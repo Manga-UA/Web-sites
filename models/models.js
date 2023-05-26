@@ -12,6 +12,7 @@ const User = sequelize.define('user_data', {
 const Title_data = sequelize.define('title_data', {
     id_title: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name_title: {type: DataTypes.STRING,},
+    image_title: {type: DataTypes.STRING},
     description_title: {type: DataTypes.STRING},
     date_release_title: {type: DataTypes.DATE},
 })
@@ -92,14 +93,14 @@ const TitleTranslate = sequelize.define('key_title_translate', {
 })
 
 
-User.hasOne(Role_user)
-Role_user.belongsTo(User)
+Role_user.hasOne(User)
+User.belongsTo(Role_user)
 
-Title_data.hasOne(Status_data)
-Status_data.belongsTo(Title_data)
+Status_data.hasOne(Title_data)
+Title_data.belongsTo(Status_data)
 
-Title_data.hasOne(Type_title)
-Type_title.belongsTo(Title_data)
+Type_title.hasOne(Title_data)
+Title_data.belongsTo(Type_title)
 
 Title_data.hasMany(Chapter)
 Chapter.belongsTo(Title_data)
