@@ -58,6 +58,31 @@ class TitleController{
         return res.json(titleData) 
 
     }
+    async update(req,res,next){
+        try {
+            const {id_title,name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType} = req.body
+            if(!id_title){
+                return next(ApiError.badRequest('not login or password'))
+            }
+            let updatePost =await Title_data.update({name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType},{where:{id_title}})
+            updatePost = await Title_data.findOne({where:{id_title}},)
+            return res.json(updatePost);
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+    async deleteOne(req,res,next){
+        try {
+            const {id_title} = req.params
+            if(!id_title){
+                return next(ApiError.badRequest('not login or password'))
+            }
+            let deletePost =await Title_data.destroy({where:{id_title}})
+            return res.json(deletePost);
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
 }
 
 module.exports=new TitleController()
