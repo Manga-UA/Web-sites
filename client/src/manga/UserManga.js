@@ -12,8 +12,8 @@ export default class UserManga {
 		this._isAuth = bool
 	}
 
-	setIsAuth(user) {
-		this._isAuth = user
+	setUser(user) {
+		this._user = user
 	}
 
 	// Компютед ф-ції
