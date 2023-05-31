@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+	font-family: "Inter";
+	src: url("./fonts/Inter.ttf");
+}
+@font-face {
+	font-family: "PT Sans Narrow";
+	src: url("./fonts/PTSansNarrow-Regular.ttf");
+}
+@font-face {
+	font-family: "Rubik Wet Paint";
+	src: url("./fonts/RubikWetPaint-Regular.ttf");
+}
+@font-face {
+	font-family: "Yanone Kaffeesatz";
+	src: url("./fonts/YanoneKaffeesatz.ttf");
+}
+
+body {
+	font-family: 'Yanone Kaffeesatz', sans-serif; 
+}
+body.dark {
+	@apply bg-main-dark text-font;
+}
+body.light {
+	@apply bg-main-light;
+}
+.ff-title {
+	font-family: 'Rubik Wet Paint', cursive;
+}
+.ff-text {
+	font-family: 'Inter', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'PT Sans Narrow', sans-serif;
+}
+svg {
+	display: flex;
+	align-items: center;
+}
