@@ -8,9 +8,18 @@ module.exports = {
 			colors: {
 				"main-dark":'#454545',
 				"main-light":'#FAF8F1',
-				"font":'#FFE6C7',
+				"font-dark":'#FFE6C7',
+				"font-light":'#27374D',
 				"button":'#2E4F4F',
-				"stroke-dark":'FFFFFF'
+				"stroke-dark":'FFFFFF',
+				// FOR THEME BUTTON
+				"xl-elipse-light":'#FF9A62',
+				"sm-elipse-light":'#FFC8A9',
+				"xl-elipse-dark":'#FFFFFF',
+				"sm-elipse-dark":'#2E4F4F',
+				"stroke-light-theme":'#868686',
+				"stroke-dark-theme":'#161535',
+				"dark-theme-btn":"#2E4F4F"
 			},
 			fontSize: {
 				'logo-bg': ['42px', {

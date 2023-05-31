@@ -23,10 +23,10 @@ body {
 	font-family: 'Yanone Kaffeesatz', sans-serif; 
 }
 body.dark {
-	@apply bg-main-dark text-font;
+	@apply bg-main-dark text-font-dark;
 }
 body.light {
-	@apply bg-main-light;
+	@apply bg-main-light text-font-light;
 }
 .ff-title {
 	font-family: 'Rubik Wet Paint', cursive;

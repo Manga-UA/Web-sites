@@ -2,7 +2,7 @@ import React from 'react'
 
 const Manga = () => {
   return (
-	<div>
+	<div className='flex-grow'>
 		Working manga
 		
 	</div>
