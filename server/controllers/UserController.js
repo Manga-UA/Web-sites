@@ -14,7 +14,7 @@ const generateJwt = (id_user,login_user,roleUserIdRole)=>{
 
 class UserController{
     async registration (req,res,next){
-        const {login_user,password_user,email,roleUserIdRole}= req.body
+        const {login_user,password_user,email,roleUserIdRole,translateDatumIdTranslate}= req.body
         if (!login_user||!password_user){
             return next(ApiError.badRequest('not login or password'))
         }
@@ -27,11 +27,12 @@ class UserController{
             return next(ApiError.badRequest('email busy'))
         }
 
-        let roleUserId = roleUserIdRole||1      
+        let roleUserId = roleUserIdRole||1   
+        let translateDatumId= translateDatumIdTranslate|| 1 
 
         const hashPassword = await bcrypt.hash(password_user,5)
         const dateRegist = Date.now()
-        const user = await User.create({login_user,password_user: hashPassword,email,data_registri: dateRegist,roleUserIdRole:roleUserId})
+        const user = await User.create({login_user,password_user: hashPassword,email,data_registri: dateRegist,roleUserIdRole:roleUserId,translateDatumIdTranslate:translateDatumId})
         //const marker = await Marker.create({userDatumIdUser: user.id_user})
         const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole)
         return res.json({token})
@@ -59,12 +60,12 @@ class UserController{
 
     async update(req,res,next){
         try {
-            const {id_user,login_user,password_user,email,roleUserIdRole} = req.body
+            const {id_user,login_user,password_user,email,roleUserIdRole,translateDatumIdTranslate} = req.body
             if(!id_user){
                 return next(ApiError.badRequest('not login or password'))
             }
             const hashPassword = await bcrypt.hash(password_user,5)
-            let updateUser =await User.update({login_user,password_user: hashPassword,email,roleUserIdRole},{where:{id_user}})
+            let updateUser =await User.update({login_user,password_user: hashPassword,email,roleUserIdRole,translateDatumIdTranslate},{where:{id_user}})
             updateUser = await User.findOne({where:{id_user}},)
             return res.json(updateUser);
         } catch (e) {

@@ -96,6 +96,10 @@ const TitleTranslate = sequelize.define('key_title_translate', {
 Role_user.hasOne(User)
 User.belongsTo(Role_user)
 
+//зв'зок до таблиці перекладачі
+Translate.hasOne(User)
+User.belongsTo(Translate)
+
 Status_data.hasOne(Title_data)
 Title_data.belongsTo(Status_data)
 

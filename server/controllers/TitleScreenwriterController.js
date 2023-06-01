@@ -10,13 +10,12 @@ class TitleController{
         const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType} = req.body
         const {image_title} = req.files
         let fileName = uuid.v4()+".jpg"
-        const dateRelease = date_release_title|| Date.now()
         image_title.mv(path.resolve(__dirname,'..','static',fileName))
 
         const titleData = await Title_data.create({
             name_title,
             description_title,
-            date_release_title: dateRelease,
+            date_release_title,
             statusDatumIdStatus,
             typeTitleIdType, 
             image_title:fileName
