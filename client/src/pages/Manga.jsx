@@ -2,11 +2,9 @@ import React from 'react'
 
 const Manga = () => {
   return (
-	<div>
+	<div className='flex-grow'>
 		Working manga
-		<h1 className="bg-main-color text-3xl font-bold underline">
-			Hello world!
-		</h1>
+		
 	</div>
   )
 }

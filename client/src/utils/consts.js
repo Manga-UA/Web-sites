@@ -12,4 +12,5 @@ export const TRANSLATOR_ROUTE = '/translator';
 export const ARTISTS_ROUTE = '/artists';
 export const AUTHOR_ROUTE = '/author';
 
-
+export const LIGHT_THEME = 'light';
+export const DARK_THEME = 'dark';
