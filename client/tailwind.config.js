@@ -5,6 +5,12 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			screens: {
+				sm: '480px',
+				md: '768px',
+				lg: '1028px',
+				xl: '1200px'
+			},
 			colors: {
 				"main-dark":'#454545',
 				"main-light":'#FAF8F1',
@@ -22,35 +28,35 @@ module.exports = {
 				"dark-theme-btn":"#2E4F4F"
 			},
 			fontSize: {
-				'logo-bg': ['42px', {
+				'logo-bg': ['2.625rem', {
 					lineHeight: '46px',
 					fontWeight: '400',
 				}],
-				'logo-md': ['34px', {
+				'logo-md': ['2.125rem', {
 					lineHeight: '42px',
 					fontWeight: '400',
 				}],
-				'logo-sm': ['24px', {
+				'logo-sm': ['1.5rem', {
 					lineHeight: '30px',
 					fontWeight: '400',
 				}],
-				'text-lg': ['24px', {
+				'text-lg': ['1.5rem', {
 					lineHeight: '30px',
 					fontWeight: '400',
 				}],
-				'text-bg': ['16px', {
+				'text-bg': ['1rem', {
 					lineHeight: '19px',
 					fontWeight: '400',
 				}],
-				'text-md': ['15px', {
+				'text-md': ['0.9375rem', {
 					lineHeight: '18px',
 					fontWeight: '400',
 				}],
-				'text-sm': ['14px', {
+				'text-sm': ['0.875rem', {
 					lineHeight: '17px',
 					fontWeight: '400',
 				}],
-				'text-xsm': ['12px', {
+				'text-xsm': ['0.75rem', {
 					lineHeight: '15px',
 					fontWeight: '400',
 				}],
@@ -58,27 +64,27 @@ module.exports = {
 					lineHeight: '60px',
 					fontWeight: '400',
 				}],
-				'title-md': ['34px', {
+				'title-md': ['2.125rem', {
 					lineHeight: '42px',
 					fontWeight: '400',
 				}],
-				'title-xbg': ['60px', {
+				'title-xbg': ['3.75rem', {
 					lineHeight: '76px',
 					fontWeight: '400',
 				}],
-				'subtitle-bg': ['30px', {
+				'subtitle-bg': ['1.875rem', {
 					lineHeight: '37px',
 					fontWeight: '400',
 				}],
-				'subtitle-md': ['26px', {
+				'subtitle-md': ['1.625rem', {
 					lineHeight: '31px',
 					fontWeight: '400',
 				}],
-				'subtitle-sm': ['24px', {
+				'subtitle-sm': ['1.5rem', {
 					lineHeight: '30px',
 					fontWeight: '400',
 				}],
-				'navbar': ['26px', {
+				'navbar': ['1.625rem', {
 					lineHeight: '31px',
 					fontWeight: '400',
 				}],

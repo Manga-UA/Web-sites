@@ -8,11 +8,11 @@ import { ReactComponent as TiktokIcon } from '../images/tiktok-icon.svg'
 
 const Footer = () => {
   return (
-	<footer className='mt-auto flex flex-col gap-6'>
+	<footer className='mt-auto flex flex-col gap-6 items-center md:items-stretch'>
 		
 		<NavLink to={MANGA_ROUTE}><LogoIcon/></NavLink>
 
-		<ul className='flex gap-[50px]'>
+		<ul className='flex flex-col gap-3 items-center md:items-stretch md:flex-row md:gap-[50px]'>
 				<li>
 					<NavLink className="text-navbar">Правовласника</NavLink>
 				</li>
@@ -20,7 +20,7 @@ const Footer = () => {
 					<NavLink  className="text-navbar" >Як додати комікс</NavLink>
 				</li>
 		</ul>
-		<div className='flex items-center justify-between'>
+		<div className='flex flex-col items-center justify-between gap-3 md:flex-row'>
 			<div className='flex items-center gap-x-[15px]'>
 				<TelegramIcon/>
 				<InstagramIcon/>
