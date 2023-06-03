@@ -1,14 +1,20 @@
 import React, { useContext, useState, } from 'react'
 import {NavLink} from 'react-router-dom'
 import { ReactComponent as LogoIcon } from '../images/Logo.svg'
+import { ReactComponent as MenuIcon } from '../images/menu-open-icon.svg'
+import { ReactComponent as MenuCloseIcon } from '../images/menu-close-icon.svg'
 
 import { CATALOG_ROUTE, DARK_THEME, LIGHT_THEME, LOGIN_ROUTE, MANGA_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import RadioBtnTheme from './RadioBtnTheme';
+import MobileHeader from './MobileHeader'
 const Header = observer(() => {
 	// стан пошуку
 	const [serchTerm, setSearchTerm] = useState('');
+	
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
 	// контекст теми  
 	const {theme} = useContext(Context);
 
@@ -18,11 +24,11 @@ const Header = observer(() => {
 	}
 	
 	return (
-		
-		<header className='flex justify-between items-center h-[90px]'>
+		<header className='flex justify-between items-center h-16 md:h-[90px]'>
+			{/* Navbar block */}
 			<div className='flex gap-[50px] items-center'>
 				<NavLink to={MANGA_ROUTE}><LogoIcon/></NavLink>
-				<ul className='flex gap-[50px]'>
+				<ul className='gap-[50px] hidden md:flex'>
 					<li>
 						<NavLink className="text-navbar">Рандомчик</NavLink>
 					</li>
@@ -31,7 +37,8 @@ const Header = observer(() => {
 					</li>
 				</ul>
 		 	</div>
-			<div className='flex space-x-10 items-center'>
+			{/* Button block */}
+			<div className=' space-x-10 items-center hidden md:flex'>
 				<input 
 					className={`px-1 bg-inherit ${theme._theme === LIGHT_THEME ? 'placeholder:text-inherit' : 'placeholder:text-font'} placeholder:text-end border border-solid border-stroke-dark rounded-[5px]`} 
 					type="search" 
@@ -61,6 +68,14 @@ const Header = observer(() => {
 					</li>
 				</ul>
 			</div>
+			{/* Mobile Header */}
+			<div 
+				className='flex md:hidden ml-auto cursor-pointer z-30'
+				onClick={()=> setIsMobileMenuOpen(!isMobileMenuOpen)}
+			>
+				{isMobileMenuOpen ? <MenuCloseIcon/> : <MenuIcon/>}
+			</div>
+			<MobileHeader isOpen={isMobileMenuOpen} />
 		</header>
 	)
 })
