@@ -42,3 +42,6 @@ svg {
 	display: flex;
 	align-items: center;
 }
+.lock {
+	overflow: hidden;
+}

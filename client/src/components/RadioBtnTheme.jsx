@@ -4,7 +4,6 @@ import { ReactComponent as MoonIcon } from '../images/moon-icon.svg'
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import { DARK_THEME, LIGHT_THEME } from '../utils/consts';
-import './RadioBtnTheme.module.css'
 const RadioBtnTheme = observer(() => {
 	// контекст теми  
 	const {theme} = useContext(Context);
@@ -14,7 +13,7 @@ const RadioBtnTheme = observer(() => {
 	}
   return (
 	
-	<div className=''>
+	<React.Fragment>
 		{
 			theme._theme === LIGHT_THEME 
 			?
@@ -34,7 +33,7 @@ const RadioBtnTheme = observer(() => {
 		}
 		
 				
-	</div>
+	</React.Fragment>
   )
 })
 
