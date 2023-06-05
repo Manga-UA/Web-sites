@@ -5,6 +5,7 @@ import { ReactComponent as LogoIcon } from '../images/Logo.svg'
 import { ReactComponent as TelegramIcon } from '../images/telegram-icon.svg'
 import { ReactComponent as InstagramIcon } from '../images/instagram-icon.svg'
 import { ReactComponent as TiktokIcon } from '../images/tiktok-icon.svg'
+import { ReactComponent as CopyRightIcon } from '../images/copyright-icon.svg'
 
 const Footer = () => {
   return (
@@ -27,7 +28,7 @@ const Footer = () => {
 				<TiktokIcon/>
 			</div>
 			<div className='flex items-center max-h-8 space-x-[10px]'>
-				<span className='text-title-bg relative top-[10px]'>©</span>
+				<CopyRightIcon/>
 				<p className='text-subtitle-sm'>2023 Manga UA</p>
 			</div>
 		</div>

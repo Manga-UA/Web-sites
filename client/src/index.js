@@ -1,18 +1,23 @@
 import React, { createContext } from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import App from './App';
 import UserManga from './manga/UserManga';
 import ThemeManga from './manga/ThemeManga';
-export const Context = createContext(null);
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-	<React.StrictMode>
-		<Context.Provider value={{
-			user: new UserManga(),
-			theme: new ThemeManga()
-		}}>
-			<App />
-		</Context.Provider>
-	</React.StrictMode>
-);
+import TitleManga from './manga/TitleManga';
 
+export const Context = createContext(null);
+
+const root = document.getElementById('root');
+ReactDOM.createRoot(root).render(
+  <React.StrictMode>
+    <Context.Provider
+      value={{
+        user: new UserManga(),
+        theme: new ThemeManga(),
+        titles: new TitleManga(),
+      }}
+    >
+      <App />
+    </Context.Provider>
+  </React.StrictMode>
+);

@@ -25,7 +25,8 @@ module.exports = {
 				"sm-elipse-dark":'#2E4F4F',
 				"stroke-light-theme":'#868686',
 				"stroke-dark-theme":'#161535',
-				"dark-theme-btn":"#2E4F4F"
+				"dark-theme-btn":"#2E4F4F",
+				"dark-transparency":'rgba(69, 69, 69, 0.1)',
 			},
 			fontSize: {
 				'logo-bg': ['2.625rem', {
@@ -88,7 +89,10 @@ module.exports = {
 					lineHeight: '31px',
 					fontWeight: '400',
 				}],
-			}
+			},
+			boxShadow: {
+				'images': '590px 0px 5px 0px #00000080 inset',
+			},
 		},
 	},
 	plugins: [],
