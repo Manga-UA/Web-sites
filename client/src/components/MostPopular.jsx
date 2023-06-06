@@ -4,7 +4,7 @@ import TitleItem from './TitleItem'
 
 const MostPopular = () => {
 	return (
-		<div className='flex flex-col'>
+		<div className='flex flex-col min-w-0'>
 			<h2 className='text-title-bg'>Найпопулярніші</h2>
 			<TitleItem/>
 			<div className='flex items-center gap-x-[10px] self-end'>

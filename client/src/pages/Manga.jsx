@@ -2,6 +2,7 @@ import React from 'react'
 import TypesManga from '../components/TypesManga';
 import MostPopular from '../components/MostPopular';
 
+
 const Manga = () => {
   return (
 	<div className='flex-grow'>
