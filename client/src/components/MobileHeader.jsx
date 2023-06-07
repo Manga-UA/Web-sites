@@ -38,14 +38,14 @@ const MobileHeader = observer(({ isOpen = false }) => {
 				{user.isAuth ?
 					<ul className='flex flex-col items-center space-y-4'>
 						<li>
-							{/* <NavLink
+							<NavLink
 								className="flex flex-col items-center gap-2" 
 								to={PROFILE_ROUTE}
 							>
 									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={userIcon} alt="userIcon" />
 									<p className='h-5 w-[70px] truncate text-text-bg'>Твій нікнейм</p>
 								
-							</NavLink> */}
+							</NavLink>
 						</li>
 					</ul>
 					:
