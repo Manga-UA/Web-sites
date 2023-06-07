@@ -16,7 +16,7 @@ import "swiper/css/autoplay"
 // import required modules
 import { Autoplay,Pagination } from "swiper";
 
-const TitleItem = () => {
+const MostPopularItem = () => {
   const { titles } = useContext(Context);
   const { theme } = useContext(Context);
   const [hoveredId, setHoveredId] = useState(null);
@@ -53,27 +53,27 @@ const TitleItem = () => {
 				640: {
 					slidesPerView: 2.6,
 					spaceBetween: 20,
-					slidesPerGroup: 2
+					slidesPerGroup: 1
 				},
 				768: {
 					slidesPerView: 3.5,
 					spaceBetween: 20,
-					slidesPerGroup: 3
+					slidesPerGroup: 1
 				},
 				1080: {
 					slidesPerView: 4.5,
 					spaceBetween: 30,
-					slidesPerGroup: 4
+					slidesPerGroup: 1
 				},
 				1200: {
 					slidesPerView: 5.5,
 					spaceBetween: 40,
-					slidesPerGroup: 3
+					slidesPerGroup: 1
 				},
 				1440: {
-					slidesPerView: 5.5,
-					spaceBetween: 50,
-					slidesPerGroup: 3,
+					slidesPerView: 7.5,
+					spaceBetween: 40,
+					slidesPerGroup: 1,
 				},
 			}}
 			pagination={{
@@ -84,11 +84,11 @@ const TitleItem = () => {
 			modules={[Autoplay, Pagination]}
 			loop={true}
 			autoplay={{
-				delay:2000,
+				delay:2400,
 			}}
 			watchOverflow={true}
 			loopedSlides={3}
-			speed={800}
+			speed={1200}
 		>
 			{titles._titles.map((title) => (
 				<SwiperSlide key={title.id_title}>
@@ -108,38 +108,38 @@ const TitleItem = () => {
 					</p>
 					{hoveredId === title.id_title && (
 						<div
-						className={`w-[365px] h-[249px] ${
-							offsetLeft > window.innerWidth / 2
-							? '-right-10px'
-							: '-left-10px'
-						} ${
-							offsetRight > window.innerWidth / 2
-							? '-left-10px'
-							: '-right-10px'
-						} z-50 absolute top-0 bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter backdrop-blur-[5px] space-y-[18px] text-left p-[10px] transition delay-150 duration-300 ease-in-out`}
+							className={`w-[365px] h-[249px] ${
+								offsetLeft > window.innerWidth / 2
+								? '-right-10px'
+								: '-left-10px'
+							} ${
+								offsetRight > window.innerWidth / 2
+								? '-left-10px'
+								: '-right-10px'
+							} absolute top-0 bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter backdrop-blur-[5px] space-y-[18px] text-left p-[10px] transition delay-150 duration-300 ease-in-out`}
 						>
 							{/* text description */}
-							<p className="text-medium h-full max-h-[110px] overflow-hidden">
+							<p className="z-10 text-medium h-full max-h-[110px] overflow-hidden">
 								{title.description_title}
 							</p>
 							{/* Button group */}
 							<div className="flex justify-start gap-[30px]">
 								<button
-								className={`flex gap-4 text-text-lg border border-solid border-stroke-dark ${
-									theme._theme === DARK_THEME
-									? 'hover:bg-sm-elipse-dark'
-									: 'hover:bg-orange-400'
-								} transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+									className={`flex gap-4 text-text-lg border border-solid border-stroke-dark ${
+										theme._theme === DARK_THEME
+										? 'hover:bg-sm-elipse-dark'
+										: 'hover:bg-orange-400'
+									} transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
 								>
 									<BookMarkLightIcon />
 									Зберегти
 								</button>
 								<button
-								className={`flex gap-4 text-text-lg ${
-									theme._theme === DARK_THEME
-									? 'bg-button hover:bg-inherit'
-									: 'bg-orange-400 hover:bg-inherit'
-								} hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+									className={`flex gap-4 text-text-lg ${
+										theme._theme === DARK_THEME
+										? 'bg-button hover:bg-inherit'
+										: 'bg-orange-400 hover:bg-inherit'
+									} hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
 								>
 									<BookIcon />
 									Читати
@@ -174,4 +174,4 @@ const TitleItem = () => {
   );
 };
 
-export default TitleItem;
+export default MostPopularItem;
