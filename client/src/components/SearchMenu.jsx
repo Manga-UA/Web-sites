@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { Context } from '../index';
 import { LIGHT_THEME } from '../utils/consts';
+import { observer } from 'mobx-react-lite';
 
-const SearchMenu = () => {
+const SearchMenu = observer(() => {
 	// контекст теми  
 	const {theme} = useContext(Context);
 	const {title} = useContext(Context);
@@ -26,6 +27,6 @@ const SearchMenu = () => {
 
 		</React.Fragment>
 	)
-}
+})
 
 export default SearchMenu
