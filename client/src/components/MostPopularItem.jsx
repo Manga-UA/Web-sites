@@ -15,8 +15,9 @@ import "swiper/css/autoplay"
 
 // import required modules
 import { Autoplay,Pagination } from "swiper";
+import { observer } from 'mobx-react-lite';
 
-const MostPopularItem = Observer(() => {
+const MostPopularItem = observer(() => {
   const { titles } = useContext(Context);
   const { theme } = useContext(Context);
   const [hoveredId, setHoveredId] = useState(null);
