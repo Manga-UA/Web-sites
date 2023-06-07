@@ -1,22 +1,24 @@
-import React, { useContext, useState, } from 'react'
+import React, { useContext, useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import { ReactComponent as LogoIcon } from '../images/Logo.svg'
 import { ReactComponent as MenuIcon } from '../images/menu-open-icon.svg'
 import { ReactComponent as MenuCloseIcon } from '../images/menu-close-icon.svg'
 
-import { CATALOG_ROUTE, DARK_THEME, LOGIN_ROUTE, MANGA_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
+import { CATALOG_ROUTE, DARK_THEME, LOGIN_ROUTE, MANGA_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import RadioBtnTheme from './RadioBtnTheme';
 import MobileHeader from './MobileHeader'
 import SearchMenu from './SearchMenu'
+import userIcon from '../images/userIcon.png'
 const Header = observer(() => {
 	
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	// контекст теми  
 	const {theme} = useContext(Context);
-
+	// контекст користувача  
+	const {user}  = useContext(Context);
 	
 	return (
 		<header className=' flex justify-between items-center h-16 lg:h-[90px]'>
@@ -38,24 +40,40 @@ const Header = observer(() => {
 				{/* Btn theme */}
 				<RadioBtnTheme/>
 				{/* Auth and Reg btn */}
-				<ul className='flex space-x-[10px]'>
-					<li>
-						<NavLink
-							className="text-text-lg py-[10px] px-[15px] rounded hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out" 
-							to={LOGIN_ROUTE}
-						>
-							Увійти
-						</NavLink>
-					</li>
-					<li>
-						<NavLink 
-							className={`text-text-lg ${theme._theme === DARK_THEME ? "bg-button hover:bg-inherit" : "bg-orange-400 hover:bg-inherit"} rounded py-[10px] px-[15px] hover:border hover:border-solid hover:border-stroke-dark  transition delay-150 duration-300 ease-in-out`}
-							to={REGISTRATION_ROUTE}
-						>
-							Реєстрація
-						</NavLink>
-					</li>
-				</ul>
+				{user.isAuth ?
+					<ul className='flex space-x-[10px]'>
+						<li>
+							<NavLink
+								className="flex flex-col items-center gap-2" 
+								to={PROFILE_ROUTE}
+							>
+									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={userIcon} alt="userIcon" />
+									<p className='h-5 w-16 truncate text-text-md'>Твій нікнейм</p>
+								
+							</NavLink>
+						</li>
+					</ul> 
+					:
+					<ul className='flex space-x-[10px]'>
+						<li>
+							<NavLink
+								className="text-text-lg py-[10px] px-[15px] rounded hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out" 
+								to={LOGIN_ROUTE}
+							>
+								Увійти
+							</NavLink>
+						</li>
+						<li>
+							<NavLink 
+								className={`text-text-lg ${theme._theme === DARK_THEME ? "bg-button hover:bg-inherit" : "bg-orange-400 hover:bg-inherit"} rounded py-[10px] px-[15px] hover:border hover:border-solid hover:border-stroke-dark  transition delay-150 duration-300 ease-in-out`}
+								to={REGISTRATION_ROUTE}
+							>
+								Реєстрація
+							</NavLink>
+						</li>
+					</ul>
+				}
+				
 			</div>
 			{/* Mobile Header */}
 			<div 

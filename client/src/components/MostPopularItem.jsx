@@ -70,11 +70,6 @@ const MostPopularItem = () => {
 					spaceBetween: 40,
 					slidesPerGroup: 1
 				},
-				1440: {
-					slidesPerView: 7.5,
-					spaceBetween: 40,
-					slidesPerGroup: 1,
-				},
 			}}
 			pagination={{
 				type:'bullets',
