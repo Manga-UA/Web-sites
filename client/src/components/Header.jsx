@@ -43,14 +43,14 @@ const Header = observer(() => {
 				{user.isAuth ?
 					<ul className='flex space-x-[10px]'>
 						<li>
-							<NavLink
+							{/* <NavLink
 								className="flex flex-col items-center gap-2" 
 								to={PROFILE_ROUTE}
 							>
 									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={userIcon} alt="userIcon" />
 									<p className='h-5 w-16 truncate text-text-md'>Твій нікнейм</p>
 								
-							</NavLink>
+							</NavLink> */}
 						</li>
 					</ul> 
 					:
