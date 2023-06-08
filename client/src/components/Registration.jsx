@@ -4,12 +4,12 @@ import myHero from '../images/myhero.jpg'
 import nightGirl from '../images/night-girl.jpg'
 import { NavLink } from 'react-router-dom'
 import { Context } from '../index'
-import { DARK_THEME, LOGIN_ROUTE } from '../utils/consts'
+import { DARK_THEME, LOGIN_ROUTE, MANGA_ROUTE } from '../utils/consts'
 import { observer } from 'mobx-react-lite'
 
 const Registration = observer(() => {
 	// контекст теми  
-	const {theme} = useContext(Context);
+	const {theme, user} = useContext(Context);
 	return (
 		<div className='flex flex-col justify-center items-center gap-4'>
 			{/* title */}
@@ -46,6 +46,8 @@ const Registration = observer(() => {
 				Увійти в світ манги
 			</NavLink>
 			<NavLink
+				to={MANGA_ROUTE}
+				onClick={()=> user._isAuth = true}
 				className={`text-text-lg ${theme._theme === DARK_THEME ? "bg-button hover:bg-inherit" : "bg-orange-400 hover:bg-inherit"} rounded py-[10px] px-[23px] hover:border hover:border-solid hover:border-stroke-dark  transition delay-150 duration-300 ease-in-out`}
 			>
 				Долучитися

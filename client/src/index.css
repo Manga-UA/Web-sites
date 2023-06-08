@@ -45,3 +45,22 @@ svg {
 .lock {
 	overflow: hidden;
 }
+/* Пагінація для рекомендаційного слайдера */
+.swiper-container .swiper-pagination-bullet {
+	width: 30px;
+	height: 30px;
+	background: rgba(255, 230, 199, 0.6);
+	@apply border-2 border-solid border-dark-theme-btn;
+}
+  /* Змінить колір активної пагінації */
+.swiper-container .swiper-pagination-bullet-active {
+	background: rgba(255, 230, 199, 0.9);
+	/* Button */
+	@apply border-4 border-solid border-dark-theme-btn;
+}
+@media (max-width:768px) {
+	.swiper-container .swiper-pagination-bullet {
+		width: 15px;
+		height: 15px;
+	}
+}

@@ -3,6 +3,7 @@ import { DARK_THEME, LIGHT_THEME, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE
 import { Context } from '../index';
 import RadioBtnTheme from './RadioBtnTheme';
 import CatalogPages from '../pages/CatalogPages';
+import { ReactComponent as ExitDoorIcon } from '../images/exit-door-icon.svg'
 import { NavLink } from 'react-router-dom';
 import SearchMenu from './SearchMenu';
 import userIcon from '../images/userIcon.png'
@@ -46,6 +47,9 @@ const MobileHeader = observer(({ isOpen = false }) => {
 									<p className='h-5 w-[70px] truncate text-text-bg'>Твій нікнейм</p>
 								
 							</NavLink>
+						</li>
+						<li>
+							<ExitDoorIcon className="cursor-pointer"  onClick={()=> user._isAuth = false}/>
 						</li>
 					</ul>
 					:

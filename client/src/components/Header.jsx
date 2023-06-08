@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 import { ReactComponent as LogoIcon } from '../images/Logo.svg'
 import { ReactComponent as MenuIcon } from '../images/menu-open-icon.svg'
 import { ReactComponent as MenuCloseIcon } from '../images/menu-close-icon.svg'
+import { ReactComponent as ExitDoorIcon } from '../images/exit-door-icon.svg'
 
 import { CATALOG_ROUTE, DARK_THEME, LOGIN_ROUTE, MANGA_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
 import { Context } from '../index';
@@ -19,7 +20,6 @@ const Header = observer(() => {
 	const {theme} = useContext(Context);
 	// контекст користувача  
 	const {user}  = useContext(Context);
-	
 	return (
 		<header className=' flex justify-between items-center h-16 lg:h-[90px]'>
 			{/* Navbar block */}
@@ -41,7 +41,7 @@ const Header = observer(() => {
 				<RadioBtnTheme/>
 				{/* Auth and Reg btn */}
 				{user.isAuth ?
-					<ul className='flex space-x-[10px]'>
+					<ul className='flex items-center gap-5'>
 						<li>
 							<NavLink
 								className="flex flex-col items-center gap-2" 
@@ -51,6 +51,9 @@ const Header = observer(() => {
 									<p className='h-5 w-16 truncate text-text-md'>Твій нікнейм</p>
 								
 							</NavLink>
+						</li>
+						<li>
+							<ExitDoorIcon className="cursor-pointer"  onClick={()=> user._isAuth = false}/>
 						</li>
 					</ul> 
 					:
