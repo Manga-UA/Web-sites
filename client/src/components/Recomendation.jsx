@@ -24,7 +24,7 @@ const Recomendation = observer(() => {
 		<div>
 			<Swiper
 				pagination = {{
-					type: 'bullets',
+					type: "bullets",
 					clickable: true,
 					dynamicBullets: true,
 				}}
@@ -34,21 +34,35 @@ const Recomendation = observer(() => {
 					delay:2400,
 				}}
 				speed={1800}
+				autoHeight={true}
+				breakpoints={{
+					320: {
+						pagination: {
+							clickable:false
+						}
+					},
+					768: {
+						pagination: {
+							clickable:true,
+						}
+					}
+				}}
+				
 				className="swiper-container"
 			>
 				{filteredTitles.map((title) => (
 					<SwiperSlide key={title.id_title} >
-						<div className='relative' key={title.id_title} >
+						<div className='relative ' key={title.id_title} >
 							<div className="relative">
-								<img className='w-full h-full object-cover max-h-[375px] rounded opacity-75' src={title.image_title} alt={title.name_title} />
+								<img className='w-full h-full object-cover min-h-[200px] max-h-[375px] rounded opacity-75' src={title.image_title} alt={title.name_title} />
 								<div className="absolute inset-0 bg-black opacity-25"></div>
 							</div>
-							<div className='absolute left-5 bottom-14 gap-5 flex flex-col'>
+							<div className='absolute left-2 bottom-3 md:left-5 md:bottom-14 gap-5 flex flex-col'>
 								<div className='flex items-center'>
 									<h2 className='text-title-bg truncate w-auto max-w-[200px]'>{title.name_title}</h2>
 									<p>[status._status]</p>
 								</div>
-								<div className='relative flex justify-between gap-10'>
+								<div className='relative space-y-3 md:flex  md:justify-between md:gap-10'>
 									{/* Info Panel */}
 									<div className="flex justify-start gap-10">
 											{/* Watching */}
