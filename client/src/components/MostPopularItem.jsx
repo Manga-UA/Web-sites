@@ -5,7 +5,8 @@ import { ReactComponent as BookMarkIcon } from '../images/bookmark-bg-icon.svg';
 import { ReactComponent as BookMarkLightIcon } from '../images/bookmark-bg-light-icon.svg';
 import { ReactComponent as LikeIcon } from '../images/like-bg-icon.svg';
 import { ReactComponent as EyesIcon } from '../images/eyes-bg-icon.svg';
-import { DARK_THEME } from '../utils/consts';
+import { DARK_THEME, TITLE_ROUTE } from '../utils/consts';
+import {useNavigate} from 'react-router-dom';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
@@ -18,25 +19,26 @@ import { Autoplay,Pagination } from "swiper";
 import { observer } from 'mobx-react-lite';
 
 const MostPopularItem = observer(() => {
-  const { titles } = useContext(Context);
-  const { theme } = useContext(Context);
-  const [hoveredId, setHoveredId] = useState(null);
-  const [offsetLeft, setOffsetLeft] = useState(0);
-  const [offsetRight, setOffsetRight] = useState(0);
+	const { titles } = useContext(Context);
+	const { theme } = useContext(Context);
+	const [hoveredId, setHoveredId] = useState(null);
+	const [offsetLeft, setOffsetLeft] = useState(0);
+	const [offsetRight, setOffsetRight] = useState(0);
 
-  const handleMouseEnter = (id) => (event) => {
-    const block = event.target;
-    const { offsetLeft, offsetWidth } = block;
-    const windowWidth = window.innerWidth;
-    setOffsetLeft(offsetLeft);
-    setOffsetRight(windowWidth - offsetLeft - offsetWidth);
-    setHoveredId(id);
-  };
+	const handleMouseEnter = (id) => (event) => {
+	const block = event.target;
+	const { offsetLeft, offsetWidth } = block;
+	const windowWidth = window.innerWidth;
+		setOffsetLeft(offsetLeft);
+		setOffsetRight(windowWidth - offsetLeft - offsetWidth);
+		setHoveredId(id);
+	};
+	const navigate = useNavigate();
+
 
   const handleMouseLeave = () => {
     setHoveredId(null);
   };
-
   return (
     <div>
 		<Swiper
@@ -93,15 +95,16 @@ const MostPopularItem = observer(() => {
 						onMouseEnter={handleMouseEnter(title.id_title)}
 						onMouseLeave={handleMouseLeave}
 						key={title.id_title}
+						onClick={()=> navigate(TITLE_ROUTE + '/' + title.id_title)}
 					>
-					<img
-						className="h-full w-full max-h-40 max-h-52 object-cover rounded"
-						src={title.image_title}
-						alt={title.name_title}
-					/>
-					<p className="text-text-lg truncate overflow-ellipsis">
-						{title.name_title}
-					</p>
+						<img
+							className="h-full w-full max-h-40 max-h-52 object-cover rounded"
+							src={title.image_title}
+							alt={title.name_title}
+						/>
+						<p className="text-text-lg truncate overflow-ellipsis">
+							{title.name_title}
+						</p>
 					{hoveredId === title.id_title && (
 						<div
 							className={`w-[365px] h-[249px] ${
