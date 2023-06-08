@@ -5,7 +5,7 @@ import { ReactComponent as MenuIcon } from '../images/menu-open-icon.svg'
 import { ReactComponent as MenuCloseIcon } from '../images/menu-close-icon.svg'
 import { ReactComponent as ExitDoorIcon } from '../images/exit-door-icon.svg'
 
-import { CATALOG_ROUTE, DARK_THEME, LOGIN_ROUTE, MANGA_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
+import { CATALOG_ROUTE, DARK_THEME, LOGIN_ROUTE, MANGA_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, TITLE_ROUTE } from '../utils/consts'
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import RadioBtnTheme from './RadioBtnTheme';
@@ -13,13 +13,21 @@ import MobileHeader from './MobileHeader'
 import SearchMenu from './SearchMenu'
 import userIcon from '../images/userIcon.png'
 const Header = observer(() => {
-	
-	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-	// контекст теми  
-	const {theme} = useContext(Context);
-	// контекст користувача  
-	const {user}  = useContext(Context);
+	const {theme, titles, user} = useContext(Context);
+
+	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	// state rand index title
+	const [randomIndex, setRandomIndex] = useState(0);
+	// function get rand title id 
+	const handleGetRandomIndex = () => {
+	  const min = 0;
+	  const max = titles._titles.length;
+	  const newIndex = Math.floor(Math.random() * (max - min)) + min;
+	  setRandomIndex(newIndex);
+	};
+	
+
 	return (
 		<header className=' flex justify-between items-center h-16 lg:h-[90px]'>
 			{/* Navbar block */}
@@ -27,7 +35,11 @@ const Header = observer(() => {
 				<NavLink to={MANGA_ROUTE}><LogoIcon/></NavLink>
 				<ul className='gap-6 xl:gap-[50px] hidden lg:flex'>
 					<li>
-						<NavLink className="text-navbar">Рандомчик</NavLink>
+						<NavLink 
+							onClick={handleGetRandomIndex}
+							to={TITLE_ROUTE + '/' + randomIndex}
+							className="text-navbar">Рандомчик
+						</NavLink>
 					</li>
 					<li>
 						<NavLink  className="text-navbar" to={CATALOG_ROUTE}>Каталог</NavLink>
@@ -85,7 +97,7 @@ const Header = observer(() => {
 			>
 				{isMobileMenuOpen ? <MenuCloseIcon/> : <MenuIcon/>}
 			</div>
-			<MobileHeader isOpen={isMobileMenuOpen} />
+			<MobileHeader isOpen={isMobileMenuOpen} setIsOpen={setIsMobileMenuOpen} />
 		</header>
 	)
 })
