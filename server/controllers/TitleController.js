@@ -1,13 +1,13 @@
 const uuid = require('uuid')
 const path = require('path');
-const {Title_data} = require('../models/models');
+const {Title_data,TitleTranslate} = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class TitleController{
 
     async create (req,res,next){
         try {       
-        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType} = req.body
+        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType,translateDatumIdTranslate} = req.body
         const {image_title} = req.files
         let fileName = uuid.v4()+".jpg"
         const dateRelease = date_release_title|| Date.now()
@@ -21,7 +21,12 @@ class TitleController{
             typeTitleIdType, 
             image_title:fileName
         })
-        return res.json(titleData)
+        /*const translateTitle = await TitleTranslate.create({
+            titleDatumIdTitle: res.titleData{id_title},
+            translateDatumIdTranslate
+        })*/
+        return res.json(titleData,translateTitle)
+
             
         } catch (e) {
             next(ApiError.badRequest(e.message))            

@@ -15,7 +15,7 @@ class TypeTitleController{
 
     async update(req,res,next){
         try {
-            const {id_type,name_type,password_user} = req.body
+            const {id_type,name_type} = req.body
             if(!id_type){
                 return next(ApiError.badRequest('not type'))
             }

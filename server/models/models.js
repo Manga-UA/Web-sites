@@ -15,6 +15,8 @@ const Title_data = sequelize.define('title_data', {
     image_title: {type: DataTypes.STRING},
     description_title: {type: DataTypes.STRING},
     date_release_title: {type: DataTypes.DATE},
+    views:{type:DataTypes.INTEGER},
+    rating:{type:DataTypes.INTEGER},
 })
 
 const Chapter = sequelize.define('chapter_data', {
@@ -74,7 +76,11 @@ const Translate = sequelize.define('translate_data', {
     description_translate: {type: DataTypes.STRING, allowNull: false},
     data_registri: {type: DataTypes.DATEONLY, allowNull: false},
 })
-
+const Rating = sequelize.define('rating',{
+    id_rating:{type: DataTypes.INTEGER, primaryKey:true, autoIncrement:true},
+    views:{type:DataTypes.BOOLEAN, defaultValue:false },
+    rating:{type: DataTypes.BOOLEAN, defaultValue:false},
+})
 
 const Marker = sequelize.define('marker_user_data', {
     id_marker: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -99,6 +105,12 @@ User.belongsTo(Role_user)
 //зв'зок до таблиці перекладачі
 Translate.hasOne(User)
 User.belongsTo(Translate)
+
+Title_data.hasMany(Rating)
+Rating.belongsTo(Title_data)
+
+User.hasMany(Rating)
+Rating.belongsTo(User)
 
 Status_data.hasOne(Title_data)
 Title_data.belongsTo(Status_data)
@@ -141,6 +153,7 @@ module.exports = {
     Status_data,
     Type_title,
     Translate,
+    Rating,
     Marker, 
     TitleGenre,
     TitleArtist,

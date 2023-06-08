@@ -5,6 +5,7 @@ const typeTitleRoutes = require('./typeTitleRoutes')
 const statusRoutes = require('./statusRoutes')
 const titleRoutes = require('./titleRouter')
 const rolesRoutes = require('./rolesRoutes')
+const ratingRoutes = require('./ratingRouter')
 
 const artistRouter = require('./artistRouter')
 const chapterRouter = require('./chapterRouter')
@@ -19,6 +20,7 @@ router.use('/user',userRouter)
 router.use('/title',titleRoutes)
 router.use('/type',typeTitleRoutes)
 router.use('/status',statusRoutes)
+router.use('/rating',ratingRoutes)
 
 router.use('/translate',artistRouter)
 router.use('/chapter',chapterRouter)
@@ -27,7 +29,5 @@ router.use('/marker',markerRouter)
 router.use('/page',pageRouter)
 router.use('/screenwriter',screenwriterRouter)
 router.use('/translate',translateRouter)
-
-
 
 module.exports= router
