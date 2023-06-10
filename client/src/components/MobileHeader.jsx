@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { CATALOG_ROUTE, DARK_THEME, LIGHT_THEME, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, TITLE_ROUTE } from '../utils/consts';
 import { Context } from '../index';
 import RadioBtnTheme from './RadioBtnTheme';
