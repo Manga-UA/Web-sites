@@ -25,8 +25,7 @@ const MobileHeader = observer(({ isOpen = false}, setIsOpen) => {
 	  setIsOpen(!isOpen)
 	};
 
-	// lock body with scrolling
-	isOpen ? document.body.classList.add('lock'):document.body.classList.remove('lock');
+	
 	return (
 		<React.Fragment>
 			<div className={`absolute top-0 left-0 right-0 bg-slate-400 opacity-50 z-10 min-h-[100%] ${isOpen ? 'flex' : 'hidden'}`}></div>

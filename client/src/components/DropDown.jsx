@@ -34,7 +34,7 @@ const DropDown = ({ options, onSelect, placeholderText, ImageIcon, selectedOptio
 		<div className='relative' ref={dropdownRef}>
 			<button
 				type='button'
-				className='inline-flex items-center justify-between w-full px-4 py-2 text-text-md border border-[0.8px] border-stroke-dark rounded-md'
+				className='inline-flex items-center justify-between w-full px-1 py-1 lg:px-4 lg:py-2 text-text-sm lg:text-text-md border border-[0.8px] border-stroke-dark rounded-md'
 				onClick={handleToggle}
 				
 			>

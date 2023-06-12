@@ -25,20 +25,20 @@ const MostPopularItem = observer(() => {
 	const [offsetLeft, setOffsetLeft] = useState(0);
 	const [offsetRight, setOffsetRight] = useState(0);
 
-	const handleMouseEnter = (id) => (event) => {
-	const block = event.target;
-	const { offsetLeft, offsetWidth } = block;
-	const windowWidth = window.innerWidth;
-		setOffsetLeft(offsetLeft);
-		setOffsetRight(windowWidth - offsetLeft - offsetWidth);
-		setHoveredId(id);
-	};
+	
 	const navigate = useNavigate();
 
-
-  const handleMouseLeave = () => {
-    setHoveredId(null);
-  };
+	const handleMouseEnter = (id) => (event) => {
+		const block = event.target;
+		const { offsetLeft, offsetWidth } = block;
+		const windowWidth = window.innerWidth;
+			setOffsetLeft(offsetLeft);
+			setOffsetRight(windowWidth - offsetLeft - offsetWidth);
+			setHoveredId(id);
+	};
+	const handleMouseLeave = () => {
+	setHoveredId(null);
+	};
   return (
     <div>
 		<Swiper
