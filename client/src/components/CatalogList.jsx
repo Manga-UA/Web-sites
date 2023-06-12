@@ -1,32 +1,23 @@
-import React, { useContext, useState } from 'react';
-import { Context } from '../index';
+import React, { useContext } from 'react'
+import { Context } from '../index'
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as EyesSMIcon } from '../images/eyes-sm-icon.svg'
 import { ReactComponent as BookIcon } from '../images/book-icon.svg';
 import { ReactComponent as BookMarkIcon } from '../images/bookmark-bg-icon.svg';
 import { ReactComponent as BookMarkLightIcon } from '../images/bookmark-bg-light-icon.svg';
 import { ReactComponent as LikeIcon } from '../images/like-bg-icon.svg';
 import { ReactComponent as EyesIcon } from '../images/eyes-bg-icon.svg';
 import { DARK_THEME, TITLE_ROUTE } from '../utils/consts';
-import {useNavigate} from 'react-router-dom';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination"
-import "swiper/css/autoplay"
+import { useState } from 'react';
 
-// import required modules
-import { Autoplay,Pagination } from "swiper";
-import { observer } from 'mobx-react-lite';
 
-const MostPopularItem = observer(() => {
-	const { titles } = useContext(Context);
-	const { theme } = useContext(Context);
+const CatalogList = () => {
+	const {titles,theme} = useContext(Context);
+	const navigate = useNavigate();
+
 	const [hoveredId, setHoveredId] = useState(null);
 	const [offsetLeft, setOffsetLeft] = useState(0);
 	const [offsetRight, setOffsetRight] = useState(0);
-
-	
-	const navigate = useNavigate();
 
 	const handleMouseEnter = (id) => (event) => {
 		const block = event.target;
@@ -37,85 +28,52 @@ const MostPopularItem = observer(() => {
 			setHoveredId(id);
 	};
 	const handleMouseLeave = () => {
-	setHoveredId(null);
+		setHoveredId(null);
 	};
-  return (
-    <div>
-		<Swiper
-			breakpoints={{
-				320: {
-					slidesPerView: 1.6,
-					spaceBetween: 5,
-					slidesPerGroup: 1
-				},
-				425: {
-					slidesPerView: 2.3,
-					spaceBetween: 10,
-					slidesPerGroup: 1
-				},
-				640: {
-					slidesPerView: 2.6,
-					spaceBetween: 20,
-					slidesPerGroup: 1
-				},
-				768: {
-					slidesPerView: 3.5,
-					spaceBetween: 20,
-					slidesPerGroup: 1
-				},
-				1080: {
-					slidesPerView: 4.5,
-					spaceBetween: 30,
-					slidesPerGroup: 1
-				},
-				1200: {
-					slidesPerView: 5.5,
-					spaceBetween: 40,
-					slidesPerGroup: 1
-				},
-			}}
-			pagination={{
-				type:'bullets',
-				clickable: true,
-				dynamicBullets: true,
-			}}
-			modules={[Autoplay, Pagination]}
-			loop={true}
-			autoplay={{
-				delay:2400,
-			}}
-			watchOverflow={true}
-			loopedSlides={3}
-			speed={1200}
-		>
+	return (
+		<React.Fragment>
 			{titles._titles.map((title) => (
-				<SwiperSlide key={title.id_title}>
 					<div
-						className="flex flex-col gap-4 w-40 -z-10 h-72 text-left rounded relative transition delay-150 duration-300 ease-in-out"
+						className="flex flex-col gap-1 md:h-full sm:w-full w-36  h-72 text-left rounded relative transition delay-150 duration-300 ease-in-out"
 						onMouseEnter={handleMouseEnter(title.id_title)}
 						onMouseLeave={handleMouseLeave}
 						key={title.id_title}
 						onClick={()=> navigate(TITLE_ROUTE + '/' + title.id_title)}
 					>
-						<img
-							className="h-full w-full max-h-40 max-h-52 object-cover rounded"
-							src={title.image_title}
-							alt={title.name_title}
-						/>
+						{/* image content */}
+						<div className='relative h-full w-full max-h-36 max-h-[215px]'>
+							<img
+								className="h-full w-full max-h-36 max-h-[215px] object-cover rounded-xl"
+								src={title.image_title}
+								alt={title.name_title}
+							/>
+		  					<div className="absolute inset-0 bg-black opacity-25 rounded-xl"></div>
+							<div className='absolute z-[1] flex gap-1.5 items-center top-[10px] right-[10px] bg-gray-400 opacity-90 p-[5px] rounded-md '>
+								<EyesSMIcon/>
+								<span className='text-text-sm opacity-100'>321</span>
+							</div>
+						</div>
+						{/* info */}
+						<div className='flex gap-1 h-7'>
+							<p className="text-text-sm truncate overflow-ellipsis">
+								Апокаліпсис
+							</p>
+							<p className="text-text-sm truncate overflow-ellipsis">
+								Хорор
+							</p>
+						</div>
 						<p className="text-text-lg truncate overflow-ellipsis">
 							{title.name_title}
 						</p>
-					{hoveredId === title.id_title && (
+						{hoveredId === title.id_title && (
 						<div
-							className={`w-[365px] h-[249px] ${
-								offsetLeft > window.innerWidth / 2
-								? '-right-10px'
-								: '-left-10px'
-							} ${
-								offsetRight > window.innerWidth / 2
-								? '-left-10px'
-								: '-right-10px'
-							} absolute top-0 bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter backdrop-blur-[5px] space-y-[18px] text-left p-[10px] transition delay-150 duration-300 ease-in-out`}
+							className={`w-[365px] h-[249px] 
+								${offsetLeft > window.innerWidth / 2 ? '-right-10px' : '-left-10px'} 
+								${offsetRight > window.innerWidth / 2 ? '-left-10px' : '-right-10px'}
+								absolute top-0 bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter
+								backdrop-blur-[5px] space-y-[18px] text-left p-[10px] transition delay-150 duration-300 ease-in-out
+								z-[5]
+							`}
 						>
 							{/* text description */}
 							<p className="z-10 text-medium h-full max-h-[110px] overflow-hidden">
@@ -165,12 +123,9 @@ const MostPopularItem = observer(() => {
 						</div>
 					)}
 					</div>
-				</SwiperSlide>
 			))}
-		</Swiper>
-      
-    </div>
-  );
-});
+		</React.Fragment>
+	)
+}
 
-export default MostPopularItem;
+export default CatalogList

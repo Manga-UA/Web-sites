@@ -21,8 +21,7 @@ const Registration = observer(() => {
 					type="email" 
 					name="email" 
 					id="email" 
-					placeholder='Пошта' 
-					
+					placeholder='Пошта'
 				/>
 				<input 
 				className= {`w-60 h-8 px-3 bg-transparent bg-cover bg-center rounded border-[0.25px] border-stroke-dark ${theme._theme === DARK_THEME ? 'placeholder-font-dark' : 'placeholder-font-light'}`}
