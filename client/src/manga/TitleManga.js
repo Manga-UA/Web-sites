@@ -29,10 +29,22 @@ export default class TitleManga {
 		]
 		this._status = [
 			{ id_status: 1, name_status: "Перекладається" },
-			{ id_status: 2, name_status: "Призупинено" },
-			{ id_status: 3, name_status: "Перекладено" },
-			{ id_status: 4, name_status: "Ангоїнг" },
+			// { id_status: 2, name_status: "Призупинено" },
+			// { id_status: 3, name_status: "Перекладено" },
+			// { id_status: 4, name_status: "Ангоїнг" },
 		]
+		this._chapters = [
+			{ id_chapter: 1, name_chapter: "The Awakening", number_chapter: 1, date_release_chapter: "22.02.2022", synopsis: "In the first chapter, the protagonist discovers a mysterious book that grants supernatural powers to its readers. As they explore their newfound abilities, they uncover a hidden world of magic and danger.", cover_image: "chapter1_cover.jpg" },
+			{ id_chapter: 2, name_chapter: "Dark Secrets", number_chapter: 2, date_release_chapter: "01.03.2022", synopsis: "In this chapter, the protagonist delves deeper into the secrets of the magical realm they have entered. They encounter a group of powerful adversaries who will stop at nothing to obtain the book's power for themselves.", cover_image: "chapter2_cover.jpg" },
+			{ id_chapter: 3, name_chapter: "Trial by FireTrial by FireTrial by FireTrial by FireTrial by Fire", number_chapter: 3, date_release_chapter: "15.03.2022", synopsis: "The third chapter follows the protagonist as they face a series of challenging trials to prove their worthiness as a wielder of the book's magic. Along the way, they form alliances and discover the true nature of their abilities.", cover_image: "chapter3_cover.jpg" },
+			{ id_chapter: 4, name_chapter: "Lost Memories", number_chapter: 4, date_release_chapter: "05.04.2022", synopsis: "In this chapter, the protagonist starts experiencing strange flashes of forgotten memories. They embark on a quest to uncover the truth behind their past, encountering old friends and enemies along the way.", cover_image: "chapter4_cover.jpg" },
+			{ id_chapter: 5, name_chapter: "Eternal Bonds", number_chapter: 5, date_release_chapter: "20.04.2022", synopsis: "In this emotional chapter, the protagonist's relationships with their companions deepen. They confront their inner fears and insecurities, realizing the importance of friendship and trust in their journey.", cover_image: "chapter5_cover.jpg" },
+			{ id_chapter: 6, name_chapter: "Cursed Destiny", number_chapter: 6, date_release_chapter: "10.05.2022", synopsis: "The sixth chapter reveals a dark prophecy surrounding the protagonist. They must confront their own destiny and make difficult choices that will determine the fate of the world and their own existence.", cover_image: "chapter6_cover.jpg" },
+			{ id_chapter: 7, name_chapter: "Rise of the Villain", number_chapter: 7, date_release_chapter: "25.05.2022", synopsis: "In this chapter, a formidable new villain emerges, posing a threat to everything the protagonist holds dear. They must gather their strength and allies to face this powerful adversary in a climactic battle.", cover_image: "chapter7_cover.jpg" },
+			{ id_chapter: 8, name_chapter: "Betrayal", number_chapter: 8, date_release_chapter: "10.06.2022", synopsis: "The eighth chapter uncovers shocking betrayals within the protagonist's circle of trust. They must navigate a web of deceit and unravel the truth before it's too late.", cover_image: "chapter8_cover.jpg" },
+			{ id_chapter: 9, name_chapter: "Sacred Relics", number_chapter: 9, date_release_chapter: "25.06.2022", synopsis: "In this chapter, the protagonist embarks on a quest to find ancient relics that hold the key to saving the world. They face ancient guardians and solve cryptic puzzles to unlock the relics' power.", cover_image: "chapter9_cover.jpg" },
+			{ id_chapter: 10, name_chapter: "Final Showdown", number_chapter: 10, date_release_chapter: "10.07.2022", synopsis: "In this epic final chapter, the protagonist confronts their ultimate nemesis in a climactic battle. The fate of the world hangs in the balance as the true power of the mystical book is revealed.", cover_image: "chapter10_cover.jpg" }
+		  ]
 		makeAutoObservable(this)
 	}
 
@@ -47,6 +59,9 @@ export default class TitleManga {
 		this._status = status
 	}
 
+	setChapters(chapter) {
+		this._chapters = chapter
+	}
 	// Компютед ф-ції
 	// звертаємось до них, як до об'єктів
 	// визиваються коли змінна що використовується змінила свій стан
@@ -58,5 +73,8 @@ export default class TitleManga {
 	}
 	get status() {
 		return this._status
+	}
+	get chapters() {
+		return this._chapters
 	}
 }

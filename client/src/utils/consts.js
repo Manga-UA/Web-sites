@@ -10,7 +10,7 @@ export const MANGA_ROUTE = '/';
 export const CHAPTER_ROUTE = '/chapter';
 export const TRANSLATOR_ROUTE = '/translator';
 export const ARTISTS_ROUTE = '/artists';
-export const AUTHOR_ROUTE = '/author';
+export const AUTHOR_ROUTE = '/screenWriter';
 
 export const LIGHT_THEME = 'light';
 export const DARK_THEME = 'dark';

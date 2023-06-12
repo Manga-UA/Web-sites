@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import CatalogList from '../components/CatalogList';
 import { ReactComponent as ArrowUpDownIcon } from '../images/arrow-up-down-icon.svg';
 import DropDown from '../components/DropDown';
