@@ -46,7 +46,6 @@ const TitlePages = observer(() => {
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
-				{/* h-full w-full min-h-[320px] max-h-96 w-sm md:w-[74.4%] */}
               <img
                 className='max-h-[228px] w-auto md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] rounded object-cover'
                 src={title.image_title}
