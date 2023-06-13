@@ -22,7 +22,7 @@ router.use('/type',typeTitleRoutes)
 router.use('/status',statusRoutes)
 router.use('/rating',ratingRoutes)
 
-router.use('/translate',artistRouter)
+router.use('/artist',artistRouter)
 router.use('/chapter',chapterRouter)
 router.use('/genre',genreRouter)
 router.use('/marker',markerRouter)

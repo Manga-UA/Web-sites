@@ -1,13 +1,13 @@
 const uuid = require('uuid')
 const path = require('path');
-const {Title_data,TitleTranslate} = require('../models/models');
+const {Title_data,TitleTranslate,TitleGenre,TitleArtist,TitleScreenwriter} = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class TitleController{
 
     async create (req,res,next){
         try {       
-        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType,translateDatumIdTranslate} = req.body
+        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType,translateDatumIdTranslate,screenwriterDatumIdScreenwriter,genreinfo} = req.body
         const {image_title} = req.files
         let fileName = uuid.v4()+".jpg"
         const dateRelease = date_release_title|| Date.now()
@@ -21,12 +21,23 @@ class TitleController{
             typeTitleIdType, 
             image_title:fileName
         })
-        /*const translateTitle = await TitleTranslate.create({
-            titleDatumIdTitle: res.titleData{id_title},
+        const translateTitle = await TitleTranslate.create({
+            titleDatumIdTitle: titleData.id_title,
             translateDatumIdTranslate
-        })*/
-        return res.json(titleData,translateTitle)
-
+        })
+        const screenwriterTitle = await TitleScreenwriter.create({
+            titleDatumIdTitle: titleData.id_title,
+            screenwriterDatumIdScreenwriter
+        })
+        const genreTitle = await TitleGenre.create({
+            titleDatumIdTitle: titleData.id_title,
+            genreTitleIdGenre
+        })
+        const artistTitle = await TitleArtist.create({
+            titleDatumIdTitle: titleData.id_title,
+            artistDatumIdArtist
+        })
+        return res.json(titleData)
             
         } catch (e) {
             next(ApiError.badRequest(e.message))            
