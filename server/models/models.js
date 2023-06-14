@@ -6,7 +6,9 @@ const User = sequelize.define('user_data', {
     login_user: {type: DataTypes.STRING, unique: true},
     password_user: {type: DataTypes.STRING},
     email: {type: DataTypes.STRING,unique: true},
-    data_registri: {type: DataTypes.DATE},
+    image_user: {type: DataTypes.STRING},
+    description_user: {type: DataTypes.STRING},
+    data_registration: {type: DataTypes.DATE},
 })
 
 const Title_data = sequelize.define('title_data', {
@@ -15,8 +17,9 @@ const Title_data = sequelize.define('title_data', {
     image_title: {type: DataTypes.STRING},
     description_title: {type: DataTypes.STRING},
     date_release_title: {type: DataTypes.DATE},
-    views:{type:DataTypes.INTEGER},
-    rating:{type:DataTypes.INTEGER},
+    views:{type:DataTypes.INTEGER, defaultValue: 0},
+    rating:{type:DataTypes.INTEGER, defaultValue: 0},
+    recomend_title:{type:DataTypes.BOOLEAN, defaultValue:false},
 })
 
 const Chapter = sequelize.define('chapter_data', {
@@ -48,6 +51,9 @@ const Role_user = sequelize.define('role_user', {
 const Artist = sequelize.define('artist_data', {
     id_artist: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name_artist: {type: DataTypes.STRING},
+    image_artist: {type: DataTypes.STRING},
+    description_artist: {type: DataTypes.STRING},
+    data_registration: {type: DataTypes.DATE},
 })
 
 const Genre = sequelize.define('genre_title', {
@@ -58,6 +64,9 @@ const Genre = sequelize.define('genre_title', {
 const Screenwriter = sequelize.define('screenwriter_data', {
     id_screenwriter: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name_screenwriter: {type: DataTypes.STRING, allowNull: false},
+    image_screenwriter: {type: DataTypes.STRING},
+    description_screenwriter: {type: DataTypes.STRING},
+    data_registration: {type: DataTypes.DATE},
 })
 
 const Status_data = sequelize.define('status_data', {
@@ -73,9 +82,11 @@ const Type_title = sequelize.define('type_title', {
 const Translate = sequelize.define('translate_data', {
     id_translate: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name_translate: {type: DataTypes.STRING, allowNull: false},
-    description_translate: {type: DataTypes.STRING, allowNull: false},
-    data_registri: {type: DataTypes.DATEONLY, allowNull: false},
+    description_translate: {type: DataTypes.STRING},
+    image_translate: {type: DataTypes.STRING},
+    data_registration: {type: DataTypes.DATE},
 })
+
 const Rating = sequelize.define('rating',{
     id_rating:{type: DataTypes.INTEGER, primaryKey:true, autoIncrement:true},
     views:{type:DataTypes.BOOLEAN, defaultValue:false },
@@ -103,7 +114,7 @@ Role_user.hasOne(User)
 User.belongsTo(Role_user)
 
 //зв'зок до таблиці перекладачі
-Translate.hasOne(User)
+Translate.hasOne(User)//translateDatumIdTranslate FK
 User.belongsTo(Translate)
 
 Title_data.hasMany(Rating)

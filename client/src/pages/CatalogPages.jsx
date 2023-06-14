@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect} from 'react'
 import CatalogList from '../components/CatalogList';
 import { ReactComponent as ArrowUpDownIcon } from '../images/arrow-up-down-icon.svg';
 import DropDown from '../components/DropDown';
@@ -8,10 +8,11 @@ import { DARK_THEME } from '../utils/consts';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import MobileFilterCatalog from '../components/MobileFilterCatalog';
+import { fetchStatus } from '../http/titleApi';
 const CatalogPages = observer(() => {
 	const [selectedSort, setSelectedSort] = useState(null);
 	const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-	const {theme} = useContext(Context);
+	const {theme,titles} = useContext(Context);
 	const sorts = ['за останнім оновлення', 'за лайками', 'за переглядами'];
 	// першочерговий напис на випадаючому списку
 	const placeholderSort = sorts[0];
@@ -19,6 +20,10 @@ const CatalogPages = observer(() => {
 		setSelectedSort(sort);
 		// додаткова логіка
 	};
+	
+	useEffect(()=>{
+		fetchStatus().then(data => titles.setStatus(data))
+	},[])
 
   return (
 	<div className='flex gap-6 relative'>

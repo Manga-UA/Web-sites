@@ -7,7 +7,7 @@ class TitleController{
 
     async create (req,res,next){
         try {       
-        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType,translateDatumIdTranslate,screenwriterDatumIdScreenwriter,genreinfo} = req.body
+        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType,translateDatumIdTranslate,screenwriterDatumIdScreenwriter} = req.body
         const {image_title} = req.files
         let fileName = uuid.v4()+".jpg"
         const dateRelease = date_release_title|| Date.now()

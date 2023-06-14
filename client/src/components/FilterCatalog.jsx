@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DropDown from './DropDown'
 import { ReactComponent as DeltaIcon } from '../images/delta-icon.svg';
 import { DARK_THEME } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
+import { fetchStatus } from '../http/titleApi';
+
 
 
 const FilterCatalog = observer(() => {
@@ -12,7 +14,7 @@ const FilterCatalog = observer(() => {
 	const [selectedCategory, setSelectedCategory] = useState(null);
 
 	// контекст
-	const {theme} = useContext(Context);
+	const {theme,titles} = useContext(Context);
 
 	// першочергові написи на випадаючому списку
 
@@ -39,11 +41,21 @@ const FilterCatalog = observer(() => {
 		setSelectedStatus(null);
 		setSelectedCategory(null);
 	};
+	let statuses
+
 
 	const genres = ['Action', 'Adventure', 'Comedy', 'Drama'];
-	const statuses = ['In Progress', 'Completed', 'On Hold', 'Cancelled'];
+	statuses = [];
 	const categories = ['Movies', 'TV Shows', 'Books', 'Games'];
 
+	let i = 1
+
+	titles.status.map(stat => {
+		statuses[i] = stat.name_status
+		i++
+	});
+
+	
 	return (
 		<div className='flex flex-col gap-4'>
 			<div className='flex justify-between items-center'>
