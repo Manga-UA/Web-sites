@@ -9,9 +9,10 @@ import { ReactComponent as LikeIcon } from '../images/like-bg-icon.svg';
 import { ReactComponent as EyesIcon } from '../images/eyes-bg-icon.svg';
 import { DARK_THEME, TITLE_ROUTE } from '../utils/consts';
 import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 
 
-const CatalogList = () => {
+const CatalogList = observer(() => {
 	const {titles,theme} = useContext(Context);
 	const navigate = useNavigate();
 
@@ -126,6 +127,6 @@ const CatalogList = () => {
 			))}
 		</React.Fragment>
 	)
-}
+})
 
 export default CatalogList

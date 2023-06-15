@@ -74,7 +74,7 @@ const Translate = sequelize.define('translate_data', {
     id_translate: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name_translate: {type: DataTypes.STRING, allowNull: false},
     description_translate: {type: DataTypes.STRING, allowNull: false},
-    data_registri: {type: DataTypes.DATEONLY, allowNull: false},
+    data_registr: {type: DataTypes.DATEONLY, allowNull: false},
 })
 const Rating = sequelize.define('rating',{
     id_rating:{type: DataTypes.INTEGER, primaryKey:true, autoIncrement:true},
