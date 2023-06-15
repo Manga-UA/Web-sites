@@ -33,8 +33,8 @@ const CatalogPages = observer(() => {
 		fetchTitles().then(data => titles.setTitles(data.rows))	
 	},[])
 	useEffect(()=>{
-		fetchTitles(titles._selectstatus/*,titles._selecttype, 10,10*/).then(data => titles.setTitles(data.rows))	
-	},[titles._selectstatus/*,titles._selecttype*/])
+		fetchTitles(titles._selectstatus,titles._selecttype, 10,10).then(data => titles.setTitles(data.rows))	
+	},[titles._selectstatus,titles._selecttype])
 	console.log(titles.types);
 
   return (

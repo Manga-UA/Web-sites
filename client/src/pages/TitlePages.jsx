@@ -28,32 +28,20 @@ const TitlePages = observer(() => {
     status,
   } = useContext(Context);
   const [titles, setTitles] = useState({})
-  const [chapter, setChapters] = useState({})
 
   const {id} = useParams()
   let titleDatumIdTitle = id
-  console.log(id)
+  console.log(titleDatumIdTitle)
   useEffect(()=>{
     fetchOneTitles(id).then(data => setTitles(data))
-    fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))
-  },[titleDatumIdTitle])
+    fetchChapter(id).then(data => chapters.setChapters(data.rows))  
+  },[id])
   const navigate = useNavigate();
  
   return (
     <React.Fragment>
       
         <div key={titles.id_title} >
-          {/* <div className='absolute top-[130px] left-0 right-0 z-[-1] w-full'> */}
-            {/* <div className='relative max-h-96 w-full'> */}
-              {/* <img */}
-                {/* className='w-full h-full object-cover' */}
-                {/* src={imgBgTitle} */}
-                {/* alt='' */}
-              {/* /> */}
-              {/* <div className='absolute inset-0 bg-black opacity-25'></div> */}
-            {/* </div> */}
-          {/* </div> */}
-				{/* style={{  backgroundImage: `url(${imgBgTitle})`, backgroundPosition: 'top',  height: '100px'}} */}
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
