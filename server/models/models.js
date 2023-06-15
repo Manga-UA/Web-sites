@@ -82,9 +82,11 @@ const Type_title = sequelize.define('type_title', {
 const Translate = sequelize.define('translate_data', {
     id_translate: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name_translate: {type: DataTypes.STRING, allowNull: false},
+
     description_translate: {type: DataTypes.STRING},
     image_translate: {type: DataTypes.STRING},
     data_registration: {type: DataTypes.DATE},
+
 })
 
 const Rating = sequelize.define('rating',{

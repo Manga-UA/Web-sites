@@ -1,9 +1,19 @@
 import React from 'react'
 
-const Profile = () => {
-  return (
-	<div>Profile</div>
-  )
-}
+import { observer } from 'mobx-react-lite';
+import UserBookmarkPages from './UserBookmarkPages';
+
+
+
+const Profile = observer(() => {
+
+	
+	
+	return (
+		<div>
+			<UserBookmarkPages></UserBookmarkPages>
+		</div>
+	)
+})
 
 export default Profile;
