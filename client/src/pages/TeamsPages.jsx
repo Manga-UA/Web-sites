@@ -33,7 +33,7 @@ const TeamsPages = observer(() => {
 				</div>
 				<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  lg:grid-cols-5 justify-items-center md:gap-y-2 lg:gap-y-5'>
 					{titles._titles.map((title) => (
-						<div className='flex flex-col gap-3 h-[350px] w-36 text-center'>
+						<div className='flex flex-col gap-3 h-[350px] w-36 text-center' key={title.id_title}>
 							<img className='w-full h-full max-h-52 object-cover rounded' src={title.image_title} alt={title.name_title} />
 							<button
 								className={
@@ -51,7 +51,7 @@ const TeamsPages = observer(() => {
 									${theme._theme === DARK_THEME ? 'bg-button hover:bg-inherit' : 'bg-orange-400 hover:bg-inherit'} 
 									hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`
 								}
-								onClick={()=> navigate(EDIT_TITLE_ROUTE)}
+								onClick={()=> navigate(EDIT_TITLE_ROUTE + '/' + title.id_title)}
 							>
 								Редагувати
 							</button>

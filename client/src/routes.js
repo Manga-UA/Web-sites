@@ -42,7 +42,7 @@ export const authRoutes = [
 		Component: AddChapterPages
 	},
 	{
-		path: EDIT_TITLE_ROUTE,
+		path: EDIT_TITLE_ROUTE + '/:id',
 		Component: EditTitlePages
 	}
 ]
