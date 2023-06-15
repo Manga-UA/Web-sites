@@ -6,7 +6,7 @@ import DropDown from '../components/DropDown';
 import { ReactComponent as DeltaIcon } from '../images/delta-icon.svg';
 
 
-const EditTitlePages = () => {
+const EditTitlePages = observer(() => {
 	const {theme} = useContext(Context);
 	// style class in elements
 	const styleLabel = 'flex flex-col gap-2 text-text-bg';
@@ -94,6 +94,6 @@ const EditTitlePages = () => {
 			</form>
 		</div>
 	)
-}
+})
 
 export default EditTitlePages
