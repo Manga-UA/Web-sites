@@ -41,7 +41,9 @@ const TitlePages = observer(() => {
   return (
     <React.Fragment>
       
-        <div key={titles.id_title} >
+      {titles._titles.map((title) => (
+        <div key={title.id_title} >
+
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
@@ -168,9 +170,9 @@ const TitlePages = observer(() => {
               </div>
             </div>
           </div>
-        </div>
-      
-    </React.Fragment>
+          </div>
+    ))}
+  </React.Fragment>
   );
 });
 
