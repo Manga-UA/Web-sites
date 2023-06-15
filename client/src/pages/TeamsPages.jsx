@@ -14,7 +14,7 @@ const TeamsPages = () => {
 					<p className='text-subtitle-bg'>Назва команди</p>
 				</div>
 				<p className='text-text-bg'>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Error dolorem veritatis cumque ipsam iure recusandae? Hic in ex mollitia, soluta cumque quia. Quisquam cumque sit, eligendi ab quo veritatis nemo.
+					Lorem ipsum dolor sit amet ectetur adipisicing elit. Error dolorem veritatis cumque ipsam iure recusandae? Hic in ex mollitia, soluta cumque quia. Quisquam cumque sit, eligendi ab quo veritatis nemo.
 				</p>
 				<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  lg:grid-cols-5 justify-items-center md:gap-y-2 lg:gap-y-5'>
 					{titles._titles.map((title) => (
