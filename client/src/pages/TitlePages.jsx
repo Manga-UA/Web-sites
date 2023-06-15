@@ -47,12 +47,12 @@ const TitlePages = observer(() => {
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
               <img
-                className='max-h-[228px] w-auto md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] rounded object-cover'
+                className='max-h-[228px] w-auto md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] lg:min-w-[850px] rounded object-cover'
                 src={title.image_title}
                 alt={title.name_title}
               />
-              <div className='flex flex-col justify-between items-stretch lg:justify-end lg:items-end w-full'>
-                <p className='text-title-bg text-end truncate w-40 lg:w-full overflow-ellipsis'>
+              <div className='flex flex-col justify-between items-stretch lg:justify-start lg:items-start w-full'>
+                <p className='text-title-bg truncate w-40 lg:w-full overflow-ellipsis'>
                   {title.name_title}
                 </p>
                 <div className='flex flex-col gap-y-9'>
@@ -80,7 +80,7 @@ const TitlePages = observer(() => {
                     </button>
                   </div>
                   {/* Info Panel */}
-                  <div className='flex gap-2 lg:justify-end'>
+                  <div className='flex gap-2 lg:justify-start'>
                     {/* Watching */}
                     <span className='flex flex-col items-center gap-3 text-text-md'>
                       <EyesIcon className='h-8' />
