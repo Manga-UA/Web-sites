@@ -7,7 +7,7 @@ class TitleController{
 
     async create (req,res,next){
         try {       
-        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType,translateDatumIdTranslate,screenwriterDatumIdScreenwriter} = req.body
+        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType/*,translateDatumIdTranslate,screenwriterDatumIdScreenwriter*/} = req.body
         const {image_title} = req.files
         let fileName = uuid.v4()+".jpg"
         const dateRelease = date_release_title|| Date.now()
@@ -21,7 +21,7 @@ class TitleController{
             typeTitleIdType, 
             image_title:fileName
         })
-        const translateTitle = await TitleTranslate.create({
+        /*const translateTitle = await TitleTranslate.create({
             titleDatumIdTitle: titleData.id_title,
             translateDatumIdTranslate
         })
@@ -36,7 +36,7 @@ class TitleController{
         const artistTitle = await TitleArtist.create({
             titleDatumIdTitle: titleData.id_title,
             artistDatumIdArtist
-        })
+        })*/
         return res.json(titleData)
             
         } catch (e) {
@@ -62,7 +62,7 @@ class TitleController{
             titleData = await Title_data.findAndCountAll({where:{typeTitleIdType},limit,offset})
         }
         if (statusDatumIdStatus && typeTitleIdType) {
-            titleData = await Title_data.findAndCountAll({where:{tytypeTitleIdTypepeId, statusDatumIdStatus},limit,offset})
+            titleData = await Title_data.findAndCountAll({where:{typeTitleIdType, statusDatumIdStatus},limit,offset})
         }
         return res.json(titleData)
     }

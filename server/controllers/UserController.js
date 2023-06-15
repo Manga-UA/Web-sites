@@ -27,7 +27,7 @@ class UserController{
             return next(ApiError.badRequest('email busy'))
         }
 
-        let roleUserId = roleUserIdRole|| 1   
+        let roleUserId = roleUserIdRole|| 3   
         let translateDatumId= translateDatumIdTranslate||null 
 
         const hashPassword = await bcrypt.hash(password_user,5)

@@ -5,6 +5,7 @@ export default class UserManga {
 		// Нижній прочерк перед змінною означає, що таку змінну не можна змінювати
 		this._isAuth = true
 		this._user = []
+		this.user_name = null
 		makeAutoObservable(this)
 	}
 

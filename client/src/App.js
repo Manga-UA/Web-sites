@@ -12,20 +12,18 @@ import Footer from './components/Footer';
 import { observer } from 'mobx-react-lite';
 import { Context } from '.';
 import { check } from './http/userApi';
+import { fetchStatus, fetchTitles } from './http/titleApi';
 const App = observer( () => {
-	const {user} = useContext(Context)
+	const {user, titles} = useContext(Context)//отримання користувача
 	const [loading, setLoading] = useState( true)
 	
 	useEffect(()=>{
 		check().then(data =>{
-			user.setUser(true)
+			user.setUser()
 			user.setIsAuth(true)
 		})
 	},[])
 
-	/*if (loading){
-		return 
-	}*/
 
 	return (
 	<BrowserRouter>

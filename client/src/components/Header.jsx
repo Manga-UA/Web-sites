@@ -21,7 +21,7 @@ const Header = observer(() => {
 	const [randomIndex, setRandomIndex] = useState(0);
 	// function get rand title id 
 	const handleGetRandomIndex = () => {
-	  const min = 0;
+	  const min = 1;
 	  const max = titles._titles.length;
 	  const newIndex = Math.floor(Math.random() * (max - min)) + min;
 	  setRandomIndex(newIndex);

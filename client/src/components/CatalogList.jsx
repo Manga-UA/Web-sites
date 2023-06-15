@@ -44,13 +44,13 @@ const CatalogList = () => {
 						<div className='relative h-full w-full max-h-36 max-h-[215px]'>
 							<img
 								className="h-full w-full max-h-36 max-h-[215px] object-cover rounded-xl"
-								src={title.image_title}
-								alt={title.name_title}
+								src={process.env.REACT_APP_API_URL + title.image_title}
+								alt={title.name_title}	
 							/>
 		  					<div className="absolute inset-0 bg-black opacity-25 rounded-xl"></div>
 							<div className='absolute z-[1] flex gap-1.5 items-center top-[10px] right-[10px] bg-gray-400 opacity-90 p-[5px] rounded-md '>
 								<EyesSMIcon/>
-								<span className='text-text-sm opacity-100'>321</span>
+								<span className='text-text-sm opacity-100'>{title.views}</span>
 							</div>
 						</div>
 						{/* info */}
@@ -107,12 +107,12 @@ const CatalogList = () => {
 								{/* Watching */}
 								<span className="flex items-center gap-3 text-text-lg">
 									<EyesIcon />
-									123
+									{title.views}
 								</span>
 								{/* Likes */}
 								<span className="flex items-center gap-3 text-text-lg">
 									<LikeIcon />
-									10
+									{title.rating}
 								</span>
 								{/* Bookmark */}
 								<span className="flex items-center gap-3 text-text-lg">

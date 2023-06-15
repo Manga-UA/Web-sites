@@ -7,12 +7,12 @@ class ChapterController{
 
     async create (req,res,next){
         try {       
-        const {name_chapter,number_chapter,date_release_chapter,titleDatumIdTitle} = req.body
-
+        const {name_chapter,number_chapter,titleDatumIdTitle} = req.body
+        const dateRegist = Date.now()
         const chapterData = await Chapter.create({
             name_chapter,
             number_chapter,
-            date_release_chapter,
+            date_release_chapter:dateRegist,
             titleDatumIdTitle
         })
         return res.json(chapterData)
@@ -25,16 +25,13 @@ class ChapterController{
     }
 
     async getAll (req,res){
-        let {titleDatumIdTitle, limit, page} = req.query
-        page = page||1
-        limit = limit||9
-        let offset = page*limit-limit
+        let {titleDatumIdTitle} = req.query
         let chapterData;
         if (!titleDatumIdTitle) {
-            chapterData = await Chapter.findAndCountAll({limit,offset})
+            chapterData = await Chapter.findAndCountAll()
         }
         if (titleDatumIdTitle) {
-            chapterData = await Chapter.findAndCountAll({where:{titleDatumIdTitle},limit,offset})
+            chapterData = await Chapter.findAndCountAll({where:{titleDatumIdTitle}})
         }
         return res.json(chapterData)
     }
