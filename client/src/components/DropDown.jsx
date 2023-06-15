@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-const DropDown = ({ options, onSelect, placeholderText, ImageIcon, selectedOption}) => {
+const DropDown = ({ options, onSelect, placeholderText, ImageIcon, selectedOption, borderStyle}) => {
 	// state with open
 	const [isOpen, setIsOpen] = useState(false);
 	//link for parent div in dropdown
@@ -34,7 +34,7 @@ const DropDown = ({ options, onSelect, placeholderText, ImageIcon, selectedOptio
 		<div className='relative' ref={dropdownRef}>
 			<button
 				type='button'
-				className='inline-flex items-center justify-between w-full px-1 py-1 lg:px-4 lg:py-2 text-text-sm lg:text-text-md border border-[0.8px] border-stroke-dark rounded-md'
+				className={`inline-flex items-center truncate ${borderStyle ? borderStyle : ' '} justify-between $ w-full px-1 py-1 lg:px-4 lg:py-2 text-text-sm lg:text-text-md border border-[0.8px] border-stroke-dark rounded-md`}
 				onClick={handleToggle}
 				
 			>
@@ -50,7 +50,7 @@ const DropDown = ({ options, onSelect, placeholderText, ImageIcon, selectedOptio
 					   <button
 						 key={option}
 						 type='button'
-						 className='block text-left w-full px-4 py-2 text-text-md hover:bg-slate-400 focus:bg-slate-400 rounded-sm'
+						 className='block text-left w-full truncate px-4 py-2 text-text-md hover:bg-slate-400 focus:bg-slate-400 rounded-sm'
 						 onClick={() => handleOptionSelect(option)}
 					   >
 						 {option}

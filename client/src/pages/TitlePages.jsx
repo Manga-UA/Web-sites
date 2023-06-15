@@ -6,10 +6,10 @@ import { ReactComponent as BookMarkIcon } from '../images/bookmark-bg-icon.svg';
 import { ReactComponent as BookMarkLightIcon } from '../images/bookmark-bg-light-icon.svg';
 import { ReactComponent as LikeIcon } from '../images/like-bg-icon.svg';
 import { ReactComponent as EyesIcon } from '../images/eyes-bg-icon.svg';
-import imgBgTitle from '../images/background-title.jpg';
 import {
   ARTISTS_ROUTE,
   AUTHOR_ROUTE,
+  CHAPTER_ROUTE,
   DARK_THEME,
   TRANSLATOR_ROUTE,
 } from '../utils/consts';
@@ -32,17 +32,6 @@ const TitlePages = observer(() => {
     <React.Fragment>
       {titles._titles.map((title) => (
         <div key={title.id_title} >
-          {/* <div className='absolute top-[130px] left-0 right-0 z-[-1] w-full'> */}
-            {/* <div className='relative max-h-96 w-full'> */}
-              {/* <img */}
-                {/* className='w-full h-full object-cover' */}
-                {/* src={imgBgTitle} */}
-                {/* alt='' */}
-              {/* /> */}
-              {/* <div className='absolute inset-0 bg-black opacity-25'></div> */}
-            {/* </div> */}
-          {/* </div> */}
-				{/* style={{  backgroundImage: `url(${imgBgTitle})`, backgroundPosition: 'top',  height: '100px'}} */}
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
@@ -110,8 +99,11 @@ const TitlePages = observer(() => {
                 <div className='flex flex-col gap-2 p-1 lg:p-3 border border-[0.5px] border-stroke-dark rounded h-full max-h-64 lg:max-h-96 lg:w-full overflow-y-auto'>
                   {chapters._chapters.map((chapter) => (
                     <div
-                      className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark'
+                      className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark cursor-pointer'
                       key={chapter.id_chapter}
+					  onClick={() =>
+                        navigate(CHAPTER_ROUTE + '/' + chapter.id_chapter)
+					}
                     >
                       <p className='text-text-bg lg:text-subtitle-sm'>
                         Глава № {chapter.number_chapter}

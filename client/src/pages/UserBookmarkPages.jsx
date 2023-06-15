@@ -9,7 +9,7 @@ import { DARK_THEME } from '../utils/consts';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import MobileFilterCatalog from '../components/MobileFilterCatalog';
-const UserBookmarkPages = () => {
+const UserBookmarkPages = observer(() => {
 
 	const [selectedSort, setSelectedSort] = useState(null);
 	const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
@@ -55,6 +55,6 @@ const UserBookmarkPages = () => {
 		</div>
 	</div>
   )
-}
+})
 
 export default UserBookmarkPages;
