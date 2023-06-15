@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite';
 const AddChapterPages = observer(() => {
 	const {theme} = useContext(Context);
 	// style class in elements
-	const styleLabel = 'flex flex-col gap-2 text-text-bg';
 	const styleInpute = 'placeholder:text-inherit h-9 px-1 lg:px-4 bg-transparent text-text-md border border-stroke-dark rounded-sm';
 
 	const [pageFields, setPageFields] = useState([{ pageNumber: '', image: '' }]);
