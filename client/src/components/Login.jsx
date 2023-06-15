@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import girl from '../images/girl.jpg'
 import myHero from '../images/myhero.jpg'
 import { NavLink } from 'react-router-dom'
@@ -6,10 +6,21 @@ import { Context } from '../index'
 import { DARK_THEME, MANGA_ROUTE } from '../utils/consts'
 import {ReactComponent as ArrowNext} from '../images/arrow-next-icon.svg'
 import { REGISTRATION_ROUTE } from '../utils/consts'
+import { login } from '../http/userApi'
 
 const Login = () => {
 		// контекст теми  
 	const {theme, user} = useContext(Context);
+
+	const[login_user, setLogin] = useState('')
+	const[password_user, setPassword] = useState('')
+	const singIn = async()=>{
+		const data = await login(login_user,password_user);
+		user.setUser (data)
+		user._isAuth = true
+		console.log(user.login_user)				
+	}
+
 	return (
 		<div className='flex flex-col justify-center items-center gap-4'>
 			{/* title */}
@@ -22,6 +33,8 @@ const Login = () => {
 					name="login" 
 					id="login" 
 					placeholder='Логін' 
+					value={login_user}
+					onChange={e=> setLogin(e.target.value)}
 					
 				/>
 				<input 
@@ -31,6 +44,8 @@ const Login = () => {
 					name="pass" 
 					id="pass" 
 					placeholder='Пароль'
+					value={password_user}
+					onChange={e=> setPassword(e.target.value)}
 				/>
 			</form>
 			<NavLink to={REGISTRATION_ROUTE} className="flex items-center gap-1.5 text-text-bg">
@@ -38,7 +53,7 @@ const Login = () => {
 			</NavLink>
 			<NavLink
 				to={MANGA_ROUTE}
-				onClick={()=> user._isAuth = true}
+				onClick={singIn}
 				className={`text-text-lg ${theme._theme === DARK_THEME ? "bg-button hover:bg-inherit" : "bg-orange-400 hover:bg-inherit"} rounded py-[10px] px-[23px] hover:border hover:border-solid hover:border-stroke-dark  transition delay-150 duration-300 ease-in-out`}
 			>
 				Тиць тиць і зайшов

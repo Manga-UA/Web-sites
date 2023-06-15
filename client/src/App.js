@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 // import Swiper styles
 import 'swiper/css';
@@ -9,8 +9,23 @@ import "./index.css"
 import Header from './components/Header';
 import Wrapper from './components/wrapper';
 import Footer from './components/Footer';
-const App = () => {
-  return (
+import { observer } from 'mobx-react-lite';
+import { Context } from '.';
+import { check } from './http/userApi';
+import { fetchStatus, fetchTitles } from './http/titleApi';
+const App = observer( () => {
+	const {user, titles} = useContext(Context)//отримання користувача
+	const [loading, setLoading] = useState( true)
+	
+	useEffect(()=>{
+		check().then(data =>{
+			user.setUser()
+			user.setIsAuth(true)
+		})
+	},[])
+
+
+	return (
 	<BrowserRouter>
 		<Wrapper>
 			<Header/>
@@ -19,6 +34,6 @@ const App = () => {
 		</Wrapper>
 	</BrowserRouter>
   )
-}
+})
 
 export default App

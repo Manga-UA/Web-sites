@@ -21,13 +21,18 @@ const Header = observer(() => {
 	const [randomIndex, setRandomIndex] = useState(0);
 	// function get rand title id 
 	const handleGetRandomIndex = () => {
-	  const min = 0;
+	  const min = 1;
 	  const max = titles._titles.length;
 	  const newIndex = Math.floor(Math.random() * (max - min)) + min;
 	  setRandomIndex(newIndex);
 	};
-	
+	console.log(user.login_user)
+	const singOut = async()=>{
+		user.setUser ({})
+		user._isAuth = false				
+	}
 
+	
 	return (
 		<header className=' flex justify-between items-center h-16 lg:h-[90px]'>
 			{/* Navbar block */}
@@ -60,12 +65,12 @@ const Header = observer(() => {
 								to={PROFILE_ROUTE}
 							>
 									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={userIcon} alt="userIcon" />
-									<p className='h-5 w-16 truncate text-text-md'>Твій нікнейм</p>
+									<p className='h-5 w-16 truncate text-text-md'>{user.login_user}</p>
 								
 							</NavLink>
 						</li>
 						<li>
-							<ExitDoorIcon className="cursor-pointer"  onClick={()=> user._isAuth = false}/>
+							<ExitDoorIcon className="cursor-pointer"  onClick={singOut}/>
 						</li>
 					</ul> 
 					:

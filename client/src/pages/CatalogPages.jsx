@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect} from 'react'
 import CatalogList from '../components/CatalogList';
 import { ReactComponent as ArrowUpDownIcon } from '../images/arrow-up-down-icon.svg';
 import DropDown from '../components/DropDown';
@@ -8,10 +8,16 @@ import { DARK_THEME } from '../utils/consts';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import MobileFilterCatalog from '../components/MobileFilterCatalog';
+import { fetchStatus, fetchTitles, fetchTypes,fetchGenre } from '../http/titleApi';
 const CatalogPages = observer(() => {
 	const [selectedSort, setSelectedSort] = useState(null);
 	const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-	const {theme} = useContext(Context);
+
+	const [selectedGenre, setSelectedGenre] = useState(null);
+	const [selectedStatus, setSelectedStatus] = useState(null);
+	const [selectedCategory, setSelectedCategory] = useState(null);
+
+	const {theme,titles} = useContext(Context);
 	const sorts = ['за останнім оновлення', 'за лайками', 'за переглядами'];
 	// першочерговий напис на випадаючому списку
 	const placeholderSort = sorts[0];
@@ -19,6 +25,17 @@ const CatalogPages = observer(() => {
 		setSelectedSort(sort);
 		// додаткова логіка
 	};
+	
+	useEffect(()=>{
+		fetchTypes().then(data => titles.setTypes(data))
+		fetchStatus().then(data => titles.setStatus(data))
+		fetchGenre().then(data => titles.setGenre(data))
+		fetchTitles().then(data => titles.setTitles(data.rows))	
+	},[])
+	useEffect(()=>{
+		fetchTitles(titles._selectstatus/*,titles._selecttype, 10,10*/).then(data => titles.setTitles(data.rows))	
+	},[titles._selectstatus/*,titles._selecttype*/])
+	console.log(titles.types);
 
   return (
 	<div className='flex gap-6 relative'>

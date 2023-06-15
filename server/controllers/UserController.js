@@ -27,12 +27,12 @@ class UserController{
             return next(ApiError.badRequest('email busy'))
         }
 
-        let roleUserId = roleUserIdRole||1   
-        let translateDatumId= translateDatumIdTranslate|| 1 
+        let roleUserId = roleUserIdRole|| 3   
+        let translateDatumId= translateDatumIdTranslate||null 
 
         const hashPassword = await bcrypt.hash(password_user,5)
         const dateRegist = Date.now()
-        const user = await User.create({login_user,password_user: hashPassword,email,data_registri: dateRegist,roleUserIdRole:roleUserId,translateDatumIdTranslate:translateDatumId})
+        const user = await User.create({login_user,password_user: hashPassword,email,data_registration: dateRegist,roleUserIdRole:roleUserId,translateDatumIdTranslate:translateDatumId})
         //const marker = await Marker.create({userDatumIdUser: user.id_user})
         const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole)
         return res.json({token})
@@ -60,12 +60,23 @@ class UserController{
 
     async update(req,res,next){
         try {
-            const {id_user,login_user,password_user,email,roleUserIdRole,translateDatumIdTranslate} = req.body
+            const {id_user,login_user,password_user,email,description_user,} = req.body
+            const {image_user} = req.files
             if(!id_user){
                 return next(ApiError.badRequest('not login or password'))
             }
             const hashPassword = await bcrypt.hash(password_user,5)
-            let updateUser =await User.update({login_user,password_user: hashPassword,email,roleUserIdRole,translateDatumIdTranslate},{where:{id_user}})
+            
+            let fileName = uuid.v4()+".jpg"
+            image_user.mv(path.resolve(__dirname,'..','static',fileName))
+
+            let updateUser =await User.update({
+                login_user,
+                password_user: hashPassword,
+                email,
+                description_user,
+                image_user: fileName
+            },{where:{id_user}})
             updateUser = await User.findOne({where:{id_user}},)
             return res.json(updateUser);
         } catch (e) {

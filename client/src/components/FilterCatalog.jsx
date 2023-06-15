@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DropDown from './DropDown'
 import { ReactComponent as DeltaIcon } from '../images/delta-icon.svg';
 import { DARK_THEME } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
+import { fetchStatus } from '../http/titleApi';
+
 
 
 const FilterCatalog = observer(() => {
@@ -12,7 +14,7 @@ const FilterCatalog = observer(() => {
 	const [selectedCategory, setSelectedCategory] = useState(null);
 
 	// контекст
-	const {theme} = useContext(Context);
+	const {theme,titles} = useContext(Context);
 
 	// першочергові написи на випадаючому списку
 
@@ -38,12 +40,63 @@ const FilterCatalog = observer(() => {
 		setSelectedGenre(null);
 		setSelectedStatus(null);
 		setSelectedCategory(null);
+		titles._selectstatus=null
+		titles._selectganre=null
+		titles._selecttype=null
+		refresh()
 	};
 
-	const genres = ['Action', 'Adventure', 'Comedy', 'Drama'];
-	const statuses = ['In Progress', 'Completed', 'On Hold', 'Cancelled'];
-	const categories = ['Movies', 'TV Shows', 'Books', 'Games'];
+	const gettipe = ()=>{
+		for (let i = 1; i < statuses.length; i++) {
+			if (statuses[i]==selectedStatus) {
+				titles._selectstatus = i
+			}			
+		}
+		for (let i = 1; i < genres.length; i++) {
+			if (genres[i]==selectedGenre) {
+				titles._selectganre = i
+			}			
+		}
+		for (let i = 1; i < type.length; i++) {
+			if (type[i]==selectedCategory) {
+				titles._selecttype = i
+			}			
+		}
+		refresh()
+	}
+	const [value,setValue] = useState();
+	  const refresh = ()=>{
+      // это вызовет ререндеринг компонента
+     setValue({});
+  }
 
+	let genres = [];
+	let statuses = [];
+	let type = [];
+
+
+	//const genres = ['Action', 'Adventure', 'Comedy', 'Drama'];
+	const categories = ['Movies', 'TV Shows', 'Books', 'Games'];///типи
+
+	let i = 1
+
+	titles.genre.map(e => {
+		genres[i] = e.name_genre
+		i++
+	});
+	i =1 
+	titles.status.map(e => {
+		statuses[i] = e.name_status
+		i++
+	});
+	i =1 
+	titles.types.map(e => {
+		type[i] = e.name_type
+		i++
+	});
+	i =1 
+
+	
 	return (
 		<div className='flex flex-col gap-4'>
 			<div className='flex justify-between items-center'>
@@ -66,11 +119,11 @@ const FilterCatalog = observer(() => {
 				</div>
 				<div className='flex flex-col gap-3'>
 					<h6 className='text-text-bg'>Категорія</h6>
-					<DropDown options={categories} onSelect={handleCategorySelect} placeholderText={placeholderCategory} ImageIcon={<DeltaIcon/>}  selectedOption={selectedCategory}/>
+					<DropDown options={type} onSelect={handleCategorySelect} placeholderText={placeholderCategory} ImageIcon={<DeltaIcon/>}  selectedOption={selectedCategory}/>
 				</div>
 				<button
 					className={`text-text-lg ${theme._theme === DARK_THEME ? "bg-button hover:bg-inherit" : "bg-orange-400 hover:bg-inherit"} rounded py-[10px] px-[15px] border border-solid border-stroke-dark`}
-				>
+					onClick={gettipe}>
 					Застосувати
 				</button>
 			</div>

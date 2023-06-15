@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import { ReactComponent as BookIcon } from '../images/book-icon.svg';
@@ -15,9 +15,11 @@ import {
 } from '../utils/consts';
 import { useNavigate } from 'react-router-dom';
 
+import {useParams} from 'react-router-dom'
+import { fetchOneTitles,fetchChapter } from '../http/titleApi';
+
 const TitlePages = observer(() => {
   const {
-    titles,
     theme,
     chapters,
     artists,
@@ -25,24 +27,37 @@ const TitlePages = observer(() => {
     translates,
     status,
   } = useContext(Context);
+  const [titles, setTitles] = useState({})
+  const [chapter, setChapters] = useState({})
 
+  const {id} = useParams()
+  let titleDatumIdTitle = id
+  console.log(id)
+  useEffect(()=>{
+    fetchOneTitles(id).then(data => setTitles(data))
+    fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))
+  },[titleDatumIdTitle])
   const navigate = useNavigate();
  
   return (
     <React.Fragment>
-      {titles._titles.map((title) => (
+   
+        <div key={titles.id_title} >
+        {titles._titles.map((title) => (
         <div key={title.id_title} >
+
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
               <img
-                className='max-h-[228px] w-auto md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] lg:min-w-[850px] rounded object-cover'
-                src={title.image_title}
-                alt={title.name_title}
+                className='max-h-[228px] w-auto md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] rounded object-cover'
+                src={process.env.REACT_APP_API_URL + titles.image_title}
+                alt={titles.name_title}
               />
-              <div className='flex flex-col justify-between items-stretch lg:justify-start lg:items-start w-full'>
-                <p className='text-title-bg truncate w-40 lg:w-full overflow-ellipsis'>
-                  {title.name_title}
+              <div className='flex flex-col justify-between items-stretch lg:justify-end lg:items-end w-full'>
+                <p className='text-title-bg text-end truncate w-40 lg:w-full overflow-ellipsis'>
+                  {titles.name_title}
+
                 </p>
                 <div className='flex flex-col gap-y-9'>
                   {/* Button group */}
@@ -73,12 +88,12 @@ const TitlePages = observer(() => {
                     {/* Watching */}
                     <span className='flex flex-col items-center gap-3 text-text-md'>
                       <EyesIcon className='h-8' />
-                      123
+                      {titles.views}
                     </span>
                     {/* Likes */}
                     <span className='flex flex-col items-center gap-3 text-text-md'>
                       <LikeIcon className='h-8' />
-                      10
+                      {titles.rating}
                     </span>
                     {/* Bookmark */}
                     <span className='flex flex-col items-center gap-3 text-text-md'>
@@ -92,7 +107,7 @@ const TitlePages = observer(() => {
             {/* info in title with detail */}
             <div className='flex flex-col gap-3 md:flex-row md:justify-between'>
               <div className='md:max-w-[60%] w-full'>
-                {title.description_title}
+                {titles.description_title}
               </div>
               <div className='flex flex-col gap-8'>
                 {/* chapter info */}
@@ -162,7 +177,7 @@ const TitlePages = observer(() => {
             </div>
           </div>
         </div>
-      ))}
+      
     </React.Fragment>
   );
 });

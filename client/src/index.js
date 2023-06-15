@@ -8,6 +8,7 @@ import CreaterManga from './manga/CreaterManga';
 
 export const Context = createContext(null);
 
+
 const root = document.getElementById('root');
 ReactDOM.createRoot(root).render(
   <React.StrictMode>

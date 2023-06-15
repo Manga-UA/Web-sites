@@ -19,8 +19,8 @@ class TypeTitleController{
             if(!id_type){
                 return next(ApiError.badRequest('not type'))
             }
-            let updateType =await Type_title.update({id_type,name_type},{where:{id_type}})
-            updateType = await Type_title.findOne({where:{id_user}},)
+            let updateType =await Type_title.update({name_type},{where:{id_type}})
+            updateType = await Type_title.findOne({where:{id_type}},)
             return res.json(updateType);
         } catch (e) {
             next(ApiError.badRequest(e.message))

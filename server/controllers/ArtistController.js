@@ -2,15 +2,23 @@ const uuid = require('uuid')
 const path = require('path');
 const {Artist} = require('../models/models');
 const ApiError = require('../error/ApiError');
+var fs = require("fs");
 
 class ArtistController{
 
     async create (req,res,next){
         try {       
-        const {name_artist} = req.body
+        const {name_artist,description_artist} = req.body
+        const {image_artist} = req.files
+        let fileName = uuid.v4()+".jpg"
+        image_artist.mv(path.resolve(__dirname,'..','static',fileName))
+        const dateRegist = Date.now()
 
         const artistData = await Artist.create({
-            name_artist
+            name_artist,
+            description_artist,
+            data_registration: dateRegist,
+            image_artist: fileName
         })
         return res.json(artistData)
             
@@ -41,11 +49,23 @@ class ArtistController{
     }
     async update(req,res,next){
         try {
-            const {id_artist,name_artist} = req.body
+            const {id_artist,name_artist,description_artist} = req.body
+            const {image_artist} = req.files
+            let fileName = uuid.v4()+".jpg"
+            image_artist.mv(path.resolve(__dirname,'..','static',fileName))
             if(!id_artist){
                 return next(ApiError.badRequest('not artist'))
             }
-            let updatePost =await Artist.update({name_artist},{where:{id_artist}})
+            const artistData =await Artist.findOne({
+                where:{id_artist}
+            },)
+            //this.deleteImage(artistData.fileName)
+
+            let updatePost =await Artist.update({
+                name_artist,
+                description_artist,
+                image_artistL:fileName
+            },{where:{id_artist}})
             updatePost = await Artist.findOne({where:{id_artist}},)
             return res.json(updatePost);
         } catch (e) {
@@ -63,6 +83,16 @@ class ArtistController{
         } catch (e) {
             next(ApiError.badRequest(e.message))
         }
+    }
+    
+    deleteImage(fileName){
+        fs.unlink(path.resolve(__dirname,'..','static',fileName), function(err){
+            if (err) {
+                console.log(err);
+            } else {
+                console.log("Файл удалён");
+            }
+        });
     }
 }
 
