@@ -26,13 +26,17 @@ const Header = observer(() => {
 	  const newIndex = Math.floor(Math.random() * (max - min)) + min;
 	  setRandomIndex(newIndex);
 	};
-	console.log(user.login_user)
+	
+	
 	const singOut = async()=>{
 		user.setUser ({})
 		user._isAuth = false				
 	}
 
 	
+	console.log(user.user.login_user);
+	console.log(user.user.password_user);
+
 	return (
 		<header className=' flex justify-between items-center h-16 lg:h-[90px]'>
 			{/* Navbar block */}
@@ -66,7 +70,6 @@ const Header = observer(() => {
 							>
 									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={userIcon} alt="userIcon" />
 									<p className='h-5 w-16 truncate text-text-md'>{user.login_user}</p>
-								
 							</NavLink>
 						</li>
 						<li>

@@ -42,7 +42,6 @@ const TitlePages = observer(() => {
   return (
     <React.Fragment>
    
-        <div key={titles.id_title} >
         {titles._titles.map((title) => (
         <div key={title.id_title} >
 
@@ -177,8 +176,8 @@ const TitlePages = observer(() => {
             </div>
           </div>
         </div>
-      
-    </React.Fragment>
+		))}
+	</React.Fragment>
   );
 });
 
