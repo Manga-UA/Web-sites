@@ -44,7 +44,8 @@ export const createTitles = async (status)=>{
 }
 export const fetchTitles = async(statusDatumIdStatus,typeTitleIdType)=>{
     const {data} = await $host.get('api/title',{params:{
-        statusDatumIdStatus,typeTitleIdType
+        statusDatumIdStatus,
+        typeTitleIdType
     }})
     return data
 }
@@ -57,11 +58,23 @@ export const createChapter = async (status)=>{
     const {data} = await $authHost.post('api/chapter', status)
     return data
 }
-export const fetchChapter = async()=>{
-    const {data} = await $host.get('api/chapter')
+export const fetchChapter = async(titleDatumIdTitle)=>{
+    const {data} = await $host.get('api/chapter',{params:{
+        titleDatumIdTitle
+    }})
     return data
 }
 export const fetchOneChapter = async(id)=>{
     const {data} = await $host.get('api/chapter/'+id)
+    return data
+}
+
+
+
+export const fetchTitleGenre = async (titleDatumIdTitle,genreTitleIdGenre)=>{
+    const {data} = await $host.get('api/titleGenre',{
+        titleDatumIdTitle,
+        genreTitleIdGenre
+    })
     return data
 }

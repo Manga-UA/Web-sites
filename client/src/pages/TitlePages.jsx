@@ -6,20 +6,23 @@ import { ReactComponent as BookMarkIcon } from '../images/bookmark-bg-icon.svg';
 import { ReactComponent as BookMarkLightIcon } from '../images/bookmark-bg-light-icon.svg';
 import { ReactComponent as LikeIcon } from '../images/like-bg-icon.svg';
 import { ReactComponent as EyesIcon } from '../images/eyes-bg-icon.svg';
+import imgBgTitle from '../images/background-title.jpg';
 import {
   ARTISTS_ROUTE,
   AUTHOR_ROUTE,
-  CHAPTER_ROUTE,
   DARK_THEME,
   TRANSLATOR_ROUTE,
+  CHAPTER_ROUTE,
 } from '../utils/consts';
 import { useNavigate } from 'react-router-dom';
 
 import {useParams} from 'react-router-dom'
 import { fetchOneTitles,fetchChapter } from '../http/titleApi';
+import { addMarker } from '../http/userApi';
 
 const TitlePages = observer(() => {
   const {
+    user,
     theme,
     chapters,
     artists,
@@ -28,23 +31,30 @@ const TitlePages = observer(() => {
     status,
   } = useContext(Context);
   const [titles, setTitles] = useState({})
-  const [chapter, setChapters] = useState({})
 
   const {id} = useParams()
-  let titleDatumIdTitle = id
-  console.log(id)
+  const titleDatumIdTitle = id
+  console.log(titleDatumIdTitle)
   useEffect(()=>{
     fetchOneTitles(id).then(data => setTitles(data))
-    fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))
+  },[])
+
+  useEffect(()=>{
+    fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))  
   },[titleDatumIdTitle])
+
+  const addBookmark = async ()=>{
+    console.log(user.user.id_user);
+    console.log(titleDatumIdTitle);
+    const response = await addMarker(user.user.id_user,titleDatumIdTitle);
+    return console.log(response)
+  }
+
   const navigate = useNavigate();
  
   return (
-    <React.Fragment>
-   
-        {titles._titles.map((title) => (
-        <div key={title.id_title} >
-
+    <React.Fragment>   
+        <div key={titles.id_title} >
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
@@ -56,7 +66,6 @@ const TitlePages = observer(() => {
               <div className='flex flex-col justify-between items-stretch lg:justify-end lg:items-end w-full'>
                 <p className='text-title-bg text-end truncate w-40 lg:w-full overflow-ellipsis'>
                   {titles.name_title}
-
                 </p>
                 <div className='flex flex-col gap-y-9'>
                   {/* Button group */}
@@ -67,6 +76,7 @@ const TitlePages = observer(() => {
                           ? 'hover:bg-sm-elipse-dark'
                           : 'hover:bg-orange-400'
                       } transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+                      onClick={addBookmark}
                     >
                       <BookMarkLightIcon />
                       Зберегти
@@ -77,13 +87,14 @@ const TitlePages = observer(() => {
                           ? 'bg-button hover:bg-inherit'
                           : 'bg-orange-400 hover:bg-inherit'
                       } hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+                      onClick={()=> navigate(CHAPTER_ROUTE + '/' + titles.id_chapter)}
                     >
                       <BookIcon />
                       Читати
                     </button>
                   </div>
                   {/* Info Panel */}
-                  <div className='flex gap-2 lg:justify-start'>
+                  <div className='flex gap-2 lg:justify-end'>
                     {/* Watching */}
                     <span className='flex flex-col items-center gap-3 text-text-md'>
                       <EyesIcon className='h-8' />
@@ -113,11 +124,8 @@ const TitlePages = observer(() => {
                 <div className='flex flex-col gap-2 p-1 lg:p-3 border border-[0.5px] border-stroke-dark rounded h-full max-h-64 lg:max-h-96 lg:w-full overflow-y-auto'>
                   {chapters._chapters.map((chapter) => (
                     <div
-                      className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark cursor-pointer'
+                      className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark'
                       key={chapter.id_chapter}
-					  onClick={() =>
-                        navigate(CHAPTER_ROUTE + '/' + chapter.id_chapter)
-					}
                     >
                       <p className='text-text-bg lg:text-subtitle-sm'>
                         Глава № {chapter.number_chapter}
@@ -175,9 +183,9 @@ const TitlePages = observer(() => {
               </div>
             </div>
           </div>
-        </div>
-		))}
-	</React.Fragment>
+          </div>
+  </React.Fragment>
+
   );
 });
 

@@ -15,6 +15,7 @@ const pageRouter = require('./pageRouter')
 const screenwriterRouter = require('./screenwriterRouter')
 const translateRouter = require('./translateRouter')
 const titleGenreRouter = require('./titleGenreRouter')
+
 router.use('/role',rolesRoutes)
 router.use('/user',userRouter)
 router.use('/title',titleRoutes)

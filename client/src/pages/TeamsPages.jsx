@@ -14,7 +14,7 @@ const TeamsPages = observer(() => {
 			<div className='flex flex-col gap-8'>
 				<div className='flex flex-col gap-2 '>
 					<img className='h-44 object-cover' src={girlImG} alt="" />
-					<p className='text-subtitle-bg'>Назва команди</p>
+					<p className='text-subtitle-bg'>PirateKing</p>
 				</div>
 				<p className='text-text-bg'>
 					Lorem ipsum dolor sit amet ectetur adipisicing elit. Error dolorem veritatis cumque ipsam iure recusandae? Hic in ex mollitia, soluta cumque quia. Quisquam cumque sit, eligendi ab quo veritatis nemo.
@@ -34,7 +34,7 @@ const TeamsPages = observer(() => {
 				<div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  lg:grid-cols-5 justify-items-center md:gap-y-2 lg:gap-y-5'>
 					{titles._titles.map((title) => (
 						<div className='flex flex-col gap-3 h-[350px] w-36 text-center' key={title.id_title}>
-							<img className='w-full h-full max-h-52 object-cover rounded' src={title.image_title} alt={title.name_title} />
+							<img className='w-full h-full max-h-52 object-cover rounded' src={process.env.REACT_APP_API_URL + title.image_title} alt={title.name_title} />
 							<button
 								className={
 									`text-text-lg text-center

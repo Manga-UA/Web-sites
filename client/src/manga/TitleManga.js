@@ -19,6 +19,10 @@ export default class TitleManga {
 		this._titles = titles
 	}
 
+	setTitlesGenres(titlesGenre) {
+		this._titlesGenre = titlesGenre
+	}
+
 	setTypes(types) {
 		this._types = types
 	}
@@ -57,6 +61,9 @@ export default class TitleManga {
 	// визиваються коли змінна що використовується змінила свій стан
 	get titles() {
 		return this._titles
+	}
+	get titlesGenre() {
+		return this._titlesGenre
 	}
 	get types() {
 		return this._types

@@ -25,8 +25,7 @@ const Registration = observer(({isLogin}) => {
 		} catch (e) {
 			alert(e.response.data.message);
 		}
-		
-	}
+}
 
 
 	return (

@@ -101,7 +101,7 @@ const MostPopularItem = observer(() => {
 					>
 						<img
 							className="h-full w-full max-h-40 max-h-52 object-cover rounded"
-							src={title.image_title}
+							src={process.env.REACT_APP_API_URL + title.image_title}
 							alt={title.name_title}
 						/>
 						<p className="text-text-lg truncate overflow-ellipsis">

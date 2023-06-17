@@ -26,8 +26,7 @@ const Login = observer(({isLogin}) => {
 		} catch (e) {
 			alert(e.response.data.message)
 		}
-		
-	}
+}
 
 	return (
 		<div className='flex flex-col justify-center items-center gap-4'>
