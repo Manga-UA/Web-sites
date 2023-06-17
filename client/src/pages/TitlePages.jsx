@@ -53,10 +53,8 @@ const TitlePages = observer(() => {
   const navigate = useNavigate();
  
   return (
-    <React.Fragment>
-      
+    <React.Fragment>   
         <div key={titles.id_title} >
-
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg' >
@@ -187,6 +185,7 @@ const TitlePages = observer(() => {
           </div>
           </div>
   </React.Fragment>
+
   );
 });
 

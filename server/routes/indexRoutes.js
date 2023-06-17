@@ -33,5 +33,4 @@ router.use('/translate',translateRouter)
 
 router.use('/titleGenre',titleGenreRouter)
 
-
 module.exports= router

@@ -31,7 +31,8 @@ const Header = observer(() => {
 	  setRandomIndex(newIndex);
 	  navigate(TITLE_ROUTE + '/' + randomIndex)
 	};
-	console.log(user.login_user)
+	
+	
 	const singOut = async()=>{
 		user.setUser ({})
 		user.setIsAuth(false)				
@@ -54,6 +55,7 @@ const Header = observer(() => {
 	console.log(user.user.image_user);
 
 	
+
 	return (
 		<header className=' flex justify-between items-center h-16 lg:h-[90px]'>
 			{/* Navbar block */}
@@ -88,7 +90,6 @@ const Header = observer(() => {
 							>
 									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={process.env.REACT_APP_API_URL + user.user.image_user} alt="userIcon" />
 									<p className='h-5 w-16 truncate text-text-md'>{user.user.login_user}</p>
-								
 							</NavLink>
 						</li>
 						<li>

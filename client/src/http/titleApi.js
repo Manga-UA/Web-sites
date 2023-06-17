@@ -6,6 +6,12 @@ export const createGenre = async (genre)=>{
     return data
 }
 
+
+export const fetchGenreKeyTitle = async ()=>{
+    const {data} = await $host.get('api/titleGenre')
+    return data
+}
+
 export const fetchGenre = async ()=>{
     const {data} = await $host.get('api/genre')
     return data
@@ -22,7 +28,7 @@ export const fetchTypes = async ()=>{
 }
 
 export const createStatus = async (status)=>{
-    const {data} = await $host.post('api/status', status)
+    const {data} = await $authHost.post('api/status', status)
     return data
 }
 
@@ -33,7 +39,7 @@ export const fetchStatus = async ()=>{
 
 
 export const createTitles = async (status)=>{
-    const {data} = await $host.post('api/title', status)
+    const {data} = await $authHost.post('api/title', status)
     return data
 }
 export const fetchTitles = async(statusDatumIdStatus,typeTitleIdType)=>{
@@ -49,7 +55,7 @@ export const fetchOneTitles = async(id)=>{
 }
 
 export const createChapter = async (status)=>{
-    const {data} = await $host.post('api/chapter', status)
+    const {data} = await $authHost.post('api/chapter', status)
     return data
 }
 export const fetchChapter = async(titleDatumIdTitle)=>{

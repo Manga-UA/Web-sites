@@ -44,7 +44,7 @@ const DropDown = ({ options, onSelect, placeholderText, ImageIcon, selectedOptio
 			</button>
 			
 			{isOpen && (
-					 <div className={`absolute w-full left-0 backdrop-filter backdrop-blur-[5px] z-10 transition-opacity duration-300 ease-in-out ${isOpen ? 'opacity-100 visible' : 'opacity-0'}`}>
+					 <div className={`absolute max-h-72 overflow-auto w-full left-0 backdrop-filter backdrop-blur-[5px] z-10 transition-opacity duration-300 ease-in-out ${isOpen ? 'opacity-100 visible' : 'opacity-0'}`}>
 					 
 					 {options.map((option) => (
 					   <button

@@ -8,7 +8,7 @@ export const registration = async (login_user, password_user, email)=>{
         email,
         roleUserIdRole: 1,/////визначитись з ролями
     })
-    localStorage.setItem('token',data.token)
+    localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }
 
@@ -17,11 +17,12 @@ export const login = async (login_user, password_user)=>{
         login_user,
         password_user,
     })
-    localStorage.setItem('token',data.token)
+    localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }
 
 export const check = async ()=>{
+
     const {data} = await $authHost.get('api/user/auth')
     localStorage.setItem('token',data.token)
     return jwt_decode(data.token)
@@ -52,4 +53,5 @@ export const fetchMarker = async ()=>{
 }
 export const deleteMarker = async (id)=>{
     const {data} = await $authHost.delete('api/marker/'+ id )
+
 }

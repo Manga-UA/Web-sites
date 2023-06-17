@@ -14,16 +14,19 @@ import { Context } from './index';
 import { check } from './http/userApi';
 import { fetchStatus, fetchTitles } from './http/titleApi';
 const App = observer( () => {
-  const {user, titles} = useContext(Context);//отримання користувача
-  const [loading, setLoading] = useState(true);
-  
-  useEffect(()=>{
-	fetchTitles().then(data => titles.setTitles(data.rows))	
-    check().then(data =>{
-      user.setUser(data)
-      user.setIsAuth(true)
-    }).finally(()=> setLoading(false));
-  },[])
+
+	const {user, titles} = useContext(Context);//отримання користувача
+	const [loading, setLoading] = useState(true);
+	
+	useEffect(()=>{
+		fetchTitles().then(data => titles.setTitles(data.rows))
+		check().then(data =>{
+			user.setUser(data)
+			user.setIsAuth(true)
+		}).finally(()=> setLoading(false));
+	},[localStorage.getItem('token')])
+
+
 
   if(loading){
 	let circleCommonClasses = 'h-10 w-10 bg-current rounded-full';

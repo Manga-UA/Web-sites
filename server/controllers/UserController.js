@@ -19,15 +19,15 @@ class UserController{
     async registration (req,res,next){
         const {login_user,password_user,email,roleUserIdRole,translateDatumIdTranslate}= req.body
         if (!login_user||!password_user){
-            return next(ApiError.badRequest('not login or password'))
+            return next(ApiError.badRequest('не вказано логін чи пароль'))
         }
         let candidate = await User.findOne({where:{login_user}})
         if(candidate){
-            return next(ApiError.badRequest('login busy'))
+            return next(ApiError.badRequest('такий логін вже зайнятий'))
         }
         candidate = await User.findOne({where:{email}})
         if (candidate){
-            return next(ApiError.badRequest('email busy'))
+            return next(ApiError.badRequest('такий email вже зайнятий'))
         }
 
         let roleUserId = roleUserIdRole|| 3   
@@ -54,11 +54,11 @@ class UserController{
         const {login_user, password_user} = req.body
         const user = await User.findOne({where: {login_user}})
         if (!user) {
-            return next(ApiError.internal('Пользователь не найден'))
+            return next(ApiError.internal('Користувача не знайдено'))
         }
         let comparePassword = bcrypt.compareSync(password_user, user.password_user)
         if (!comparePassword) {
-            return next(ApiError.internal('Указан неверный пароль'))
+            return next(ApiError.internal('Вказано неправильний пароль'))
         }
         const token = generateJwt(
             user.id_user,
@@ -70,6 +70,7 @@ class UserController{
     }
 
     async check(req, res, next) {
+
         const token = generateJwt(
             req.user.id_user,
             req.user.login_user, 

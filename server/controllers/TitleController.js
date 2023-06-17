@@ -7,37 +7,37 @@ class TitleController{
 
     async create (req,res,next){
         try {       
-        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType/*,translateDatumIdTranslate,screenwriterDatumIdScreenwriter*/} = req.body
-        const {image_title} = req.files
-        let fileName = uuid.v4()+".jpg"
-        const dateRelease = date_release_title|| Date.now()
-        image_title.mv(path.resolve(__dirname,'..','static',fileName))
+			const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType,genreTitleIdGenre/*,translateDatumIdTranslate,screenwriterDatumIdScreenwriter*/} = req.body
+			const {image_title} = req.files
+			let fileName = uuid.v4()+".jpg"
+			const dateRelease = date_release_title|| Date.now()
+			image_title.mv(path.resolve(__dirname,'..','static',fileName))
 
-        const titleData = await Title_data.create({
-            name_title,
-            description_title,
-            date_release_title: dateRelease,
-            statusDatumIdStatus,
-            typeTitleIdType, 
-            image_title:fileName
-        })
-        /*const translateTitle = await TitleTranslate.create({
-            titleDatumIdTitle: titleData.id_title,
-            translateDatumIdTranslate
-        })
-        const screenwriterTitle = await TitleScreenwriter.create({
-            titleDatumIdTitle: titleData.id_title,
-            screenwriterDatumIdScreenwriter
-        })
-        const genreTitle = await TitleGenre.create({
-            titleDatumIdTitle: titleData.id_title,
-            genreTitleIdGenre
-        })
-        const artistTitle = await TitleArtist.create({
-            titleDatumIdTitle: titleData.id_title,
-            artistDatumIdArtist
-        })*/
-        return res.json(titleData)
+			const titleData = await Title_data.create({
+				name_title,
+				description_title,
+				date_release_title: dateRelease,
+				statusDatumIdStatus,
+				typeTitleIdType, 
+				image_title:fileName
+			})
+			// const translateTitle = await TitleTranslate.create({
+			// 	titleDatumIdTitle: titleData.id_title,
+			// 	translateDatumIdTranslate
+			// })
+			// const screenwriterTitle = await TitleScreenwriter.create({
+			// 	titleDatumIdTitle: titleData.id_title,
+			// 	screenwriterDatumIdScreenwriter
+			// })
+			const genreTitle = await TitleGenre.create({
+				titleDatumIdTitle: titleData.id_title,
+				genreTitleIdGenre
+			})
+			// const artistTitle = await TitleArtist.create({
+			// 	titleDatumIdTitle: titleData.id_title,
+			// 	artistDatumIdArtist
+			// })
+			return res.json(titleData)
             
         } catch (e) {
             next(ApiError.badRequest(e.message))            
