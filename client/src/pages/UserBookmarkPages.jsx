@@ -24,12 +24,11 @@ const UserBookmarkPages = observer(() => {
 
   return (
 	<div>
-		UserBookmarkPages
 		<ProfileBtnNavigate></ProfileBtnNavigate>
 		<div className='flex gap-6 relative'>
 			<div className='flex flex-col gap-14 w-full lg:max-w-[80%]'>
 				<div className='flex items-end justify-between'>
-					<h2 className='text-title-md lg:text-title-bg'>Каталог</h2>
+					<h2 className='text-title-md lg:text-title-bg'></h2>
 					<div className='w-[170px] lg:h-10 text-text-bg rounded'>
 						<DropDown options={sorts} onSelect={handleSortSelect} placeholderText={placeholderSort} ImageIcon={<ArrowUpDownIcon/>} selectedOption={selectedSort}/>
 					</div>

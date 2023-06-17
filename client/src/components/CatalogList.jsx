@@ -57,10 +57,10 @@ const CatalogList = observer(() => {
 						{/* info */}
 						<div className='flex gap-1 h-7'>
 							<p className="text-text-sm truncate overflow-ellipsis">
-								Апокаліпсис
+								{/* Апокаліпсис */}
 							</p>
 							<p className="text-text-sm truncate overflow-ellipsis">
-								Хорор
+								{/* Хорор */}
 							</p>
 						</div>
 						<p className="text-text-lg truncate overflow-ellipsis">

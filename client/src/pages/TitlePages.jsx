@@ -12,14 +12,17 @@ import {
   AUTHOR_ROUTE,
   DARK_THEME,
   TRANSLATOR_ROUTE,
+  CHAPTER_ROUTE,
 } from '../utils/consts';
 import { useNavigate } from 'react-router-dom';
 
 import {useParams} from 'react-router-dom'
 import { fetchOneTitles,fetchChapter } from '../http/titleApi';
+import { addMarker } from '../http/userApi';
 
 const TitlePages = observer(() => {
   const {
+    user,
     theme,
     chapters,
     artists,
@@ -30,19 +33,29 @@ const TitlePages = observer(() => {
   const [titles, setTitles] = useState({})
 
   const {id} = useParams()
-  let titleDatumIdTitle = id
+  const titleDatumIdTitle = id
   console.log(titleDatumIdTitle)
   useEffect(()=>{
     fetchOneTitles(id).then(data => setTitles(data))
-    fetchChapter(id).then(data => chapters.setChapters(data.rows))  
-  },[id])
+  },[])
+
+  useEffect(()=>{
+    fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))  
+  },[titleDatumIdTitle])
+
+  const addBookmark = async ()=>{
+    console.log(user.user.id_user);
+    console.log(titleDatumIdTitle);
+    const response = await addMarker(user.user.id_user,titleDatumIdTitle);
+    return console.log(response)
+  }
+
   const navigate = useNavigate();
  
   return (
     <React.Fragment>
       
-      {titles._titles.map((title) => (
-        <div key={title.id_title} >
+        <div key={titles.id_title} >
 
           <div className='flex flex-col gap-7 '>
             {/* header info */}
@@ -65,6 +78,7 @@ const TitlePages = observer(() => {
                           ? 'hover:bg-sm-elipse-dark'
                           : 'hover:bg-orange-400'
                       } transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+                      onClick={addBookmark}
                     >
                       <BookMarkLightIcon />
                       Зберегти
@@ -75,6 +89,7 @@ const TitlePages = observer(() => {
                           ? 'bg-button hover:bg-inherit'
                           : 'bg-orange-400 hover:bg-inherit'
                       } hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+                      onClick={()=> navigate(CHAPTER_ROUTE + '/' + titles.id_chapter)}
                     >
                       <BookIcon />
                       Читати
@@ -171,7 +186,6 @@ const TitlePages = observer(() => {
             </div>
           </div>
           </div>
-    ))}
   </React.Fragment>
   );
 });

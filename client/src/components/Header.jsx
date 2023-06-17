@@ -1,5 +1,5 @@
 import React, { useContext, useState} from 'react'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useNavigate} from 'react-router-dom'
 import { ReactComponent as LogoIcon } from '../images/Logo.svg'
 import { ReactComponent as MenuIcon } from '../images/menu-open-icon.svg'
 import { ReactComponent as MenuCloseIcon } from '../images/menu-close-icon.svg'
@@ -12,25 +12,46 @@ import RadioBtnTheme from './RadioBtnTheme';
 import MobileHeader from './MobileHeader'
 import SearchMenu from './SearchMenu'
 import userIcon from '../images/userIcon.png'
+
 const Header = observer(() => {
 
+	const navigate = useNavigate()
 	const {theme, titles, user} = useContext(Context);
 
+	let i =1
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	// state rand index title
-	const [randomIndex, setRandomIndex] = useState(0);
+	const [randomIndex, setRandomIndex] = useState(i);
 	// function get rand title id 
 	const handleGetRandomIndex = () => {
 	  const min = 1;
 	  const max = titles._titles.length;
 	  const newIndex = Math.floor(Math.random() * (max - min)) + min;
+	  i= newIndex
 	  setRandomIndex(newIndex);
+	  navigate(TITLE_ROUTE + '/' + randomIndex)
 	};
 	console.log(user.login_user)
 	const singOut = async()=>{
 		user.setUser ({})
-		user._isAuth = false				
+		user.setIsAuth(false)				
 	}
+	const handleClear = () => {
+		titles._selectstatus=null
+		titles._selectganre=null
+		titles._selecttype=null
+		refresh()
+	};
+	const [value,setValue] = useState();
+	  const refresh = ()=>{
+      // это вызовет ререндеринг компонента
+     setValue({});
+	}
+
+	console.log(user.user.id_user);
+	console.log(user.user.login_user);
+	console.log(user.user.roleUserIdRole);
+	console.log(user.user.image_user);
 
 	
 	return (
@@ -40,14 +61,15 @@ const Header = observer(() => {
 				<NavLink to={MANGA_ROUTE}><LogoIcon/></NavLink>
 				<ul className='gap-6 xl:gap-[50px] hidden lg:flex'>
 					<li>
-						<NavLink 
+						<button 
 							onClick={handleGetRandomIndex}
-							to={TITLE_ROUTE + '/' + randomIndex}
-							className="text-navbar">Рандомчик
-						</NavLink>
+							
+							className="text-navbar">
+								Рандомчик
+						</button>
 					</li>
 					<li>
-						<NavLink  className="text-navbar" to={CATALOG_ROUTE}>Каталог</NavLink>
+						<NavLink  className="text-navbar" to={CATALOG_ROUTE} onClick={handleClear}>Каталог</NavLink>
 					</li>
 				</ul>
 		 	</div>
@@ -64,8 +86,8 @@ const Header = observer(() => {
 								className="flex flex-col items-center gap-2" 
 								to={PROFILE_ROUTE}
 							>
-									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={userIcon} alt="userIcon" />
-									<p className='h-5 w-16 truncate text-text-md'>{user.login_user}</p>
+									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={process.env.REACT_APP_API_URL + user.user.image_user} alt="userIcon" />
+									<p className='h-5 w-16 truncate text-text-md'>{user.user.login_user}</p>
 								
 							</NavLink>
 						</li>

@@ -5,15 +5,15 @@ export default class CreaterManga {
 		// Нижній прочерк перед змінною означає, що таку змінну не можна змінювати
 		// художник
 		this._artists = [
-			{id_artist:1,name_artist:"Y Wo",},
+			{id_artist:1,name_artist:"Хірому Аракава",},
 		]
 		// сценарист/автор
 		this._screenWriters = [
-			{ id_screenwriter: 1, name_screenwriter: "Action" },
+			{ id_screenwriter: 1, name_screenwriter: "Тацукі Фуджімото" },
 		]
 		// перекладач
 		this._translates = [
-			{ id_translate: 1, name_translate: "Action", description_translate: "Опис", data_registri: "22.02.2022"},
+			{ id_translate: 1, name_translate: "PirateKing", description_translate: "Опис", data_registri: "22.02.2022"},
 		]
 		makeAutoObservable(this)
 	}

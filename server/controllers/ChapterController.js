@@ -25,15 +25,19 @@ class ChapterController{
     }
 
     async getAll (req,res){
-        let {titleDatumIdTitle} = req.query
-        let chapterData;
-        if (!titleDatumIdTitle) {
-            chapterData = await Chapter.findAndCountAll()
-        }
-        if (titleDatumIdTitle) {
+        try { 
+            let {titleDatumIdTitle} = req.query
+            let chapterData;
+            if (!titleDatumIdTitle) {
+                chapterData = await Chapter.findAndCountAll()
+            }
+            if (titleDatumIdTitle) {
             chapterData = await Chapter.findAndCountAll({where:{titleDatumIdTitle}})
+            }
+            return res.json(chapterData)
+        } catch (e) {
+            next(ApiError.badRequest(e.message))            
         }
-        return res.json(chapterData)
     }
 
     async getOne (req,res){

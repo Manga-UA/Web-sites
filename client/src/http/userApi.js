@@ -26,3 +26,30 @@ export const check = async ()=>{
     localStorage.setItem('token',data.token)
     return jwt_decode(data.token)
 }
+
+export const update = async ()=>{
+    const {data} = await $authHost.get('api/user/')
+}
+
+export const updatePassword = async (formdata)=>{
+    const {data} = await $authHost.put('api/user/password',formdata)
+}
+
+export const updateImage = async (user)=>{
+    const {data} = await $authHost.put('api/user/image',user)
+}
+
+export const addMarker = async (userDatumIdUser,titleDatumIdTitle)=>{
+    const {data} = await $authHost.post('api/marker',{
+        userDatumIdUser,
+        titleDatumIdTitle,
+    })
+    return data
+}
+export const fetchMarker = async ()=>{
+    const {data} = await $authHost.get('api/marker')
+    return data
+}
+export const deleteMarker = async (id)=>{
+    const {data} = await $authHost.delete('api/marker/'+ id )
+}

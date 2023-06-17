@@ -17,8 +17,10 @@ const Login = () => {
 	const singIn = async()=>{
 		const data = await login(login_user,password_user);
 		user.setUser (data)
+		console.log(user)
 		user._isAuth = true
-		console.log(user.login_user)				
+		user.user_name = login_user
+		console.log(localStorage.getItem('token'))			
 	}
 
 	return (

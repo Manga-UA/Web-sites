@@ -1,12 +1,15 @@
+const uuid = require('uuid')
+const path = require('path');
 const ApiError = require('../error/ApiError');
 const bcrypt = require('bcrypt')
 const jwt = require ('jsonwebtoken')
 const {User,Marker} = require ('../models/models')
 var date = new Date();
+const image = 'userIcon.jpg'
 
-const generateJwt = (id_user,login_user,roleUserIdRole)=>{
+const generateJwt = (id_user,login_user,roleUserIdRole,image_user)=>{
     return jwt.sign(
-        {id_user,login_user,roleUserIdRole},
+        {id_user,login_user,roleUserIdRole,image_user},
         process.env.SECRET_KEY,
         {expiresIn: '24h'}
     )
@@ -32,9 +35,17 @@ class UserController{
 
         const hashPassword = await bcrypt.hash(password_user,5)
         const dateRegist = Date.now()
-        const user = await User.create({login_user,password_user: hashPassword,email,data_registration: dateRegist,roleUserIdRole:roleUserId,translateDatumIdTranslate:translateDatumId})
+        const user = await User.create({
+            login_user,
+            password_user: hashPassword,
+            email,
+            data_registration: dateRegist,
+            roleUserIdRole:roleUserId,
+            translateDatumIdTranslate:translateDatumId,
+            image_user:image
+        })
         //const marker = await Marker.create({userDatumIdUser: user.id_user})
-        const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole)
+        const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole,user.image_user)
         return res.json({token})
 
     }
@@ -49,18 +60,28 @@ class UserController{
         if (!comparePassword) {
             return next(ApiError.internal('Указан неверный пароль'))
         }
-        const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole)
+        const token = generateJwt(
+            user.id_user,
+            user.login_user,
+            user.roleUserIdRole,
+            user.image_user
+            )
         return res.json({token})
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id_user, req.user.login_user, req.user.roleUserIdRole)
+        const token = generateJwt(
+            req.user.id_user,
+            req.user.login_user, 
+            req.user.roleUserIdRole,
+            req.user.image_user
+            )
         return res.json({token})
     }
 
     async update(req,res,next){
         try {
-            const {id_user,login_user,password_user,email,description_user,} = req.body
+            const {id_user,login_user,password_user} = req.body
             const {image_user} = req.files
             if(!id_user){
                 return next(ApiError.badRequest('not login or password'))
@@ -71,11 +92,48 @@ class UserController{
             image_user.mv(path.resolve(__dirname,'..','static',fileName))
 
             let updateUser =await User.update({
-                login_user,
                 password_user: hashPassword,
-                email,
-                description_user,
                 image_user: fileName
+            },{where:{id_user}})
+            updateUser = await User.findOne({where:{id_user}},)
+            return res.json(updateUser);
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async updateImage(req,res,next){
+        try {
+            const {id_user} = req.body
+            const {image_user} = req.files
+            if(!id_user){
+                return next(ApiError.badRequest('not login or password'))
+            }
+            //const hashPassword = await bcrypt.hash(password_user,5)
+            
+            let fileName = uuid.v4()+".jpg"
+            image_user.mv(path.resolve(__dirname,'..','static',fileName))
+
+            let updateUser =await User.update({
+                image_user: fileName
+            },{where:{id_user}})
+            updateUser = await User.findOne({where:{id_user}},)
+            return res.json(updateUser);
+        } catch (e) {
+            next(ApiError.badRequest(e.message))
+        }
+    }
+
+    async updatePassword(req,res,next){
+        try {
+            const {id_user,password_user} = req.body
+            if(!id_user){
+                return next(ApiError.badRequest('not login or password'))
+            }
+            const hashPassword = await bcrypt.hash(password_user,5)
+            
+            let updateUser =await User.update({
+                password_user: hashPassword
             },{where:{id_user}})
             updateUser = await User.findOne({where:{id_user}},)
             return res.json(updateUser);

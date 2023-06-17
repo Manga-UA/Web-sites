@@ -11,8 +11,6 @@ import { registration } from '../http/userApi'
 const Registration = observer(() => {
 	// контекст теми  
 	const {theme, user} = useContext(Context);
-
-	console.log(process.env.REACT_APP_API_URL)
 	
 	const[login_user, setLogin] = useState('')
 	const[password_user, setPassword] = useState('')
@@ -21,6 +19,7 @@ const Registration = observer(() => {
 		const response = await registration(login_user,password_user,email);
 		user.setUser (response)
 		user._isAuth = true
+		user.user_name = login_user
 		console.log(response)				
 	}
 
