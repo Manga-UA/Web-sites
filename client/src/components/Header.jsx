@@ -29,13 +29,13 @@ const Header = observer(() => {
 	
 	
 	const singOut = async()=>{
-		user.setUser ({})
-		user._isAuth = false				
+		user.setUser ({});
+		user.setIsAuth(false);				
 	}
 
-	
+	// id_user
+	console.log(user.user.id_user);
 	console.log(user.user.login_user);
-	console.log(user.user.password_user);
 
 	return (
 		<header className=' flex justify-between items-center h-16 lg:h-[90px]'>

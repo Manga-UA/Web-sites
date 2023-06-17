@@ -19,6 +19,8 @@ ReactDOM.createRoot(root).render(
         titles: new TitleManga(),
 		chapters: new TitleManga(),
 		status: new TitleManga(),
+		genres: new TitleManga(),
+		genresTitle: new TitleManga(),
 		artists: new CreaterManga(),
 		screenWriters: new CreaterManga(),
 		translates: new CreaterManga(),

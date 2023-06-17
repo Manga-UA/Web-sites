@@ -8,7 +8,7 @@ import { DARK_THEME } from '../utils/consts';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import MobileFilterCatalog from '../components/MobileFilterCatalog';
-import { fetchStatus, fetchTitles, fetchTypes,fetchGenre } from '../http/titleApi';
+import { fetchStatus, fetchTitles, fetchTypes,fetchGenre, fetchGenreKeyTitle } from '../http/titleApi';
 const CatalogPages = observer(() => {
 	const [selectedSort, setSelectedSort] = useState(null);
 	const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
@@ -17,7 +17,7 @@ const CatalogPages = observer(() => {
 	const [selectedStatus, setSelectedStatus] = useState(null);
 	const [selectedCategory, setSelectedCategory] = useState(null);
 
-	const {theme,titles} = useContext(Context);
+	const {theme,titles,genresTitle} = useContext(Context);
 	const sorts = ['за останнім оновлення', 'за лайками', 'за переглядами'];
 	// першочерговий напис на випадаючому списку
 	const placeholderSort = sorts[0];
@@ -30,11 +30,14 @@ const CatalogPages = observer(() => {
 		fetchTypes().then(data => titles.setTypes(data))
 		fetchStatus().then(data => titles.setStatus(data))
 		fetchGenre().then(data => titles.setGenre(data))
-		fetchTitles().then(data => titles.setTitles(data.rows))	
+		fetchTitles().then(data => titles.setTitles(data.rows))
+		fetchGenreKeyTitle().then(data => genresTitle.setGenreTitle(data.rows))	
 	},[])
+	
+	
 	useEffect(()=>{
-		fetchTitles(titles._selectstatus/*,titles._selecttype, 10,10*/).then(data => titles.setTitles(data.rows))	
-	},[titles._selectstatus/*,titles._selecttype*/])
+		fetchTitles(titles.selectStatus,titles.selectType).then(data => titles.setTitles(data.rows))	
+	},[titles._selectstatus,titles._selecttype,titles._selectganre])
 	console.log(titles.types);
 
   return (
@@ -42,10 +45,11 @@ const CatalogPages = observer(() => {
 		<div className='flex flex-col gap-14 w-full lg:max-w-[80%]'>
 			<div className='flex items-end justify-between'>
 				<h2 className='text-title-md lg:text-title-bg'>Каталог</h2>
-				<div className='w-[170px] lg:h-10 text-text-bg rounded'>
+				{/* <div className='w-[170px] lg:h-10 text-text-bg rounded'>
 					<DropDown options={sorts} onSelect={handleSortSelect} placeholderText={placeholderSort} ImageIcon={<ArrowUpDownIcon/>} selectedOption={selectedSort}/>
-				</div>
+				</div> */}
 			</div>
+			
 			<div className='grid justify-items-center grid-cols-2 grid-flow-row gap-2 sm:grid-cols-3 md:justify-items-stretch md:grid-cols-4 lg:grid-cols-7 lg:grid-row-4 lg:gap-x-4 lg:gap-y-4'>
 				<CatalogList/>
 			</div>

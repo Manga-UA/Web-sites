@@ -14,7 +14,7 @@ const FilterCatalog = observer(() => {
 	const [selectedCategory, setSelectedCategory] = useState(null);
 
 	// контекст
-	const {theme,titles} = useContext(Context);
+	const {theme,titles,genresTitle} = useContext(Context);
 
 	// першочергові написи на випадаючому списку
 
@@ -82,6 +82,7 @@ const FilterCatalog = observer(() => {
 
 	titles.genre.map(e => {
 		genres[i] = e.name_genre
+		console.log(e.name_genre);
 		i++
 	});
 	i =1 
@@ -95,8 +96,38 @@ const FilterCatalog = observer(() => {
 		i++
 	});
 	i =1 
-
+	// Получаем тайтлы
+	const titlesArray = titles.titles;
 	
+	// получаем значения татйлов ключей связаных с жанрами
+	const fetchGenreInTitle = () => {
+	  const titleGenres = titlesArray.map((title) => {
+		const keyTitleGenres = genresTitle.genresTitle.filter(
+		  (keyTitleGenre) => keyTitleGenre.titleDatumIdTitle === title.id_title
+		);
+		const genres = keyTitleGenres.map((keyTitleGenre) => {
+		  const genreTitle = titles.genre.find(
+			(genreTitle) => genreTitle.id_genre === keyTitleGenre.genreTitleIdGenre
+		  );
+		  return {
+			id_genre: genreTitle.id_genre,
+			name_genre: genreTitle.name_genre
+		  };
+		});
+		return {
+		  id_title: title.id_title,
+		  name_title: title.name_title,
+		  genres: genres
+		};
+	  });
+	  return titleGenres;
+	};
+  
+	const titleGenres = fetchGenreInTitle()
+
+
+	console.log(selectedGenre);
+
 	return (
 		<div className='flex flex-col gap-4'>
 			<div className='flex justify-between items-center'>

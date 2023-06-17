@@ -39,6 +39,8 @@ const MostPopularItem = observer(() => {
 	const handleMouseLeave = () => {
 	setHoveredId(null);
 	};
+	const titleArray = Object.values(titles.titles);
+
   return (
     <div>
 		<Swiper
@@ -88,7 +90,7 @@ const MostPopularItem = observer(() => {
 			loopedSlides={3}
 			speed={1200}
 		>
-			{titles._titles.map((title) => (
+			{titleArray.map((title) => (
 				<SwiperSlide key={title.id_title}>
 					<div
 						className="flex flex-col gap-4 w-40 -z-10 h-72 text-left rounded relative transition delay-150 duration-300 ease-in-out"

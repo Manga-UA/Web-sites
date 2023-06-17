@@ -4,9 +4,9 @@ const jwt = require ('jsonwebtoken')
 const {User,Marker} = require ('../models/models')
 var date = new Date();
 
-const generateJwt = (id_user,login_user,roleUserIdRole)=>{
+const generateJwt = (id_user,login_user,roleUserIdRole,image_user)=>{
     return jwt.sign(
-        {id_user,login_user,roleUserIdRole},
+        {id_user,login_user,roleUserIdRole,image_user},
         process.env.SECRET_KEY,
         {expiresIn: '24h'}
     )
@@ -16,15 +16,15 @@ class UserController{
     async registration (req,res,next){
         const {login_user,password_user,email,roleUserIdRole,translateDatumIdTranslate}= req.body
         if (!login_user||!password_user){
-            return next(ApiError.badRequest('not login or password'))
+            return next(ApiError.badRequest('не вказано логін чи пароль'))
         }
         let candidate = await User.findOne({where:{login_user}})
         if(candidate){
-            return next(ApiError.badRequest('login busy'))
+            return next(ApiError.badRequest('такий логін вже зайнятий'))
         }
         candidate = await User.findOne({where:{email}})
         if (candidate){
-            return next(ApiError.badRequest('email busy'))
+            return next(ApiError.badRequest('такий email вже зайнятий'))
         }
 
         let roleUserId = roleUserIdRole|| 3   
@@ -34,7 +34,7 @@ class UserController{
         const dateRegist = Date.now()
         const user = await User.create({login_user,password_user: hashPassword,email,data_registration: dateRegist,roleUserIdRole:roleUserId,translateDatumIdTranslate:translateDatumId})
         //const marker = await Marker.create({userDatumIdUser: user.id_user})
-        const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole)
+        const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole,user.image_user)
         return res.json({token})
 
     }
@@ -43,18 +43,18 @@ class UserController{
         const {login_user, password_user} = req.body
         const user = await User.findOne({where: {login_user}})
         if (!user) {
-            return next(ApiError.internal('Пользователь не найден'))
+            return next(ApiError.internal('Користувача не знайдено'))
         }
         let comparePassword = bcrypt.compareSync(password_user, user.password_user)
         if (!comparePassword) {
-            return next(ApiError.internal('Указан неверный пароль'))
+            return next(ApiError.internal('Вказано неправильний пароль'))
         }
-        const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole)
+        const token = generateJwt(user.id_user,user.login_user,user.roleUserIdRole,user.image_user)
         return res.json({token})
     }
 
     async check(req, res, next) {
-        const token = generateJwt(req.user.id_user, req.user.login_user, req.user.roleUserIdRole)
+        const token = generateJwt(req.user.id_user, req.user.login_user, req.user.roleUserIdRole, req.user.image_user)
         return res.json({token})
     }
 

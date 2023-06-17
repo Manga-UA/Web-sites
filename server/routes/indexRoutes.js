@@ -14,7 +14,7 @@ const markerRouter = require('./markerRouter')
 const pageRouter = require('./pageRouter')
 const screenwriterRouter = require('./screenwriterRouter')
 const translateRouter = require('./translateRouter')
-
+const titleGenreRouter = require('./titleGenreRouter')
 router.use('/role',rolesRoutes)
 router.use('/user',userRouter)
 router.use('/title',titleRoutes)
@@ -29,5 +29,7 @@ router.use('/marker',markerRouter)
 router.use('/page',pageRouter)
 router.use('/screenwriter',screenwriterRouter)
 router.use('/translate',translateRouter)
+
+router.use('/titleGenre',titleGenreRouter)
 
 module.exports= router

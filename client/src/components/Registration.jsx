@@ -2,26 +2,30 @@ import React, { useContext, useState } from 'react'
 import girl from '../images/girl.jpg'
 import myHero from '../images/myhero.jpg'
 import nightGirl from '../images/night-girl.jpg'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Context } from '../index'
 import { DARK_THEME, LOGIN_ROUTE, MANGA_ROUTE } from '../utils/consts'
 import { observer } from 'mobx-react-lite'
 import { registration } from '../http/userApi'
 
-const Registration = observer(() => {
+const Registration = observer(({isLogin}) => {
 	// контекст теми  
 	const {theme, user} = useContext(Context);
-
-	console.log(process.env.REACT_APP_API_URL)
-	
+	const navigate = useNavigate();
 	const[login_user, setLogin] = useState('')
 	const[password_user, setPassword] = useState('')
 	const[email, setEmail] = useState('')
-	const singIn = async()=>{
-		const response = await registration(login_user,password_user,email);
-		user.setUser (response)
-		user._isAuth = true
-		console.log(response)				
+
+	const singUp = async()=>{
+		try {
+			const response = await registration(login_user,password_user,email);
+			user.setUser (response);
+			user.setIsAuth(true);
+			navigate(MANGA_ROUTE);
+		} catch (e) {
+			alert(e.response.data.message);
+		}
+		
 	}
 
 
@@ -64,13 +68,12 @@ const Registration = observer(() => {
 			<NavLink to={LOGIN_ROUTE} className="flex items-center gap-1.5 text-text-bg">
 				Увійти в світ манги
 			</NavLink>
-			<NavLink
-				to={MANGA_ROUTE}
-				onClick={singIn}
+			<button
+				onClick={singUp}
 				className={`text-text-lg ${theme._theme === DARK_THEME ? "bg-button hover:bg-inherit" : "bg-orange-400 hover:bg-inherit"} rounded py-[10px] px-[23px] hover:border hover:border-solid hover:border-stroke-dark  transition delay-150 duration-300 ease-in-out`}
 			>
 				Долучитися
-			</NavLink>
+			</button>
 		</div>
 	)
 })
