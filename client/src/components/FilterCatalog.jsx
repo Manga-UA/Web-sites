@@ -82,7 +82,6 @@ const FilterCatalog = observer(() => {
 
 	titles.genre.map(e => {
 		genres[i] = e.name_genre
-		console.log(e.name_genre);
 		i++
 	});
 	i =1 
@@ -125,6 +124,7 @@ const FilterCatalog = observer(() => {
   
 	const titleGenres = fetchGenreInTitle()
 
+	
 
 	console.log(selectedGenre);
 

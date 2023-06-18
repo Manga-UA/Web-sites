@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import DropDown from '../components/DropDown'
 import { Context } from '../index';
 import { ReactComponent as DeltaIcon } from '../images/delta-icon.svg';
 import { observer } from 'mobx-react-lite';
 import { ReactComponent as BookMarkIcon } from '../images/bookmark-bg-icon.svg';
 import girlTEST from '../images/pages.jpg'
-
+import { fetchOneChapter } from '../http/titleApi';
 const TitleChapterPages = observer(() => {
 	const [selectedChapter, setSelectedChapter] = useState(null);
 
@@ -26,6 +26,13 @@ const TitleChapterPages = observer(() => {
 	
 	const chapters = ['1 - філософія страдань', '1-2', '1-3', '1-4'];
 	const titleName = titles._titles.map((title)=> title.name_title);
+
+
+	useEffect(()=>{
+		fetchOneChapter(1).then(data => titles.setChapters(data))
+	})
+
+	console.log();
 
 
 	return (

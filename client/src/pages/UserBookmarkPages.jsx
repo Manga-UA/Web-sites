@@ -29,9 +29,9 @@ const UserBookmarkPages = observer(() => {
 			<div className='flex flex-col gap-14 w-full lg:max-w-[80%]'>
 				<div className='flex items-end justify-between'>
 					<h2 className='text-title-md lg:text-title-bg'></h2>
-					<div className='w-[170px] lg:h-10 text-text-bg rounded'>
+					{/* <div className='w-[170px] lg:h-10 text-text-bg rounded'>
 						<DropDown options={sorts} onSelect={handleSortSelect} placeholderText={placeholderSort} ImageIcon={<ArrowUpDownIcon/>} selectedOption={selectedSort}/>
-					</div>
+					</div> */}
 				</div>
 				<div className='grid justify-items-center grid-cols-2 grid-flow-row gap-2 sm:grid-cols-3 md:justify-items-stretch md:grid-cols-4 lg:grid-cols-7 lg:grid-row-4 lg:gap-x-4 lg:gap-y-4'>
 					<CatalogList/>

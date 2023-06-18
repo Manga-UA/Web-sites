@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import {useParams} from 'react-router-dom'
 import { fetchOneTitles,fetchChapter } from '../http/titleApi';
 import { addMarker } from '../http/userApi';
+import { fetchScreenWriter } from '../http/createApi';
 
 const TitlePages = observer(() => {
   const {
@@ -40,7 +41,8 @@ const TitlePages = observer(() => {
   },[])
 
   useEffect(()=>{
-    fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))  
+    fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))
+	fetchScreenWriter().then(data => screenWriters.setScreenWriter(data.rows))
   },[titleDatumIdTitle])
 
   const addBookmark = async ()=>{
@@ -50,26 +52,35 @@ const TitlePages = observer(() => {
     return console.log(response)
   }
 
+
+
   const navigate = useNavigate();
  
+
+//   const fetchScreenWriterInTitle = () => {
+	
+//   };
+
+
+
   return (
     <React.Fragment>   
         <div key={titles.id_title} >
           <div className='flex flex-col gap-7 '>
             {/* header info */}
-            <div className='flex flex-col md:flex-row md:gap-4 lg' >
+            <div className='flex flex-col md:flex-row md:gap-4 lg:justify-start' >
               <img
                 className='max-h-[228px] w-auto md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] rounded object-cover'
                 src={process.env.REACT_APP_API_URL + titles.image_title}
                 alt={titles.name_title}
               />
-              <div className='flex flex-col justify-between items-stretch lg:justify-end lg:items-end w-full'>
-                <p className='text-title-bg text-end truncate w-40 lg:w-full overflow-ellipsis'>
+              <div className='flex flex-col justify-between items-stretch lg:justify-start lg:items-start w-full'>
+                <p className='text-title-bg text-start truncate w-40 lg:w-full overflow-ellipsis'>
                   {titles.name_title}
                 </p>
-                <div className='flex flex-col gap-y-9'>
+                <div className='flex flex-col gap-y-9 items-start'>
                   {/* Button group */}
-                  <div className='order-2 z-10 flex flex-col gap-3'>
+                  <div className='order-2 z-10 flex flex-col justify-start gap-3'>
                     <button
                       className={`flex gap-4 text-text-lg border border-solid border-stroke-dark ${
                         theme._theme === DARK_THEME
@@ -124,8 +135,9 @@ const TitlePages = observer(() => {
                 <div className='flex flex-col gap-2 p-1 lg:p-3 border border-[0.5px] border-stroke-dark rounded h-full max-h-64 lg:max-h-96 lg:w-full overflow-y-auto'>
                   {chapters._chapters.map((chapter) => (
                     <div
-                      className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark'
+                      className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark cursor-pointer'
                       key={chapter.id_chapter}
+					  onClick={()=>navigate(CHAPTER_ROUTE + '/' + chapter.id_chapter)}
                     >
                       <p className='text-text-bg lg:text-subtitle-sm'>
                         Глава № {chapter.number_chapter}
@@ -152,7 +164,7 @@ const TitlePages = observer(() => {
                       Художник: {artist.name_artist}
                     </p>
                   ))}
-                  {screenWriters._screenWriters.map((screenWriter) => (
+                  {screenWriters.screenWriters.map((screenWriter) => (
                     <p
                       className='text-subtitle-sm cursor-pointer'
                       key={screenWriter.id_screenwriter}

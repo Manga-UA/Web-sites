@@ -89,7 +89,7 @@ const Header = observer(() => {
 								to={PROFILE_ROUTE}
 							>
 									<img className='border border-solid border-stroke-dark rounded-full p-1 h-12 w-12' src={process.env.REACT_APP_API_URL + user.user.image_user} alt="userIcon" />
-									<p className='h-5 w-16 truncate text-text-md'>{user.user.login_user}</p>
+									<p className='text-center h-5 w-16 truncate text-text-md'>{user.user.login_user}</p>
 							</NavLink>
 						</li>
 						<li>

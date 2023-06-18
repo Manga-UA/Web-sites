@@ -103,6 +103,7 @@ const Recomendation = observer(() => {
 												? 'bg-button hover:bg-inherit'
 												: 'bg-orange-400 hover:bg-inherit'
 											} hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+											onClick={()=> navigate(TITLE_ROUTE + '/' + title.id_title)}
 										>
 											<BookIcon />
 											Читати

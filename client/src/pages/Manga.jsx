@@ -21,7 +21,7 @@ const Manga = observer(() => {
 		<div className='flex-grow flex flex-col gap-10'>
 			
 			<Recomendation />
-			{/* <MostPopular/> */}
+			<MostPopular/>
 			<TypesManga/>
 		</div>
 	)
