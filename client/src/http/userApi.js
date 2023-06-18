@@ -36,8 +36,13 @@ export const updatePassword = async (formdata)=>{
     const {data} = await $authHost.put('api/user/password',formdata)
 }
 
-export const updateImage = async (user)=>{
-    const {data} = await $authHost.put('api/user/image',user)
+export const updateImage = async (formdata)=>{
+    const {data} = await $authHost.put('api/user/image',formdata)
+}
+
+export const fetchOneUser = async(id)=>{
+    const {data} = await $host.get('api/user/'+id)
+    return data
 }
 
 export const addMarker = async (userDatumIdUser,titleDatumIdTitle)=>{
@@ -47,8 +52,14 @@ export const addMarker = async (userDatumIdUser,titleDatumIdTitle)=>{
     })
     return data
 }
-export const fetchMarker = async ()=>{
-    const {data} = await $authHost.get('api/marker')
+export const fetchMarker = async (userDatumIdUser, titleDatumIdTitle,limit,page)=>{
+    const {data} = await $authHost.get('api/marker',{params:{
+        userDatumIdUser, 
+        titleDatumIdTitle,
+        limit,
+        page,
+    }
+    })
     return data
 }
 export const deleteMarker = async (id)=>{

@@ -7,15 +7,15 @@ class TitleTranslateController{
 
     async create (req,res,next){
         try {       
-        const {userDatumIdUser,titleDatumIdTitle} = req.body
+        const {titleDatumIdTitle,translateDatumIdTranslate} = req.body
         if (!userDatumIdUser || !titleDatumIdTitle) {
             return next(ApiError.badRequest('not user or title'))
         }
-        const markerData = await TitleTranslate.create({
-            userDatumIdUser,
-            titleDatumIdTitle
+        const data = await TitleTranslate.create({
+            titleDatumIdTitle,
+            translateDatumIdTranslate
         })
-        return res.json(markerData)
+        return res.json(data)
             
         } catch (e) {
             next(ApiError.badRequest(e.message))            
@@ -25,31 +25,31 @@ class TitleTranslateController{
     }
 
     async getAll (req,res){
-        let {userDatumIdUser, titleDatumIdTitle, limit, page} = req.query
+        let {titleDatumIdTitle,translateDatumIdTranslate, limit, page} = req.query
         page = page||1
         limit = limit||9
         let offset = page*limit-limit
-        let markerData;
-        if (!userDatumIdUser || !titleDatumIdTitle) {
-            markerData = await TitleTranslate.findAndCountAll({limit,offset})
+        let titleTraslateData;
+        if (!titleDatumIdTitle || !translateDatumIdTranslate) {
+            titleTraslateData = await TitleTranslate.findAndCountAll({limit,offset})
         }
-        if (userDatumIdUser && !titleDatumIdTitle) {
-            markerData = await TitleTranslate.findAndCountAll({where:{userDatumIdUser},limit,offset})
+        if (titleDatumIdTitle && !translateDatumIdTranslate) {
+            titleTraslateData = await TitleTranslate.findAndCountAll({where:{titleDatumIdTitle},limit,offset})
         }
-        if (!userDatumIdUser && titleDatumIdTitle) {
-            markerData = await TitleTranslate.findAndCountAll({where:{titleDatumIdTitle},limit,offset})
+        if (!titleDatumIdTitle && translateDatumIdTranslate) {
+            titleTraslateData = await TitleTranslate.findAndCountAll({where:{translateDatumIdTranslate},limit,offset})
         }
-        if (userDatumIdUser && titleDatumIdTitle) {
-            markerData = await TitleTranslate.findAndCountAll({where:{userDatumIdUser, titleDatumIdTitle},limit,offset})
+        if (titleDatumIdTitle && translateDatumIdTranslate) {
+            titleTraslateData = await TitleTranslate.findAndCountAll({where:{titleDatumIdTitle, translateDatumIdTranslate},limit,offset})
         }
-        return res.json(markerData)
+        return res.json(titleTraslateData)
     }
 
     async getOne (req,res){
         try{
-            const{id_marker}= req.params
+            const{id_title_translate}= req.params
             const postData =await TitleTranslate.findOne({
-                where:{id_marker}
+                where:{id_title_translate}
             },)
             return res.json(postData) 
         }
@@ -60,12 +60,12 @@ class TitleTranslateController{
     }
     async update(req,res,next){
         try {
-            const {id_marker,userDatumIdUser,titleDatumIdTitle} = req.body
-            if(!id_marker){
+            const {id_title_translate,titleDatumIdTitle,translateDatumIdTranslate} = req.body
+            if(!id_title_translate){
                 return next(ApiError.badRequest('not marker'))
             }
-            let updatePost =await TitleTranslate.update({userDatumIdUser,titleDatumIdTitle},{where:{id_marker}})
-            updatePost = await TitleTranslate.findOne({where:{id_marker}},)
+            let updatePost =await TitleTranslate.update({titleDatumIdTitle,translateDatumIdTranslate},{where:{id_title_translate}})
+            updatePost = await TitleTranslate.findOne({where:{id_title_translate}},)
             return res.json(updatePost);
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -73,11 +73,11 @@ class TitleTranslateController{
     }
     async deleteOne(req,res,next){
         try {
-            const {id_marker} = req.params
-            if(!id_marker){
+            const {id_title_translate} = req.params
+            if(!id_title_translate){
                 return next(ApiError.badRequest('not marker'))
             }
-            let deletePost =await TitleTranslate.destroy({where:{id_marker}})
+            let deletePost =await TitleTranslate.destroy({where:{id_title_translate}})
             return res.json(deletePost);
         } catch (e) {
             next(ApiError.badRequest(e.message))

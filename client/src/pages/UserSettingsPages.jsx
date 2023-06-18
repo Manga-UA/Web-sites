@@ -1,11 +1,11 @@
-import React, { useContext,useState } from 'react'
+import React, { useContext,useState,useEffect } from 'react'
 import ProfileBtnNavigate from '../components/ProfileBtnNavigate';
 import Recomendation from '../components/Recomendation';
 import { Context } from '../index';
 import userIcon from '../images/userIcon.png'
 import { DARK_THEME } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
-import { login,updatePassword,updateImage } from '../http/userApi'
+import { login,updatePassword,updateImage,fetchOneUser } from '../http/userApi'
 
 const UserSettingsPages = observer(() => {
 	const {user,theme} = useContext(Context);
@@ -18,12 +18,23 @@ const UserSettingsPages = observer(() => {
 		setImage(e.target.files[0])
 	}
 
+	const [value,setValue] = useState();
+	  const refresh = ()=>{
+      // это вызовет ререндеринг компонента
+     setValue({});
+	}
+
+	useEffect(()=>{
+		fetchOneUser(user.user.id_user).then(data => user.setUser(data))
+	},[value])
+
 	const updateImages=()=>{
 		const formData = new FormData()
 		formData.append('id_user',`${user.user.id_user}`)
 		formData.append('image_user',imageUser)
-		updateImage(formData).then()
-		console.log()
+		updateImage(formData)
+		console.log(user.user.id_user)
+		refresh()
 	}
 	const updatePass=()=>{
 		const formData = new FormData()
@@ -85,7 +96,7 @@ const UserSettingsPages = observer(() => {
 
 				<div className='flex flex-col gap-2'>
 					<h5 className='text-subtitle-sm'>Оновити аватар</h5>
-					<form className='flex flex-col gap-2 w-full'>
+					<form className='flex flex-col gap-2 w-full'onSubmit={handleSubmit}>
 						<input
 							className='h-9 bg-transparent rounded px-1 border border-stroke-dark placeholder:text-inherit' 
 							type="file" 
