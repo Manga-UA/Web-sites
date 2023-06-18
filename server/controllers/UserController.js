@@ -161,6 +161,16 @@ class UserController{
         userData = await User.findAndCountAll({})
         return res.json(userData)
     }
-}
+    async getOne (req,res){
+        try {
+        const{id_user}= req.params
+        const userData =await User.findOne({
+            where:{id_user}
+        },)
+        return res.json(userData) 
+    } catch (e) {
+        next(ApiError.badRequest(e.message))
+    }
+}}
 
 module.exports=new UserController()

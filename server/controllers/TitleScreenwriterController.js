@@ -1,26 +1,19 @@
 const uuid = require('uuid')
 const path = require('path');
-const {Title_data} = require('../models/models');
+const {TitleScreenwriter} = require('../models/models');
 const ApiError = require('../error/ApiError');
 
-class TitleController{
+class TitleScreenwriterController{
 
     async create (req,res,next){
         try {       
-        const {name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType} = req.body
-        const {image_title} = req.files
-        let fileName = uuid.v4()+".jpg"
-        image_title.mv(path.resolve(__dirname,'..','static',fileName))
+        const {titleDatumIdTitle,screenwriterDatumIdScreenwriter} = req.body
 
-        const titleData = await Title_data.create({
-            name_title,
-            description_title,
-            date_release_title,
-            statusDatumIdStatus,
-            typeTitleIdType, 
-            image_title:fileName
+        const data = await TitleScreenwriter.create({
+            titleDatumIdTitle,
+            screenwriterDatumIdScreenwriter
         })
-        return res.json(titleData)
+        return res.json(data)
             
         } catch (e) {
             next(ApiError.badRequest(e.message))            
@@ -30,42 +23,42 @@ class TitleController{
     }
 
     async getAll (req,res){
-        let {statusDatumIdStatus, typeTitleIdType, limit, page} = req.query
+        let {titleDatumIdTitle,screenwriterDatumIdScreenwriter, limit, page} = req.query
         page = page||1
         limit = limit||9
         let offset = page*limit-limit
-        let titleData;
-        if (!statusDatumIdStatus && !typeTitleIdType) {
-            titleData = await Title_data.findAndCountAll({limit,offset})
+        let data;
+        if (!titleDatumIdTitle && !screenwriterDatumIdScreenwriter) {
+            data = await TitleScreenwriter.findAndCountAll({limit,offset})
         }
-        if (statusDatumIdStatus && !typeTitleIdType) {
-            titleData = await Title_data.findAndCountAll({where:{statusDatumIdStatus},limit,offset})
+        if (titleDatumIdTitle && !screenwriterDatumIdScreenwriter) {
+            data = await TitleScreenwriter.findAndCountAll({where:{titleDatumIdTitle},limit,offset})
         }
-        if (!statusDatumIdStatus && typeTitleIdType) {
-            titleData = await Title_data.findAndCountAll({where:{typeTitleIdType},limit,offset})
+        if (!titleDatumIdTitle && screenwriterDatumIdScreenwriter) {
+            data = await TitleScreenwriter.findAndCountAll({where:{screenwriterDatumIdScreenwriter},limit,offset})
         }
-        if (statusDatumIdStatus && typeTitleIdType) {
-            titleData = await Title_data.findAndCountAll({where:{tytypeTitleIdTypepeId, statusDatumIdStatus},limit,offset})
+        if (titleDatumIdTitle && screenwriterDatumIdScreenwriter) {
+            data = await TitleScreenwriter.findAndCountAll({where:{titleDatumIdTitle, screenwriterDatumIdScreenwriter},limit,offset})
         }
-        return res.json(titleData)
+        return res.json(data)
     }
 
     async getOne (req,res){
-        const{id_title}= req.params
-        const titleData =await Title_data.findOne({
-            where:{id_title}
+        const{id_title_screenwriter}= req.params
+        const data =await TitleScreenwriter.findOne({
+            where:{id_title_screenwriter}
         },)
-        return res.json(titleData) 
+        return res.json(data) 
 
     }
     async update(req,res,next){
         try {
-            const {id_title,name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType} = req.body
-            if(!id_title){
-                return next(ApiError.badRequest('not login or password'))
+            const {id_title_screenwriter,titleDatumIdTitle,screenwriterDatumIdScreenwriter} = req.body
+            if(!id_title_screenwriter){
+                return next(ApiError.badRequest('not record'))
             }
-            let updatePost =await Title_data.update({name_title,description_title,date_release_title,statusDatumIdStatus,typeTitleIdType},{where:{id_title}})
-            updatePost = await Title_data.findOne({where:{id_title}},)
+            let updatePost =await TitleScreenwriter.update({titleDatumIdTitle,screenwriterDatumIdScreenwriter},{where:{id_title_screenwriter}})
+            updatePost = await TitleScreenwriter.findOne({where:{id_title_screenwriter}},)
             return res.json(updatePost);
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -73,11 +66,11 @@ class TitleController{
     }
     async deleteOne(req,res,next){
         try {
-            const {id_title} = req.params
-            if(!id_title){
-                return next(ApiError.badRequest('not login or password'))
+            const {id_title_screenwriter} = req.params
+            if(!id_title_screenwriter){
+                return next(ApiError.badRequest('not record'))
             }
-            let deletePost =await Title_data.destroy({where:{id_title}})
+            let deletePost =await TitleScreenwriter.destroy({where:{id_title_screenwriter}})
             return res.json(deletePost);
         } catch (e) {
             next(ApiError.badRequest(e.message))
@@ -85,4 +78,4 @@ class TitleController{
     }
 }
 
-module.exports=new TitleController()
+module.exports=new TitleScreenwriterController()

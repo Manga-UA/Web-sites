@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState,useEffect } from 'react'
 import ProfileBtnNavigate from '../components/ProfileBtnNavigate';
 import CatalogList from '../components/CatalogList';
 import { ReactComponent as ArrowUpDownIcon } from '../images/arrow-up-down-icon.svg';
@@ -9,11 +9,12 @@ import { DARK_THEME } from '../utils/consts';
 import { Context } from '../index';
 import { observer } from 'mobx-react-lite';
 import MobileFilterCatalog from '../components/MobileFilterCatalog';
+import {fetchMarker} from '../http/userApi'
 const UserBookmarkPages = observer(() => {
 
 	const [selectedSort, setSelectedSort] = useState(null);
 	const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
-	const {theme} = useContext(Context);
+	const {theme,titles,user} = useContext(Context);
 	const sorts = ['за останнім оновлення', 'за лайками', 'за переглядами'];
 	// першочерговий напис на випадаючому списку
 	const placeholderSort = sorts[0];
@@ -21,6 +22,13 @@ const UserBookmarkPages = observer(() => {
 		setSelectedSort(sort);
 		// додаткова логіка
 	};
+	useEffect(()=>{
+		fetchMarker(user.user.id_user,null).then(data => user.setMarker(data.rows))
+		console.log(user.user.id_user)
+		console.log(user.marker.userDatumIdUser)	
+	},[user.user.id_user])
+
+	console.log(titles.marker)
 
   return (
 	<div>

@@ -6,11 +6,15 @@ export default class UserManga {
 		this._isAuth = false
 		this._user = []
 		this._marker = []
+		this._isMarker = false
 		makeAutoObservable(this)
 	}
 
 	setIsAuth(bool) {
 		this._isAuth = bool
+	}
+	setIsMarker(bool) {
+		this._isMarker = bool
 	}
 
 	setUser(user) {
@@ -26,6 +30,11 @@ export default class UserManga {
 	get isAuth() {
 		return this._isAuth
 	}
+	get isMarker() {
+		return this._isMarker
+	}
+
+	
 	get user() {
 		return this._user
 	}
