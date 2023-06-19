@@ -38,7 +38,7 @@ export const authRoutes = [
 		Component: AddTitlePages
 	},
 	{
-		path: ADD_CHAPTER_ROUTE,
+		path: ADD_CHAPTER_ROUTE+'/:id',
 		Component: AddChapterPages
 	},
 	{

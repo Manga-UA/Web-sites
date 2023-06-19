@@ -134,7 +134,7 @@ Title_data.belongsTo(Type_title)
 Title_data.hasMany(Chapter)
 Chapter.belongsTo(Title_data)
 
-Chapter.hasMany(Page)
+Chapter.hasMany(Page,{as: 'masPage'});
 Page.belongsTo(Chapter)
 
 User.belongsToMany(Title_data, {through: Marker })

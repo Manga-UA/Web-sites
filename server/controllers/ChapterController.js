@@ -1,13 +1,13 @@
 const uuid = require('uuid')
 const path = require('path');
-const {Chapter} = require('../models/models');
+const {Chapter,Page} = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 class ChapterController{
 
     async create (req,res,next){
         try {       
-        const {name_chapter,number_chapter,titleDatumIdTitle} = req.body
+        let {name_chapter,number_chapter,titleDatumIdTitle,masPage} = req.body
         const dateRegist = Date.now()
         const chapterData = await Chapter.create({
             name_chapter,
@@ -15,6 +15,34 @@ class ChapterController{
             date_release_chapter:dateRegist,
             titleDatumIdTitle
         })
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log("masPage")
+        console.log(masPage)
+        if (masPage) {
+            masPage = JSON.parse(masPage)
+            console.log(masPage)
+            masPage.forEach(async i => {
+                //let {image} = req.files
+                //let fileName = uuid.v4() + ".jpg"
+                console.log(i.pageNumber);
+                console.log(i.image);
+                //i.image.mv(path.resolve(__dirname, '..', 'static', fileName))
+                await Page.create({
+                    number_page: i.pageNumber,
+                    image_page:i.image,
+                    chapterDatumIdChapter: chapterData.id_chapter
+                })
+            })
+        }
         return res.json(chapterData)
             
         } catch (e) {
@@ -41,7 +69,8 @@ class ChapterController{
     async getOne (req,res){
         const{id_chapter}= req.params
         const chapterData =await Chapter.findOne({
-            where:{id_chapter}
+            where:{id_chapter},
+            include: [{model: Page, as: 'masPage'}]
         },)
         return res.json(chapterData) 
 

@@ -111,7 +111,16 @@ class UserController{
                 return next(ApiError.badRequest('not login or password'))
             }
             //const hashPassword = await bcrypt.hash(password_user,5)
-            
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log("dasdadasd");
+            console.log(image_user);
             let fileName = uuid.v4()+".jpg"
             image_user.mv(path.resolve(__dirname,'..','static',fileName))
 

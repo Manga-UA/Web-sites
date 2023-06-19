@@ -55,7 +55,6 @@ const TitlePages = observer(() => {
 
 
   const navigate = useNavigate();
-  
 	// let firstChapter = undefined
 	// тут должен быть другой значение
 	let firstChapter = 1
@@ -99,6 +98,7 @@ const TitlePages = observer(() => {
                       <BookMarkLightIcon />
                       Зберегти
                     </button>
+
 					{
 						chapters.chapters.length > 0 ? (
 							<button
@@ -131,6 +131,7 @@ const TitlePages = observer(() => {
 						)
 					}
                     
+
                   </div>
                   {/* Info Panel */}
                   <div className='flex gap-2 lg:justify-end'>
@@ -184,6 +185,7 @@ const TitlePages = observer(() => {
 					(
 					<p>Немає доступних глав</p>
 					)}
+
                 </div>
                 {/* info creators */}
                 <div className='flex flex-col gap-3 p-4 border border-[0.5px] border-stroke-dark rounded'>

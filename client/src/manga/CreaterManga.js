@@ -6,6 +6,7 @@ export default class CreaterManga {
 		// художник
 		this._artists = [
 			{id_artist:1,name_artist:"Хірому Аракава",},
+			{id_artist:2,name_artist:"Хіром",},
 		]
 		// сценарист/автор
 		this._screenWriters = [
