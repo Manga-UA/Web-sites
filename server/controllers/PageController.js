@@ -22,9 +22,7 @@ class PageController{
         } catch (e) {
             next(ApiError.badRequest(e.message))            
         }
- 
-
-    }
+     }
 
     async getAll (req,res){
         let {chapterDatumIdChapter, limit, page} = req.query
@@ -47,7 +45,6 @@ class PageController{
             where:{id_page}
         },)
         return res.json(pageData) 
-
     }
     async update(req,res,next){
         try {

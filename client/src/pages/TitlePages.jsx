@@ -38,7 +38,7 @@ const TitlePages = observer(() => {
   console.log(titleDatumIdTitle)
   useEffect(()=>{
     fetchOneTitles(id).then(data => setTitles(data))
-  },[])
+  },[id])
 
   useEffect(()=>{
     fetchChapter(titleDatumIdTitle).then(data => chapters.setChapters(data.rows))
@@ -55,12 +55,15 @@ const TitlePages = observer(() => {
 
 
   const navigate = useNavigate();
- 
+  
+	// let firstChapter = undefined
+	// тут должен быть другой значение
+	let firstChapter = 1
 
-//   const fetchScreenWriterInTitle = () => {
-	
-//   };
-
+	if(chapters._chapters[0]){
+		firstChapter = chapters._chapters[0].id_chapter
+	}
+	console.log(chapters.chapters.length)
 
 
   return (
@@ -69,11 +72,15 @@ const TitlePages = observer(() => {
           <div className='flex flex-col gap-7 '>
             {/* header info */}
             <div className='flex flex-col md:flex-row md:gap-4 lg:justify-start' >
-              <img
-                className='max-h-[228px] w-auto md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] rounded object-cover'
-                src={process.env.REACT_APP_API_URL + titles.image_title}
-                alt={titles.name_title}
-              />
+				{/* max-h-[228px] w-full md:w-full md:h-full md:min-h-[384px] md:min-w-[512px] */}
+				<div className='max-h-max max-w-xs'>
+					<img
+						className='w-full h-full rounded'
+						src={process.env.REACT_APP_API_URL + titles.image_title}
+						alt={titles.name_title}
+					/>
+				</div>
+             
               <div className='flex flex-col justify-between items-stretch lg:justify-start lg:items-start w-full'>
                 <p className='text-title-bg text-start truncate w-40 lg:w-full overflow-ellipsis'>
                   {titles.name_title}
@@ -92,17 +99,38 @@ const TitlePages = observer(() => {
                       <BookMarkLightIcon />
                       Зберегти
                     </button>
-                    <button
-                      className={`flex gap-4 text-text-lg ${
-                        theme._theme === DARK_THEME
-                          ? 'bg-button hover:bg-inherit'
-                          : 'bg-orange-400 hover:bg-inherit'
-                      } hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
-                      onClick={()=> navigate(CHAPTER_ROUTE + '/' + titles.id_chapter)}
-                    >
-                      <BookIcon />
-                      Читати
-                    </button>
+					{
+						chapters.chapters.length > 0 ? (
+							<button
+								className={`flex gap-4 text-text-lg ${
+									theme._theme === DARK_THEME
+									? 'bg-button hover:bg-inherit'
+									: 'bg-orange-400 hover:bg-inherit'
+								} hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+								onClick={()=> navigate(CHAPTER_ROUTE + '/' + firstChapter)}
+							>
+							<BookIcon />
+							Читати
+							</button>
+						) :
+						(
+							<div className='space-y-3'>
+								<button
+									className={`flex gap-4 text-text-lg opacity-50 pointer-events-none ${
+										theme._theme === DARK_THEME
+										? 'bg-button hover:bg-inherit'
+										: 'bg-orange-400 hover:bg-inherit'
+									} hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
+									
+								>
+								<BookIcon />
+								Читати
+								</button>
+								<p className='text-text-sm'>Цей тайтл поки не  можливо прочитати</p>
+							</div>
+						)
+					}
+                    
                   </div>
                   {/* Info Panel */}
                   <div className='flex gap-2 lg:justify-end'>
@@ -133,23 +161,29 @@ const TitlePages = observer(() => {
               <div className='flex flex-col gap-8'>
                 {/* chapter info */}
                 <div className='flex flex-col gap-2 p-1 lg:p-3 border border-[0.5px] border-stroke-dark rounded h-full max-h-64 lg:max-h-96 lg:w-full overflow-y-auto'>
-                  {chapters._chapters.map((chapter) => (
-                    <div
-                      className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark cursor-pointer'
-                      key={chapter.id_chapter}
-					  onClick={()=>navigate(CHAPTER_ROUTE + '/' + chapter.id_chapter)}
-                    >
-                      <p className='text-text-bg lg:text-subtitle-sm'>
-                        Глава № {chapter.number_chapter}
-                      </p>
-                      <p className='text-text-md lg:text-text-lg truncate w-20 lg:max-w-[135px]'>
-                        {chapter.name_chapter}
-                      </p>
-                      <p className='text-text-md lg:text-text-lg'>
-                        {chapter.date_release_chapter}
-                      </p>
-                    </div>
-                  ))}
+				{chapters.chapters.length > 0 ? (
+					chapters._chapters.map((chapter) => (
+						<div
+						className='flex justify-between p-3 gap-2 rounded border border-[0.5px] border-stroke-dark cursor-pointer'
+						key={chapter.id_chapter}
+						onClick={()=>navigate(CHAPTER_ROUTE + '/' + chapter.id_chapter)}
+						>
+						<p className='text-text-bg lg:text-subtitle-sm'>
+							Глава № {chapter.number_chapter}
+						</p>
+						<p className='text-text-md lg:text-text-lg truncate w-20 lg:max-w-[135px]'>
+							{chapter.name_chapter}
+						</p>
+						<p className='text-text-md lg:text-text-lg'>
+							{chapter.date_release_chapter}
+						</p>
+						</div>
+					))
+					) 
+					: 
+					(
+					<p>Немає доступних глав</p>
+					)}
                 </div>
                 {/* info creators */}
                 <div className='flex flex-col gap-3 p-4 border border-[0.5px] border-stroke-dark rounded'>

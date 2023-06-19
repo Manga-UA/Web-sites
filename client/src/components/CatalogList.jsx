@@ -131,7 +131,8 @@ const CatalogList = observer(() => {
 					// ${offsetLeft > window.innerWidth / 2 ? '-right-10px' : '-left-10px'} 
 						// ${offsetRight > window.innerWidth / 2 ? '-left-10px' : '-right-10px'}
 				  <div
-					className={`w-[365px] h-[249px] absolute top-0 left-40 bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter
+					className={`w-[365px] h-[249px] absolute top-0 
+						bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter
 						backdrop-blur-[5px] space-y-[18px] text-left p-[10px] transition delay-150 duration-300 ease-in-out
 						z-[5]
 					`}
@@ -250,7 +251,6 @@ const CatalogList = observer(() => {
 					  </p>
 					  {/* Button group */}
 					  <div className="flex justify-start gap-[30px]">
-  
 								  <button
 									  className={`flex gap-4 text-text-lg border border-solid border-stroke-dark ${
 										  theme._theme === DARK_THEME

@@ -27,6 +27,14 @@ const AddTitlePages = observer(() => {
 		// додаткова логіка
 	};
 
+	useEffect(()=>{
+		fetchTypes().then(data => titles.setTypes(data))
+		fetchStatus().then(data => titles.setStatus(data))
+		fetchGenre().then(data => titles.setGenre(data))
+		fetchTitles().then(data => titles.setTitles(data.rows))
+		fetchArtist().then(data => genresTitle.setGenreTitle(data.rows))	
+	},[])
+
 	const statuses = ['In Progress', 'Completed', 'On Hold', 'Cancelled'];
 	const categories = ['Movies', 'TV Shows', 'Books', 'Games'];
 
@@ -70,12 +78,16 @@ const AddTitlePages = observer(() => {
 					<DropDown options={categories} onSelect={handleCategorySelect} placeholderText={placeholderCategory} ImageIcon={<DeltaIcon/>}  selectedOption={selectedCategory}/>
 				</div>
 				{/* Author */}
-				<input 
+				{/* <input 
 					className={styleInpute}
 					placeholder='Вкажіть автора'
 					type="text"
 					id="name_screenwriter" 
-				/>
+				/> */}
+				<div className='flex flex-col gap-2'>
+					<h6 className='text-text-bg'>Автор</h6>
+					<DropDown options={categories} onSelect={handleCategorySelect} placeholderText={placeholderCategory} ImageIcon={<DeltaIcon/>}  selectedOption={selectedCategory}/>
+				</div>
 				{/* Artist */}
 				<input 
 					className={styleInpute}

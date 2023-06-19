@@ -12,3 +12,13 @@ export const fetchScreenWriter = async ()=>{
     return data
 }
 
+export const createArtist = async ()=>{
+    const {data} = await $authHost.post('api/artist')
+    return data
+}
+
+export const fetchArtist = async ()=>{
+    const {data} = await $host.get('api/artist')
+    return data
+}
+
