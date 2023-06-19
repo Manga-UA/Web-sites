@@ -13,9 +13,9 @@ const Auth = () => {
   return (
 	<div>
 		{isLogin ?
-			<Login/>
+			<Login isLogin={isLogin}/>
 		:
-			<Registration/>
+			<Registration isLogin={isLogin}/>
 		}
 	</div>
   )

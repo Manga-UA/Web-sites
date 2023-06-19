@@ -25,7 +25,10 @@ const MobileHeader = observer(({ isOpen = false}, setIsOpen) => {
 	  setIsOpen(!isOpen)
 	};
 
-	
+	const singOut = async()=>{
+		user.setUser ({});
+		user.setIsAuth(false);				
+	}
 	return (
 		<React.Fragment>
 			<div className={`absolute top-0 left-0 right-0 bg-slate-400 opacity-50 z-10 min-h-[100%] ${isOpen ? 'flex' : 'hidden'}`}></div>
@@ -68,7 +71,7 @@ const MobileHeader = observer(({ isOpen = false}, setIsOpen) => {
 								</NavLink>
 							</li>
 							<li>
-								<ExitDoorIcon className="cursor-pointer"  onClick={()=> user._isAuth = false}/>
+								<ExitDoorIcon className="cursor-pointer"  onClick={singOut}/>
 							</li>
 						</ul>
 						:

@@ -22,12 +22,8 @@ class GenreController{
     }
 
     async getAll (req,res){
-        let {limit, page} = req.query
-        page = page||1
-        limit = limit||9
-        let offset = page*limit-limit
         let genreData;
-        genreData = await Genre.findAndCountAll({limit,offset})
+        genreData = await Genre.findAll()
         return res.json(genreData)
     }
 

@@ -39,6 +39,8 @@ const MostPopularItem = observer(() => {
 	const handleMouseLeave = () => {
 	setHoveredId(null);
 	};
+	const titleArray = Object.values(titles.titles);
+
   return (
     <div>
 		<Swiper
@@ -88,7 +90,7 @@ const MostPopularItem = observer(() => {
 			loopedSlides={3}
 			speed={1200}
 		>
-			{titles._titles.map((title) => (
+			{titleArray.map((title) => (
 				<SwiperSlide key={title.id_title}>
 					<div
 						className="flex flex-col gap-4 w-40 -z-10 h-72 text-left rounded relative transition delay-150 duration-300 ease-in-out"
@@ -99,7 +101,7 @@ const MostPopularItem = observer(() => {
 					>
 						<img
 							className="h-full w-full max-h-40 max-h-52 object-cover rounded"
-							src={title.image_title}
+							src={process.env.REACT_APP_API_URL + title.image_title}
 							alt={title.name_title}
 						/>
 						<p className="text-text-lg truncate overflow-ellipsis">

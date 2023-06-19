@@ -7,10 +7,16 @@ class ScreenwriterController{
 
     async create (req,res,next){
         try {       
-        const {name_screenwriter} = req.body
-
+        const {name_screenwriter,description_screenwriter} = req.body
+        const {image_screenwriter} = req.files
+        let fileName = uuid.v4()+".jpg"
+        image_screenwriter.mv(path.resolve(__dirname,'..','static',fileName))
+        const dateRegist = Date.now()
         const screenwriterData = await Screenwriter.create({
-            name_screenwriter
+            name_screenwriter,
+            description_screenwriter,
+            data_registration: dateRegist,
+            image_screenwriter:fileName
         })
         return res.json(screenwriterData)
             
@@ -41,11 +47,19 @@ class ScreenwriterController{
     }
     async update(req,res,next){
         try {
-            const {id_screenwriter,name_screenwriter} = req.body
+            const {id_screenwriter,name_screenwriter,description_screenwriter} = req.body
+            const {image_screenwriter} = req.files
+            let fileName = uuid.v4()+".jpg"
+            image_screenwriter.mv(path.resolve(__dirname,'..','static',fileName))
             if(!id_screenwriter){
                 return next(ApiError.badRequest('not screenwriter'))
             }
-            let updatePost =await Screenwriter.update({name_screenwriter},{where:{id_screenwriter}})
+
+            let updatePost =await Screenwriter.update({
+                name_screenwriter,
+                description_screenwriter,
+                image_screenwriter:fileName
+            },{where:{id_screenwriter}})
             updatePost = await Screenwriter.findOne({where:{id_screenwriter}},)
             return res.json(updatePost);
         } catch (e) {

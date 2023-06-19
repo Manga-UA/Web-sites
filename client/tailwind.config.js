@@ -93,6 +93,10 @@ module.exports = {
 			boxShadow: {
 				'images': '590px 0px 5px 0px #00000080 inset',
 			},
+			animation: {
+                bounce200: 'bounce 1s infinite 200ms',
+                bounce400: 'bounce 1s infinite 400ms',
+            },
 		},
 	},
 	plugins: [],

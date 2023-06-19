@@ -3,17 +3,25 @@ import {makeAutoObservable} from 'mobx'
 export default class UserManga {
 	constructor() {
 		// Нижній прочерк перед змінною означає, що таку змінну не можна змінювати
-		this._isAuth = true
-		this._user = false
+		this._isAuth = false
+		this._user = []
+		this._marker = []
+		this._isMarker = false
 		makeAutoObservable(this)
 	}
 
 	setIsAuth(bool) {
 		this._isAuth = bool
 	}
+	setIsMarker(bool) {
+		this._isMarker = bool
+	}
 
 	setUser(user) {
 		this._user = user
+	}
+	setMarker(marker) {
+		this._marker = marker
 	}
 
 	// Компютед ф-ції
@@ -22,7 +30,15 @@ export default class UserManga {
 	get isAuth() {
 		return this._isAuth
 	}
+	get isMarker() {
+		return this._isMarker
+	}
+
+	
 	get user() {
 		return this._user
+	}
+	get marker() {
+		return this._marker
 	}
 }

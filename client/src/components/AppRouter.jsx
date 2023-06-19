@@ -7,7 +7,7 @@ import { MANGA_ROUTE } from '../utils/consts';
 import { Context } from '../index';
 const AppRouter = () => {
 	const {user} = useContext(Context);
-	console.log(user);
+
 	return (
 		// Працює таким чином, що вказавши йому декілька маршрутів
 		// якщо не один з них не відпрацює або буде вказаний не коректно,

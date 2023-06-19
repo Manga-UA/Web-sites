@@ -30,7 +30,7 @@ class MarkerController{
         limit = limit||9
         let offset = page*limit-limit
         let markerData;
-        if (!userDatumIdUser || !titleDatumIdTitle) {
+        if (!userDatumIdUser && !titleDatumIdTitle) {
             markerData = await Marker.findAndCountAll({limit,offset})
         }
         if (userDatumIdUser && !titleDatumIdTitle) {

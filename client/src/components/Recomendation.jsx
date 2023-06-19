@@ -22,7 +22,8 @@ const Recomendation = observer(() => {
 	const { titles, status, theme } = useContext(Context);
 	const navigate  = useNavigate();
 	// фільтрація даних тайтлів за рекомендацією
-	const filteredTitles = titles._titles.filter((title)=>title.recomend_title);
+	const filteredTitles = titles.titles.filter((title)=> title.recomend_title);
+	
 	return (
 		<div>
 			<Swiper
@@ -57,7 +58,7 @@ const Recomendation = observer(() => {
 					<SwiperSlide key={title.id_title} >
 						<div className='relative ' key={title.id_title}  onClick={()=> navigate(TITLE_ROUTE + '/' + title.id_title)}>
 							<div className="relative">
-								<img className='w-full h-full object-cover min-h-[200px] max-h-[375px] rounded opacity-75' src={title.image_title} alt={title.name_title} />
+								<img className='w-full h-full object-cover min-h-[200px] max-h-[375px] rounded opacity-75' src={process.env.REACT_APP_API_URL + title.image_title} alt={title.name_title} />
 								<div className="absolute inset-0 bg-black opacity-25"></div>
 							</div>
 							<div className='absolute left-2 bottom-3 md:left-5 md:bottom-14 gap-5 flex flex-col'>

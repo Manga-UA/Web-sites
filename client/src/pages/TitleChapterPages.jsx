@@ -4,7 +4,7 @@ import { Context } from '../index';
 import { ReactComponent as DeltaIcon } from '../images/delta-icon.svg';
 import { observer } from 'mobx-react-lite';
 import { ReactComponent as BookMarkIcon } from '../images/bookmark-bg-icon.svg';
-import girlTEST from '../images/girl.jpg'
+import girlTEST from '../images/pages.jpg'
 
 const TitleChapterPages = observer(() => {
 	const [selectedChapter, setSelectedChapter] = useState(null);

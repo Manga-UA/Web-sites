@@ -8,6 +8,7 @@ import CreaterManga from './manga/CreaterManga';
 
 export const Context = createContext(null);
 
+
 const root = document.getElementById('root');
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
@@ -18,6 +19,8 @@ ReactDOM.createRoot(root).render(
         titles: new TitleManga(),
 		chapters: new TitleManga(),
 		status: new TitleManga(),
+		genres: new TitleManga(),
+		genresTitle: new TitleManga(),
 		artists: new CreaterManga(),
 		screenWriters: new CreaterManga(),
 		translates: new CreaterManga(),

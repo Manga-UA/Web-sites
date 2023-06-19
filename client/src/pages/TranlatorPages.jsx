@@ -13,10 +13,10 @@ const TranlatorPages = observer(() => {
 		<div className='flex flex-col gap-8'>
 			<div className='flex flex-col lg:flex-row gap-3 lg:items-center '>
 				<img className='h-52 w-auto object-cover max-w-md' src={avatar} alt="" />
-				<h4 className='text-title-bg'>Шалений Кохай</h4>
+				<h4 className='text-title-bg'>PirateKing</h4>
 			</div>
 			<div className='text-text-lg'>
-				Шалений Кохай - незалежна і некомерційна команда з Перекладу Манг/Маньхуа/Манхв.
+				PirateKing - незалежна і некомерційна команда з Перекладу Манг/Маньхуа/Манхв.
 			</div>
 			<div className='grid justify-items-center grid-cols-2 grid-flow-row gap-2 sm:grid-cols-3 md:justify-items-stretch md:grid-cols-4 lg:grid-cols-7 lg:grid-row-4 lg:gap-x-4 lg:gap-y-4'>
 				{titles._titles.map((title)=>(
