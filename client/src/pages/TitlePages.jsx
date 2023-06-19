@@ -51,6 +51,11 @@ const TitlePages = observer(() => {
   }
 
   const navigate = useNavigate();
+  let firstChapter = 1
+  if(chapters._chapters[0]){
+    firstChapter = chapters._chapters[0].id_chapter
+  }
+  
  
   return (
     <React.Fragment>   
@@ -87,7 +92,8 @@ const TitlePages = observer(() => {
                           ? 'bg-button hover:bg-inherit'
                           : 'bg-orange-400 hover:bg-inherit'
                       } hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`}
-                      onClick={()=> navigate(CHAPTER_ROUTE + '/' + titles.id_chapter)}
+                      onClick={()=> navigate(CHAPTER_ROUTE + '/' + firstChapter)}
+                      
                     >
                       <BookIcon />
                       Читати
@@ -136,6 +142,14 @@ const TitlePages = observer(() => {
                       <p className='text-text-md lg:text-text-lg'>
                         {chapter.date_release_chapter}
                       </p>
+                      {console.log(chapter)}
+                      {/* {chapter.masPage.map((masPage,index)=>
+                      <p>
+                        {masPage.number_page}
+                        : {masPage.rows.image_page}
+                      </p>
+                      
+                      )} */}
                     </div>
                   ))}
                 </div>

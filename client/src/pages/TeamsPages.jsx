@@ -41,7 +41,7 @@ const TeamsPages = observer(() => {
 									${theme._theme === DARK_THEME ? 'bg-button hover:bg-inherit' : 'bg-orange-400 hover:bg-inherit'} 
 									hover:border hover:border-solid hover:border-stroke-dark transition delay-150 duration-300 ease-in-out rounded py-[10px] px-[15px]`
 								}
-								onClick={()=> navigate(ADD_CHAPTER_ROUTE)}
+								onClick={()=> navigate(ADD_CHAPTER_ROUTE+'/'+title.id_title)}
 							>
 								Додати главу
 							</button>
