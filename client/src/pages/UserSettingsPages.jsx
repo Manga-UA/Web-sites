@@ -34,6 +34,7 @@ const UserSettingsPages = observer(() => {
 		formData.append('image_user',imageUser)
 		updateImage(formData)
 		console.log(user.user.id_user)
+		console.log(imageUser)
 		refresh()
 	}
 	const updatePass=()=>{

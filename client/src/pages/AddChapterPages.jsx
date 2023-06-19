@@ -37,7 +37,7 @@ const AddChapterPages = observer(() => {
 
 	// Функция для добавления новых полей
 	const addPageFields = () => {
-		setPageFields([...pageFields, { pageNumber: '', image: null }]);
+		setPageFields([...pageFields, { pageNumber: '', image: {} }]);
 	};
 
 	// удаление страницы
@@ -59,7 +59,9 @@ const AddChapterPages = observer(() => {
 		const updatedPageFields = [...pageFields];
 		// let fileName = uuid.v4() + ".jpg"
 		// value.mv(path.resolve(__dirname, '../../..', 'server/static', fileName))
-		updatedPageFields[index].image = files;
+		console.log(files.name);
+		updatedPageFields[index].image = files.name;
+		console.log(updatedPageFields);
 		setPageFields(updatedPageFields);
 	};
 
@@ -80,6 +82,8 @@ const AddChapterPages = observer(() => {
         console.log(numberChapter);
 		console.log(id);
 		console.log(pageFields);
+		console.log(JSON.stringify( pageFields));
+		console.log(formData.getAll(0));
 		createChapter(formData)
     }
 
@@ -129,8 +133,7 @@ const AddChapterPages = observer(() => {
 						<input
 							className={styleInpute}
 							type="file"
-							value={page.image}
-							onChange={(e) => updateImage(index, e.target.files)}
+							onChange={(e) => updateImage(index, e.target.files[0])}
 						/>
 						<button
 							className="text-red-400"

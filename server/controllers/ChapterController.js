@@ -29,10 +29,14 @@ class ChapterController{
         console.log(masPage)
         if (masPage) {
             masPage = JSON.parse(masPage)
-            masPage.forEach( i => {
-                let fileName = uuid.v4() + ".jpg"
-                image.mv(path.resolve(__dirname, '..', 'static', fileName))
-                Page.create({
+            console.log(masPage)
+            masPage.forEach(async i => {
+                //let {image} = req.files
+                //let fileName = uuid.v4() + ".jpg"
+                console.log(i.pageNumber);
+                console.log(i.image);
+                //i.image.mv(path.resolve(__dirname, '..', 'static', fileName))
+                await Page.create({
                     number_page: i.pageNumber,
                     image_page:i.image,
                     chapterDatumIdChapter: chapterData.id_chapter
