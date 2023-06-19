@@ -91,7 +91,7 @@ const MostPopularItem = observer(() => {
 			speed={1200}
 		>
 			{titleArray.map((title) => (
-				<SwiperSlide key={title.id_title}>
+				<SwiperSlide className='z-10' key={title.id_title}>
 					<div
 						className="flex flex-col gap-4 w-40 -z-10 h-72 text-left rounded relative transition delay-150 duration-300 ease-in-out"
 						onMouseEnter={handleMouseEnter(title.id_title)}
@@ -107,7 +107,7 @@ const MostPopularItem = observer(() => {
 						<p className="text-text-lg truncate overflow-ellipsis">
 							{title.name_title}
 						</p>
-					{hoveredId === title.id_title && (
+					{/* {hoveredId === title.id_title && (
 						<div
 							className={`w-[365px] h-[249px] ${
 								offsetLeft > window.innerWidth / 2
@@ -117,14 +117,14 @@ const MostPopularItem = observer(() => {
 								offsetRight > window.innerWidth / 2
 								? '-left-10px'
 								: '-right-10px'
-							} absolute top-0 bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter backdrop-blur-[5px] space-y-[18px] text-left p-[10px] transition delay-150 duration-300 ease-in-out`}
+							} absolute top-0 left-40 z-50 bg-[rgba(69, 69, 69, 0.1)] border border-solid border-dark-theme-btn backdrop-filter backdrop-blur-[5px] space-y-[18px] text-left p-[10px] transition delay-150 duration-300 ease-in-out`}
 						>
 							{/* text description */}
-							<p className="z-10 text-medium h-full max-h-[110px] overflow-hidden">
+							{/* <p className="z-10 text-medium h-full max-h-[110px] overflow-hidden">
 								{title.description_title}
 							</p>
 							{/* Button group */}
-							<div className="flex justify-start gap-[30px]">
+							{/* <div className="flex justify-start gap-[30px]">
 								<button
 									className={`flex gap-4 text-text-lg border border-solid border-stroke-dark ${
 										theme._theme === DARK_THEME
@@ -145,27 +145,27 @@ const MostPopularItem = observer(() => {
 									<BookIcon />
 									Читати
 								</button>
-							</div>
+							</div> */} 
 							{/* Info Panel */}
-							<div className="flex justify-start gap-10">
+							{/* <div className="flex justify-start gap-10">
 								{/* Watching */}
-								<span className="flex items-center gap-3 text-text-lg">
+								{/* <span className="flex items-center gap-3 text-text-lg">
 									<EyesIcon />
 									123
-								</span>
+								</span> */}
 								{/* Likes */}
-								<span className="flex items-center gap-3 text-text-lg">
+								{/* <span className="flex items-center gap-3 text-text-lg">
 									<LikeIcon />
 									10
-								</span>
+								</span> */}
 								{/* Bookmark */}
-								<span className="flex items-center gap-3 text-text-lg">
+								{/* <span className="flex items-center gap-3 text-text-lg">
 									<BookMarkIcon />
 									2
-								</span>
-							</div>
-						</div>
-					)}
+								</span> */}
+							{/* </div> */} 
+						{/* </div> */}
+					{/* )} */} 
 					</div>
 				</SwiperSlide>
 			))}

@@ -37,7 +37,7 @@ const CatalogPages = observer(() => {
 	
 	useEffect(()=>{
 
-		fetchTitles(titles.selectStatus,titles.selectType).then(data => titles.setTitles(data.rows))	
+		fetchTitles(titles.selectStatus,titles.selectType,titles.selectGanre).then(data => titles.setTitles(data.rows))	
 	},[titles._selectstatus,titles._selecttype,titles._selectganre])
 
 	console.log(titles.types);

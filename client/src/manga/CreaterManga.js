@@ -10,7 +10,7 @@ export default class CreaterManga {
 		]
 		// сценарист/автор
 		this._screenWriters = [
-			{ id_screenwriter: 1, name_screenwriter: "Тацукі Фуджімото" },
+			// { id_screenwriter: 1, name_screenwriter: "Тацукі Фуджімото" },
 		]
 		// перекладач
 		this._translates = [
@@ -23,7 +23,7 @@ export default class CreaterManga {
 		this._artist = artist
 	}
 
-	setTypes(screenWriter) {
+	setScreenWriter(screenWriter) {
 		this._screenWriter = screenWriter
 	}
 	setTranslate(translate) {
@@ -36,8 +36,8 @@ export default class CreaterManga {
 	get artist() {
 		return this._artist
 	}
-	get screenWriter() {
-		return this._screenWriter
+	get screenWriters() {
+		return this._screenWriters
 	}
 	get translate() {
 		return this._translate

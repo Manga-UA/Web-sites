@@ -69,6 +69,19 @@ export const fetchOneChapter = async(id)=>{
     return data
 }
 
+export const createPages = async (pages)=>{
+    const {data} = await $authHost.post('api/page', pages)
+    return data
+}
+export const fetchPages = async(chapterDatumIdChapter)=>{
+    const {data} = await $host.get('api/page',{params:{
+        chapterDatumIdChapter
+    }})
+    return data
+}
+
+
+
 
 
 export const fetchTitleGenre = async (titleDatumIdTitle,genreTitleIdGenre)=>{

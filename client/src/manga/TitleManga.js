@@ -10,6 +10,7 @@ export default class TitleManga {
 		this._genreTitle = []
 		this._artistTitle = []
 		this._chapters = []
+		this._pages = []
 		this._selectstatus = null
 		this._selectganre=null
 		this._selecttype=null
@@ -45,6 +46,9 @@ export default class TitleManga {
 
 	setChapters(chapter) {
 		this._chapters = chapter
+	}
+	setPages(pages) {
+		this._pages = pages
 	}
 
 	setSelectedTitles(titles) {
@@ -82,6 +86,10 @@ export default class TitleManga {
 	}
 	get artistTitle(){
 		return this._artistTitle
+	}
+
+	get pages() {
+		return this._pages
 	}
 
 	get status() {

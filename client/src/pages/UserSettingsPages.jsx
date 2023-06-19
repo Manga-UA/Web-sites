@@ -121,8 +121,8 @@ const UserSettingsPages = observer(() => {
 				
 			</div>
 			{/* info */}
-			<div className='order-1 flex flex-col gap-3'>
-				<img className='border border-stroke-dark rounded-3xl py-8 px-5 md:py-20 md:px-20' src={ user.isAuth ? process.env.REACT_APP_API_URL + user.user.image_user:{}} alt="" />
+			<div className='order-1 flex flex-col gap-3 lg:max-h-52 lg:w-52'>
+				<img className='h-full w-full object-contain border border-stroke-dark rounded-3xl p-2' src={ user.isAuth ? process.env.REACT_APP_API_URL + user.user.image_user:{}} alt="" />
 				<p className='text-text-lg text-center'>{user.user.login_user}</p>
 			</div>
 		</div>
